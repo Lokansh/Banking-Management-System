@@ -12,7 +12,7 @@
     <artifactId>banking-management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>banking-management</name>
-    <description>banking-management</description>
+    <description>Banking Management System</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -42,7 +42,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${project.parent.version}</version>
             </plugin>
         </plugins>
     </build>
