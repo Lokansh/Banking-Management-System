@@ -23,7 +23,6 @@ build:
     paths:
       - "**/target/*.jar"
 
-
 test:
   stage: test
   tags:
@@ -38,17 +37,21 @@ test:
       junit:
         - "**/target/surefire-reports/TEST-*.xml"
 
+# TODO Remove staging if not required
 #staging:
-#  type: deploy
-#  stage: staging
-#  image: maven:latest
+#  tags:
+#    - dalfcs_gitlab_docker_ci
+#  stage: deploy
+#  image: ruby:latest
 #  script:
+#    - apt-get update -qy
+#    - apt-get install -y ruby-dev
+#    - gem install dpl
 #    - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
 #  only:
 #    - staging
 
 deploy:
-  type: deploy
   tags:
     - dalfcs_gitlab_docker_ci
   stage: deploy
@@ -59,8 +62,8 @@ deploy:
     - gem install dpl
     - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
   only:
-    - heroku-deployment
-#   TODO : change this to main
+    - develop
+    - main
 
 after_script:
   - echo "Pipeline Ended"
