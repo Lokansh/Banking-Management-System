@@ -52,12 +52,15 @@ deploy:
   tags:
     - ugrad
   stage: deploy
-  image: maven:latest
+  image: ruby:latest
   script:
     - echo "Deploy Stage Started"
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
     - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
   only:
-    - heroku-deplyoment
+    - heroku-deployment
 #   TODO : change this to main
 
 after_script:
