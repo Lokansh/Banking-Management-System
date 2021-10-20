@@ -1,44 +1,50 @@
 image: maven:latest
 
 variables:
- GIT_STRATEGY: clone
+  GIT_STRATEGY: clone
 
 before_script:
- - echo "Pipeline Started"
- - chmod 777 ./mvnw
+  - echo "Pipeline Started"
+  - chmod 777 ./mvnw
 
 stages:
- - build
- - test
- - deploy
+  - build
+  - test
+  - deploy
 
 build:
- stage: build
- tags:
- - ugrad
- script:
- - echo "Build Stage Started"
- - ./mvnw clean install -DskipTests
- artifacts:
-  paths:
-   - "**/target/*.jar"
+  stage: build
+  tags:
+    - grad
+  script:
+    - echo "Build Stage Started"
+    - ./mvnw clean install -DskipTests
+  artifacts:
+    paths:
+      - "**/target/*.jar"
 
 
 test:
- stage: test
- tags:
- - ugrad
- script:
- - echo "Test Stage Started"
- - ./mvnw test
+  stage: test
+  tags:
+    - grad
+  script:
+    - echo "Test Stage Started"
+    - ./mvnw test
+  artifacts:
+    paths:
+      - "**/target/surefire-reports/TEST-*.xml"
+    reports:
+      junit:
+        - "**/target/surefire-reports/TEST-*.xml"
 
 deploy:
- stage: deploy
- tags:
- - ugrad
- script:
- - echo "Deploy Stage Started"
- - echo "Deploy Script - yet to be implemented"
+  stage: deploy
+  tags:
+    - grad
+  script:
+    - echo "Deploy Stage Started"
+    - echo "Deploy Script - yet to be implemented"
 
 after_script:
- - echo "Pipeline Ended"
+  - echo "Pipeline Ended"
