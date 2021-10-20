@@ -38,13 +38,27 @@ test:
       junit:
         - "**/target/surefire-reports/TEST-*.xml"
 
+#staging:
+#  type: deploy
+#  stage: staging
+#  image: maven:latest
+#  script:
+#    - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
+#  only:
+#    - staging
+
 deploy:
-  stage: deploy
+  type: deploy
   tags:
     - ugrad
+  stage: production
+  image: maven:latest
   script:
     - echo "Deploy Stage Started"
-    - echo "Deploy Script - yet to be implemented"
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+  only:
+    - heroku-deplyoment
+#   TODO : change this to main
 
 after_script:
   - echo "Pipeline Ended"
