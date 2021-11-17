@@ -1,9 +1,9 @@
 package com.bankingmanagement.bankingmanagement.authentication.exception;
 
-public class userAuthenticationException extends Exception{
+public class UserAuthenticationException extends Exception{
     private final String errorMessage;
 
-    public userAuthenticationException(String errorMessage) {
+    public UserAuthenticationException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

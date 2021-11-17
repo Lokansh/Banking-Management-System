@@ -1,9 +1,10 @@
 package com.bankingmanagement.bankingmanagement.authentication.service;
 
-import com.bankingmanagement.bankingmanagement.authentication.exception.userAuthenticationException;
+import com.bankingmanagement.bankingmanagement.authentication.exception.UserAuthenticationException;
+import com.bankingmanagement.bankingmanagement.authentication.model.UserLogin;
 
 public interface LoginService {
 
-    boolean validateUser(String userid, String password) throws userAuthenticationException;
+    boolean validateUser(UserLogin userLogin) throws UserAuthenticationException;
 
 }

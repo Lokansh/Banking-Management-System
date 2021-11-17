@@ -50,7 +50,7 @@
     <table border="0" class="loginTable" >
         <tr>
             <td>Username</td>
-            <td><input type="text" name="username"></td>
+            <td><input type="text" name="UserLoginID"></td>
         </tr>
         <tr>
             <td>Password</td>

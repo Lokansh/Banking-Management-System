@@ -1,25 +1,22 @@
 package com.bankingmanagement.bankingmanagement.authentication.controller;
 
-import com.bankingmanagement.bankingmanagement.authentication.exception.userAuthenticationException;
-import com.bankingmanagement.bankingmanagement.authentication.serviceImplemenation.LoginServiceImpl;
+import com.bankingmanagement.bankingmanagement.authentication.exception.UserAuthenticationException;
+import com.bankingmanagement.bankingmanagement.authentication.model.UserLogin;
+import com.bankingmanagement.bankingmanagement.authentication.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-import com.bankingmanagement.bankingmanagement.authentication.model.Customer;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class UserLoginController {
 
     @Autowired
-    private LoginServiceImpl loginService;
+    private LoginService loginService;
 
     @RequestMapping("/home")
     public String home()
@@ -45,15 +42,14 @@ public class UserLoginController {
         return "user";
     }
 
-    @PostMapping("/login")
-    public String login_user(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session, ModelMap modelMap)
+    @RequestMapping(path = "/login", method = POST)
+    public String login_user(UserLogin userLogin, HttpSession session, ModelMap modelMap)
     {
-
         try {
-            loginService.validateUser(username,password);
-            session.setAttribute("username",username);
+            loginService.validateUser(userLogin);
+            session.setAttribute("username",userLogin.getUserLoginID());
             return "user";
-        } catch (userAuthenticationException e) {
+        } catch (UserAuthenticationException e) {
             e.printStackTrace();
             modelMap.put("errorMsg", e.getErrorMessage());
             return "login";

@@ -1,13 +1,13 @@
 package com.bankingmanagement.bankingmanagement.authentication.serviceImplemenation;
 
-import com.bankingmanagement.bankingmanagement.authentication.database.loginDao;
-import com.bankingmanagement.bankingmanagement.authentication.database.loginDaoImpl;
-import com.bankingmanagement.bankingmanagement.authentication.exception.userAuthenticationException;
+import com.bankingmanagement.bankingmanagement.authentication.exception.UserAuthenticationException;
+import com.bankingmanagement.bankingmanagement.authentication.model.UserLogin;
 import com.bankingmanagement.bankingmanagement.authentication.service.LoginService;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionDao;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.bankingmanagement.bankingmanagement.authentication.database.LoginDao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,7 +20,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import static com.bankingmanagement.bankingmanagement.authentication.database.loginConstants.LOGIN_PASSWORD;
+import static com.bankingmanagement.bankingmanagement.authentication.database.LoginConstants.LOGIN_PASSWORD;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -30,21 +30,23 @@ public class LoginServiceImpl implements LoginService {
     private DatabaseConnectionDao databaseConnectionDAO;
 
     @Autowired
-    private loginDao LoginDao;
+    private LoginDao loginDao;
 
     @Override
-    public boolean validateUser(String userid, String password) throws userAuthenticationException {
+    public boolean validateUser(UserLogin userLogin) throws UserAuthenticationException {
 
         //validate userId and password against valid format/characters
+        String userid = userLogin.getUserLoginID();
+        String password = userLogin.getPassword();
+
         validateUserType(userid, password);
-        System.out.println(LoginDao.selectUserByUsername(userid));
         try (
                 final Connection connection = databaseConnectionDAO.getConnection();
                 final Statement statement = connection.createStatement();
-                final ResultSet userResultSet = statement.executeQuery(LoginDao.selectUserByUsername(userid))) {
+                final ResultSet userResultSet = statement.executeQuery(loginDao.selectUserByUsername(userid))) {
 
                     if (userResultSet == null) {
-                        throw new userAuthenticationException("Invalid email and/or password");
+                        throw new UserAuthenticationException("Invalid email and/or password");
                     }
                     if (userResultSet.next()) {
                         final boolean isPasswordValid =
@@ -52,26 +54,26 @@ public class LoginServiceImpl implements LoginService {
 
                         //Mananamin@123
                         if (!isPasswordValid) {
-                            throw new userAuthenticationException("Invalid email and/or password");
+                            throw new UserAuthenticationException("Invalid email and/or password");
                         }
 
         //               TODO: implement to check whether account is active or not using AcocuntStatusType Table
                         final boolean isAccountActive = true;
                         if (!isAccountActive) {
-                            throw new userAuthenticationException("Account not active");
+                            throw new UserAuthenticationException("Account not active");
                         }
                         return true;
                     }
                     else {
-                        throw new userAuthenticationException("Invalid email and/or password");
+                        throw new UserAuthenticationException("Invalid email and/or password");
                     }
                 } catch (SQLException | DatabaseConnectionException sqlException) {
                     sqlException.printStackTrace();
-                    throw new userAuthenticationException("Internal Error while validating user");
+                    throw new UserAuthenticationException("Internal Error while validating user");
         }
     }
 
-    private void validateUserType(String userid, String password) throws userAuthenticationException {
+    private void validateUserType(String userid, String password) throws UserAuthenticationException {
         final boolean isUserValid = (userid != null) &&
                 (!userid.trim().isEmpty()) && Pattern.matches("^[a-zA-Z0-9._-]{3,}$", userid);
         final boolean isUserPasswordValid = (password != null) &&
@@ -79,14 +81,13 @@ public class LoginServiceImpl implements LoginService {
                 password);
 
         if (!isUserValid || !isUserPasswordValid) {
-            throw new userAuthenticationException("Invalid format of email and/or password");
+            throw new UserAuthenticationException("Invalid format of email and/or password");
         }
     }
 
     public boolean validateSHA256Hash(final String source,
                                              final String targetHash) {
         final String sourceHash = getSHA256Hash(source);
-        System.out.println(sourceHash);
         if (sourceHash == null || targetHash == null) {
             return false;
         }

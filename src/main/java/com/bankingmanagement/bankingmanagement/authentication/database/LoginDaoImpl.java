@@ -1,18 +1,17 @@
 package com.bankingmanagement.bankingmanagement.authentication.database;
 
 import org.springframework.stereotype.Component;
-import static com.bankingmanagement.bankingmanagement.authentication.database.loginConstants.*;
+import static com.bankingmanagement.bankingmanagement.authentication.database.LoginConstants.*;
 
 @Component
-public class loginDaoImpl implements loginDao {
-    public loginDaoImpl() {
+public class LoginDaoImpl implements LoginDao {
+    public LoginDaoImpl() {
     }
 
     @Override
     public String selectUserByUsername(String username) {
         return "SELECT " +
                 LOGIN_ID + ", " +
-                LOGIN_USERNAME + ", " +
                 LOGIN_PASSWORD +
                 " FROM " +
                 USERLOGIN_TABLE +
