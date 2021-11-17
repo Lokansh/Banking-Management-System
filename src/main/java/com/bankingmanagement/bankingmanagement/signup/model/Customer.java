@@ -1,7 +1,7 @@
-package com.bankingmanagement.bankingmanagement.authentication.model;
+package com.bankingmanagement.bankingmanagement.signup.model;
 
 public class Customer {
-    private final int CustomerID;
+    private String CustomerID;
     private String firstName;
     private String lastName;
     private String address1;
@@ -12,7 +12,7 @@ public class Customer {
     private String email;
     private int sin;
 
-    public Customer(int customerID, String firstName, String lastName, String address1, String address2, String city, String zipCode, String contactNumber, String email, int sin) {
+    public Customer(String customerID, String firstName, String lastName, String address1, String address2, String city, String zipCode, String contactNumber, String email, int sin) {
         CustomerID = customerID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -25,8 +25,12 @@ public class Customer {
         this.sin = sin;
     }
 
-    public int getCustomerID() {
+    public String getCustomerID() {
         return CustomerID;
+    }
+
+    public void setCustomerID(String customerID) {
+        CustomerID = customerID;
     }
 
     public String getFirstName() {

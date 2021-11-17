@@ -18,18 +18,6 @@ public class UserLoginController {
     @Autowired
     private LoginService loginService;
 
-    @RequestMapping("/home")
-    public String home()
-    {
-        return "home";
-    }
-
-    @RequestMapping("/signup")
-    public String getSignup()
-    {
-        return "signup";
-    }
-
     @RequestMapping("/login")
     public String getLogin()
     {
