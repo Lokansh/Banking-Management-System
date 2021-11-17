@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "com.bankingmanagement.bankingmanagement.authentication","com.bankingmanagement.bankingmanagement.database"} )
 public class BankingManagementApplication {
 
     public static void main(String[] args) {
