@@ -11,7 +11,7 @@ public class EmployeeDashboardController {
 	@RequestMapping(path= "/emp-details", method = GET)
     public String home()
     {
-        return "Employee Details";
+        return "employeeDashboard";
     }
 	
 	

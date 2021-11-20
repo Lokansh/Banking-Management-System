@@ -1,6 +1,5 @@
 package com.bankingmanagement.bankingmanagement.employeeDashboard.serviceImplementation;
 
-import static com.bankingmanagement.bankingmanagement.authentication.database.LoginConstants.LOGIN_PASSWORD;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
