@@ -2,18 +2,27 @@ package com.bankingmanagement.bankingmanagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestController
+
+@Controller
+@SpringBootApplication(scanBasePackages = { "com.bankingmanagement.bankingmanagement.*"} )
+
 public class BankingManagementApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BankingManagementApplication.class, args);
     }
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String index() {
-        return "Greetings from ABC Bank";
+        return "home";
+    }
+
+    @RequestMapping("/home")
+    public String home()
+    {
+        return "home";
     }
 }

@@ -11,7 +11,7 @@
             font-size: 30pt;
             font-style: normal;
             font-weight: bold;
-            color:SlateBlue;
+            color:#D63301;
             text-align: center;
             text-decoration: underline
         }
@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<h3>Success Page</h3>
+<h3> Nova Bank</h3>
 <%
 
     response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
