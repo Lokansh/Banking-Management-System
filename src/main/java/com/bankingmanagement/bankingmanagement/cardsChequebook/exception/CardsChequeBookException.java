@@ -1,6 +1,6 @@
 package com.bankingmanagement.bankingmanagement.cardsChequebook.exception;
 
-public class CardsChequeBookException {
+public class CardsChequeBookException extends Throwable {
     private final String errorMessage;
 
     public CardsChequeBookException(String errorMessage) {

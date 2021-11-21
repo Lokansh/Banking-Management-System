@@ -1,23 +1,22 @@
 package com.bankingmanagement.bankingmanagement.cardsChequebook.database;
 
-import static com.bankingmanagement.bankingmanagement.cardsChequebook.database.CardsChequeBookConstants..*;
+import static com.bankingmanagement.bankingmanagement.cardsChequebook.database.CardsChequeBookConstants.*;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class CardsChequeBookDaoImpl implements com.bankingmanagement.bankingmanagement.employeeDashboard.database.CardsChequeBookDao {
+public class CardsChequeBookDaoImpl implements com.bankingmanagement.bankingmanagement.cardsChequebook.database.CardsChequeBookDao {
 
     @Override
-    public String getEmployeeDetailsData(String id) {
+    public String cardsChequeBookData(String username) {
         return "SELECT " +
-                EMP_FIRST_NAME + ", " +
-                EMP_LAST_NAME +
-                EMP_MANAGER + ", " +
-                EMP_SALARY +
+                LOGIN_ID + ", " +
+                LOGIN_PASSWORD +
                 " FROM " +
-                EMPLOYEE_TABLE +
+                USERLOGIN_TABLE +
                 " WHERE " +
-                EMP_ID + "=\"" + id + "\";";
+                LOGIN_ID + "=\"" + username + "\";";
+
     }
 
 }
