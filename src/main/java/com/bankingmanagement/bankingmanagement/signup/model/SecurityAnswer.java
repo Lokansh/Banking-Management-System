@@ -1,5 +1,6 @@
 package com.bankingmanagement.bankingmanagement.signup.model;
 
+
 public class SecurityAnswer {
 
     private String userLoginID;
