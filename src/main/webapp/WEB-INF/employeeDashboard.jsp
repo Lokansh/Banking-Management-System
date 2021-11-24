@@ -52,10 +52,10 @@
 <h4><span class="pr selected">Employee Dashboard</span>
 
 
-<span class="pr" href="/cust-details">Customer Details</span>
+<span class="pr"><a href="/emp-dash/cust-details">Customer Details</a></span>
 
 
-<span href="requests">Requests</span></h4>
+<span> <a href="/emp-dash/requests">Requests</a></span></h4>
 
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
