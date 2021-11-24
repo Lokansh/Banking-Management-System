@@ -20,6 +20,14 @@
     </style>
 </head>
 <body>
-CARDS Type
+
+<h3>Nova Bank</h3>
+
+<a href="${pageContext.request.contextPath }/logout">Apply for a new Debit Card</a>
+<br><br>
+<a href="${pageContext.request.contextPath }/logout">Apply for a new Credit Card</a>
+<br><br>
+<a href="${pageContext.request.contextPath }/logout">Apply for a new Debit Card</a>
+
 </body>
 </html>

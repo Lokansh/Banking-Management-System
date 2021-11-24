@@ -1,6 +1,6 @@
-package com.bankingmanagement.bankingmanagement.cardsChequebook.database;
+package com.bankingmanagement.bankingmanagement.card.database;
 
-public final class CardsChequeBookConstants {
+public final class CardConstants {
     // User-Login table.
     public static final String USERLOGIN_TABLE = "UserLogin";
 

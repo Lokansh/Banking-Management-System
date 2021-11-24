@@ -1,12 +1,12 @@
-package com.bankingmanagement.bankingmanagement.cardsChequebook.model;
+package com.bankingmanagement.bankingmanagement.card.model;
 
-public class Cards {
+public class Card {
 
     private String cardNumber;
     private String cardType;
     private String cardStatus;
 
-    public Cards(String cardNumberInput, String cardTypeInput, String cardStatusInput){
+    public Card(String cardNumberInput, String cardTypeInput, String cardStatusInput){
         this.cardNumber = cardNumberInput;
         this.cardType = cardTypeInput;
         this.cardStatus = cardStatusInput;

@@ -1,9 +1,9 @@
-package com.bankingmanagement.bankingmanagement.cardsChequebook.exception;
+package com.bankingmanagement.bankingmanagement.card.exception;
 
-public class CardsChequeBookException extends Throwable {
+public class CardException extends Throwable {
     private final String errorMessage;
 
-    public CardsChequeBookException(String errorMessage) {
+    public CardException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
@@ -13,7 +13,7 @@ public class CardsChequeBookException extends Throwable {
 
     @Override
     public String toString() {
-        return "CardsChequeBookException{" +
+        return "CardException{" +
                 "errorMessage='" + errorMessage + '\'' +
                 '}';
     }
