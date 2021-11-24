@@ -16,6 +16,26 @@
             text-align: center;
             text-decoration: underline
         }
+<<<<<<< HEAD
+=======
+        h4{
+            font-family: Calibri;
+            font-size: 10pt;
+            font-style: normal;
+            font-weight: bold;
+            color:#6b5b95;
+            text-align: center;
+            text-decoration: underline
+        }
+        h5{
+            font-family: Calibri;
+            font-size: 10pt;
+            font-style: normal;
+            color:#6b5b95;
+            text-align: center;
+            text-decoration: underline
+        }
+>>>>>>> origin/user-authentication-sub-task-1
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;}
 
@@ -39,6 +59,19 @@
         }
     </style>
 </head>
+<<<<<<< HEAD
+=======
+<%
+
+    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+    if(session.getAttribute("username")!=null)
+    {
+        response.sendRedirect("/user");
+    }
+
+%>
+
+>>>>>>> origin/user-authentication-sub-task-1
 
 <h3>Welcome to Nova Bank</h3>
 
@@ -54,15 +87,29 @@
         </tr>
         <tr>
             <td>Password</td>
+<<<<<<< HEAD
             <td><input type="password" name="password"></td>
         </tr>
+=======
+            <td><input type="password" name="password"></td><br>
+            <td><a href="forget">Forget Password?</a></td>
+
+
+        </tr>
+
+>>>>>>> origin/user-authentication-sub-task-1
         <tr>
             <td>&nbsp;</td>
             <td><input type="submit" value="Login"></td>
         </tr>
     </table>
 </form>
+<<<<<<< HEAD
 
+=======
+<h4>First Time User</h4>
+<a href="signup"><h5>Register</h5></a><br>
+>>>>>>> origin/user-authentication-sub-task-1
 
 </body>
 </html>

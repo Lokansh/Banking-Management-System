@@ -40,7 +40,7 @@ public class DatabaseConnection implements DatabaseConnectionDao {
 
             final String databaseType = databaseConfigProperties.getProperty("databaseType");
             final String databaseURL = databaseConfigProperties.getProperty("databaseURL") +
-                    databaseConfigProperties.getProperty(databaseType + "Database");
+                    databaseConfigProperties.getProperty(databaseType + "Database")+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 
             final String databaseUserName = databaseConfigProperties.getProperty(databaseType + "Username");

@@ -19,6 +19,18 @@
         * {box-sizing: border-box;}
     </style>
 </head>
+<<<<<<< HEAD
+=======
+<%
+
+    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+    if(session.getAttribute("username")!=null)
+    {
+        response.sendRedirect("/user");
+    }
+
+%>
+>>>>>>> origin/user-authentication-sub-task-1
 <body>
 
 <h3>Welcome to Nova Bank</h3>
