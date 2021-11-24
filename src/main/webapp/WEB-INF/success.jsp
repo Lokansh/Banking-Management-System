@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Home page</title>
+    <title>Success</title>
     <style>
         h3{
             font-family: Calibri;
@@ -19,20 +19,11 @@
         * {box-sizing: border-box;}
     </style>
 </head>
-<%
 
-    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
-    if(session.getAttribute("username")!=null)
-    {
-        response.sendRedirect("/user");
-    }
-
-%>
 <body>
 
 <h3>Welcome to Nova Bank</h3>
-<a href="signup"><h4>Sign Up</h4></a><br>
-<a href="login"><h4>Login</h4></a>
+Success
 
 </body>
 </html>

@@ -1,9 +1,9 @@
-package com.bankingmanagement.bankingmanagement.cardsChequebook.exception;
+package com.bankingmanagement.bankingmanagement.forget.exception;
 
-public class CardsChequeBookException {
+public class UserForgetPasswordException extends Exception{
     private final String errorMessage;
 
-    public CardsChequeBookException(String errorMessage) {
+    public UserForgetPasswordException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
@@ -13,7 +13,7 @@ public class CardsChequeBookException {
 
     @Override
     public String toString() {
-        return "CardsChequeBookException{" +
+        return "UserForgetPasswordException{" +
                 "errorMessage='" + errorMessage + '\'' +
                 '}';
     }

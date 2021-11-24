@@ -1,6 +1,6 @@
 package com.bankingmanagement.bankingmanagement.loan.exception;
 
-public class LoanException extends Throwable {
+public class LoanException extends Exception{
     private final String errorMessage;
 
     public LoanException(String errorMessage) {

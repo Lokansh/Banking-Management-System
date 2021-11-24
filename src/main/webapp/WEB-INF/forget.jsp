@@ -1,10 +1,11 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" isELIgnored="false"%>
+         pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Sign In | NovaBank </title>
+    <title>Forget Password</title>
 
     <style>
         h3{
@@ -18,25 +19,14 @@
         }
         h4{
             font-family: Calibri;
-            font-size: 15pt;
             font-style: normal;
             font-weight: bold;
-            color:#6b5b95;
-            text-align: center;
-            text-decoration: underline
-        }
-        h5{
-            font-family: Calibri;
-            font-size: 10pt;
-            font-style: normal;
-            color:#6b5b95;
-            text-align: center;
-            text-decoration: underline
+            text-align: center
         }
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;}
 
-        .loginTable{
+        .signupTable{
             margin-left: auto;
             margin-right: auto;
         }
@@ -54,13 +44,10 @@
         .hide {
             display: none;
         }
-        a{
-            text-align: center;
-            margin: 0 auto;
-            display: block;
-        }
     </style>
+
 </head>
+
 <%
 
     response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
@@ -71,35 +58,49 @@
 
 %>
 
+<body>
 
 <h3>Welcome to Nova Bank</h3>
-
+<h4>Forget Password</h4>
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
-<form method="post" action="${pageContext.request.contextPath }/login">
 
-    <table border="0" class="loginTable" >
+<form:errors path="forget.*"/>
+<form:form  method="post" action="${pageContext.request.contextPath }/forget">
+
+    <table border="0" class="signupTable" >
+
         <tr>
-            <td>Username</td>
-            <td><input type="text" name="UserLoginID"></td>
+            <td>User ID</td>
+            <td>
+                <input type="text" name="userLoginID">
+            </td>
         </tr>
+
         <tr>
-            <td>Password</td>
-            <td><input type="password" name="password"></td><br>
-            <td><a href="forget">Forget Password?</a></td>
+            <td>Security Question</td>
+            <td>
+                <select name="questionID">
+                    <option value="1">In what city were you born?</option>
+                    <option value="2">What is the name of your favorite movie?</option>
+                    <option value="3">What is your mother's maiden name?</option>
+                    <option value="4">What college did you attend?</option>
+                    <option value="5">What was your favorite subject as a child?</option>
+                </select>
+            </td>
+        </tr>
 
-
+        <tr>
+            <td>Security Answer</td>
+            <td><input type="text" name="questionAnswer"></td>
         </tr>
 
         <tr>
             <td>&nbsp;</td>
-            <td><input type="submit" value="Login"></td>
+            <td><input type="submit" value="submit"></td>
         </tr>
     </table>
-</form>
-<h4>First Time User</h4>
-<a href="signup">Register</a><br>
-
+</form:form>
 </body>
 </html>

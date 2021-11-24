@@ -31,12 +31,12 @@ public class UserLoginController {
     }
 
     @RequestMapping(path = "/login", method = POST)
-    public String login_user(UserLogin userLogin, HttpSession session, ModelMap modelMap)
+    public String login_user(@ModelAttribute UserLogin userLogin, HttpSession session, ModelMap modelMap)
     {
         try {
             loginService.validateUser(userLogin);
             session.setAttribute("username",userLogin.getUserLoginID());
-            return "user";
+            return "redirect:/user";
         } catch (UserAuthenticationException e) {
             e.printStackTrace();
             modelMap.put("errorMsg", e.getErrorMessage());

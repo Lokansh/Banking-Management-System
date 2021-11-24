@@ -24,6 +24,12 @@
             margin-left: auto;
             margin-right: auto;
         }
+        h4{
+            font-family: Calibri;
+            font-style: normal;
+            font-weight: bold;
+            text-align: center
+        }
 
         .errorMsg{
             border: 1px solid;
@@ -41,112 +47,121 @@
     </style>
 
 </head>
+
+<%
+
+    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+    if(session.getAttribute("username")!=null)
+    {
+        response.sendRedirect("/user");
+    }
+
+%>
+
 <body>
 
 <h3>Welcome to Nova Bank</h3>
+<h4>Register New User</h4>
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
 
-<form:errors path="userInfo.*"/>
+<form:errors path="user.*"/>
 <form:form  method="post" action="${pageContext.request.contextPath }/signup">
 
     <table border="0" class="signupTable" >
 
         <tr>
-            <td>cutomerID</td>
+            <td>User ID</td>
             <td>
-                <input type="text" name="customer.CustomerID">
+                <input type="text" name="customerID">
             </td>
         </tr>
         <tr>
             <td>First Name</td>
             <td>
-                <input type="text" name="customer.firstName">
+                <input type="text" name="firstName">
             </td>
         </tr>
 
         <tr>
             <td>Last Name</td>
             <td>
-                <input type="text" name="customer.lastName">
+                <input type="text" name="lastName">
             </td>
         </tr>
 
         <tr>
             <td>Address Line 1</td>
             <td>
-                <input type="text" name="customer.address1">
+                <input type="text" name="address1">
             </td>
         </tr>
 
         <tr>
             <td>Address Line 2</td>
             <td>
-                <input type="text" name="customer.address2">
+                <input type="text" name="address2">
             </td>
         </tr>
 
         <tr>
             <td>City</td>
             <td>
-                <input type="text" name="customer.City">
+                <input type="text" name="city">
             </td>
         </tr>
 
         <tr>
             <td>ZipCode</td>
             <td>
-                <input type="text" name="customer.zipCode">
+                <input type="text" name="zipCode">
             </td>
         </tr>
 
         <tr>
             <td>Contact Number</td>
             <td>
-                <input type="text" name="customer.contactNumber">
+                <input type="text" name="contactNumber">
             </td>
         </tr>
 
         <tr>
             <td>Email Address</td>
             <td>
-                <input type="text" name="customer.email">
+                <input type="text" name="email">
             </td>
         </tr>
 
         <tr>
             <td>SIN number</td>
             <td>
-                <input type="number" name="customer.sin">
+                <input type="number" name="sin">
             </td>
         </tr>
 
-        <tr>
-            <td>Username</td>
-            <td>
-                <input type="text" name="userLogin.UserLoginID">
-            </td>
-        </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" name="userLogin.password"></td>
-        </tr>
-
-        <tr>
-            <td>USerID</td>
-            <td><input type="text" name="securityAnswer.userLoginID"></td>
+            <td><input type="password" name="password"></td>
         </tr>
 
         <tr>
             <td>Security Question</td>
-            <td><input type="number" name="securityAnswer.questionID"></td>
+            <td>
+                <select name="questionID">
+                    <option value="1">In what city were you born?</option>
+                    <option value="2">What is the name of your favorite movie?</option>
+                    <option value="3">What is your mother's maiden name?</option>
+                    <option value="4">What college did you attend?</option>
+                    <option value="5">What was your favorite subject as a child?</option>
+                </select>
+            </td>
         </tr>
 
         <tr>
             <td>Security Answer</td>
-            <td><input type="text" name="securityAnswer.questionAnswer"></td>
+            <td><input type="text" name="questionAnswer"></td>
         </tr>
 
         <tr>

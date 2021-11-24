@@ -1,37 +1,44 @@
 package com.bankingmanagement.bankingmanagement.signup.model;
 
+public class User {
 
-public class Customer {
-    private String CustomerID;
+    private String customerID;
     private String firstName;
     private String lastName;
     private String address1;
     private String address2;
-    private String City;
+    private String city;
     private String zipCode;
     private String contactNumber;
     private String email;
     private int sin;
+    private int questionID;
+    private String questionAnswer;
+    private String password;
 
-    public Customer(String customerID, String firstName, String lastName, String address1, String address2, String city, String zipCode, String contactNumber, String email, int sin) {
-        CustomerID = customerID;
+    public User(String customerID, String firstName, String lastName, String address1, String address2, String city, String zipCode, String contactNumber, String email, int sin, int questionID, String questionAnswer, String password) {
+        this.customerID = customerID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address1 = address1;
         this.address2 = address2;
-        City = city;
+        this.city = city;
         this.zipCode = zipCode;
         this.contactNumber = contactNumber;
         this.email = email;
         this.sin = sin;
+        this.questionID = questionID;
+        this.questionAnswer = questionAnswer;
+        this.password = password;
     }
 
+
     public String getCustomerID() {
-        return CustomerID;
+        return customerID;
     }
 
     public void setCustomerID(String customerID) {
-        CustomerID = customerID;
+        this.customerID = customerID;
     }
 
     public String getFirstName() {
@@ -67,11 +74,11 @@ public class Customer {
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String city) {
-        City = city;
+        this.city = city;
     }
 
     public String getZipCode() {
@@ -105,4 +112,29 @@ public class Customer {
     public void setSin(int sin) {
         this.sin = sin;
     }
+
+    public int getQuestionID() {
+        return questionID;
+    }
+
+    public void setQuestionID(int questionID) {
+        this.questionID = questionID;
+    }
+
+    public String getQuestionAnswer() {
+        return questionAnswer;
+    }
+
+    public void setQuestionAnswer(String questionAnswer) {
+        this.questionAnswer = questionAnswer;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

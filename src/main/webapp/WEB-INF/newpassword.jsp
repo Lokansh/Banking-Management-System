@@ -1,10 +1,11 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" isELIgnored="false"%>
+         pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Sign In | NovaBank </title>
+    <title>Forget Password</title>
 
     <style>
         h3{
@@ -18,25 +19,14 @@
         }
         h4{
             font-family: Calibri;
-            font-size: 15pt;
             font-style: normal;
             font-weight: bold;
-            color:#6b5b95;
-            text-align: center;
-            text-decoration: underline
-        }
-        h5{
-            font-family: Calibri;
-            font-size: 10pt;
-            font-style: normal;
-            color:#6b5b95;
-            text-align: center;
-            text-decoration: underline
+            text-align: center
         }
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;}
 
-        .loginTable{
+        .signupTable{
             margin-left: auto;
             margin-right: auto;
         }
@@ -54,52 +44,43 @@
         .hide {
             display: none;
         }
-        a{
-            text-align: center;
-            margin: 0 auto;
-            display: block;
-        }
     </style>
+
 </head>
+
 <%
 
     response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
-    if(session.getAttribute("username")!=null)
+    if(session.getAttribute("new_password")==null)
     {
-        response.sendRedirect("/user");
+        response.sendRedirect("/forget");
     }
 
 %>
 
+<body>
 
 <h3>Welcome to Nova Bank</h3>
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
-<form method="post" action="${pageContext.request.contextPath }/login">
+<h3>New Password</h3>
+<form:errors path="newpassword.*"/>
+<form:form  method="post" action="${pageContext.request.contextPath }/newpassword">
 
-    <table border="0" class="loginTable" >
+    <table border="0" class="signupTable" >
+
         <tr>
-            <td>Username</td>
-            <td><input type="text" name="UserLoginID"></td>
-        </tr>
-        <tr>
-            <td>Password</td>
+            <td>New Password</td>
             <td><input type="password" name="password"></td><br>
-            <td><a href="forget">Forget Password?</a></td>
-
-
         </tr>
 
         <tr>
             <td>&nbsp;</td>
-            <td><input type="submit" value="Login"></td>
+            <td><input type="submit" value="submit"></td>
         </tr>
     </table>
-</form>
-<h4>First Time User</h4>
-<a href="signup">Register</a><br>
-
+</form:form>
 </body>
 </html>
