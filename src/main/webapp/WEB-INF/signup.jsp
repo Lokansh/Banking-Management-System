@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
->>>>>>> origin/user-authentication-sub-task-1
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -10,11 +7,6 @@
     <meta charset="ISO-8859-1">
     <title>Sign up</title>
 
-<<<<<<< HEAD
-</head>
-<body>
-WIP
-=======
     <style>
         h3{
             font-family: Calibri;
@@ -163,6 +155,5 @@ WIP
         </tr>
     </table>
 </form:form>
->>>>>>> origin/user-authentication-sub-task-1
 </body>
 </html>

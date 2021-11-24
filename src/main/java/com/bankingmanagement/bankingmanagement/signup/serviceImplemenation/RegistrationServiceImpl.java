@@ -133,11 +133,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         String zipCode = customer.getZipCode();
 
-<<<<<<< HEAD
-        if(zipCode==null || zipCode.trim().isEmpty() || !Pattern.matches("^\\d{5}(?:[-\\s]\\d{4})?$", zipCode)){
-=======
         if(false&&(zipCode==null || zipCode.trim().isEmpty() || !Pattern.matches("^\\d{5}(?:[-\\s]\\d{4})?$", zipCode))){
->>>>>>> origin/user-authentication-sub-task-1
             throw new UserRegistrationException("Zipcode is empty or Invalid ");
         }
 
