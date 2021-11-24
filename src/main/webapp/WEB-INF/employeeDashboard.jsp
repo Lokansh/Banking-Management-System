@@ -7,15 +7,17 @@
     <title>Employee Dashboard</title>
 
     <style>
-        h3{
+        h4{
             font-family: Calibri;
             font-size: 30pt;
             font-style: normal;
-            font-weight: bold;
+            
             color:#6b5b95;
             text-align: center;
-            text-decoration: underline
+            cursor: pointer;
+			
         }
+        
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;}
 
@@ -37,13 +39,47 @@
         .hide {
             display: none;
         }
+        .pr{
+        	padding-right:2em;
+        }
+        .selected{
+        	font-weight: bold;
+            text-decoration: underline
+        }
     </style>
 </head>
 
-<h3>Employee Dashboard</h3>
+<h4><span class="pr selected">Employee Dashboard</span>
+
+
+<span class="pr" href="/cust-details">Customer Details</span>
+
+
+<span href="requests">Requests</span></h4>
+
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
+</div>
+
+<div>
+ID   :    ${sessionScope.id }
+</div>
+
+<div>
+First Name   :    ${sessionScope.fName }
+</div>
+
+<div>
+Last Name   :    ${sessionScope.lName }
+</div>
+
+<div>
+Manager   :    ${sessionScope.manager }
+</div>
+
+<div>
+Salary   :    CAD ${sessionScope.salary }
 </div>
 
 
