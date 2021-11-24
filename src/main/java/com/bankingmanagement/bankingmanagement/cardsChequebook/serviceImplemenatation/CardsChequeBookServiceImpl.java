@@ -30,7 +30,7 @@ public class CardsChequeBookServiceImpl implements CardsChequeBookService {
     private CardsChequeBookDao cardsChequeBookDao;
 
     @Override
-    public String getEmployeeDetails(String id) throws CardsChequeBookException {
+    public String getCardsDetails(String id) throws CardsChequeBookException {
         try (final Connection connection = databaseConnectionDAO.getConnection();
              final Statement statement = connection.createStatement();
              final ResultSet empResultSet = statement.executeQuery(cardsChequeBookDao.cardsChequeBookData(id))) {
