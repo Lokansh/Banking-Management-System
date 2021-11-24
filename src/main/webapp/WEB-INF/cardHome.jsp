@@ -23,11 +23,15 @@
 
 <h3>Nova Bank</h3>
 
-<a href="${pageContext.request.contextPath }/logout">Apply for a new Debit Card</a>
+<a href="${pageContext.request.contextPath }/logout">Apply for a Card</a>
 <br><br>
-<a href="${pageContext.request.contextPath }/logout">Apply for a new Credit Card</a>
+<a href="${pageContext.request.contextPath }/logout">Block Card</a>
 <br><br>
-<a href="${pageContext.request.contextPath }/logout">Apply for a new Debit Card</a>
+<a href="${pageContext.request.contextPath }/logout">Set/Reset Pin</a>
+<br><br>
+<a href="${pageContext.request.contextPath }/logout">Reset Pin</a>
+<br><br>
+<a href="${pageContext.request.contextPath }/logout">Modify Limit</a>
 
 </body>
 </html>

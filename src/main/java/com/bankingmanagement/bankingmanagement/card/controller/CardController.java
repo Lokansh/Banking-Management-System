@@ -9,9 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CardController {
 
-    @RequestMapping(path= "/card", method = GET)
+    @RequestMapping(path= "/cardHome", method = GET)
+    public String cardHome()
+    {
+        return "cardHome";
+    }
+
+
+    @RequestMapping(path= "/cardHome", method = GET)
     public String home()
     {
-        return "card";
+        return "cardHome";
     }
+
+
 }
