@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CardController {
 
-    @RequestMapping(path= "/cardHome", method = GET)
+    @RequestMapping(path= "/cards", method = GET)
     public String cardHome()
     {
         return "cardHome";
@@ -21,6 +21,5 @@ public class CardController {
     {
         return "cardHome";
     }
-
-
+    
 }
