@@ -37,9 +37,4 @@ public class Employee {
 		this.employeeSalary = employeeSalary;
 	}
 	
-	public String toString() {
-		return "Employee [employeeID=" + employeeID + ", employeeFirstName=" + employeeFirstName + ", employeeLastName="
-				+ employeeLastName + ", employeeManager=" + employeeManager + ", employeeSalary=" + employeeSalary
-				+ "]";
-	}
 }

@@ -31,25 +31,19 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService {
 				final ResultSet empResultSet = statement
 						.executeQuery(getEmployeeDetailsDao.getEmployeeDetailsData(id))) {
 
-			System.out.println("===================================================444444");
 			if (empResultSet == null) {
-				System.out.println("===================================================6666666");
 				
 				throw new EmployeeDetailsException("Invalid request");
 			}
 //			List<String> nameList = new ArrayList<String>();
 			Employee emp=new Employee();
 			if (empResultSet.next()) {
-				System.out.println("===================================================77777");
 				emp.setEmployeeFirstName(empResultSet.getNString("EmployeeFirstName"));
 				emp.setEmployeeLastName(empResultSet.getNString("EmployeeLastName"));
 				emp.setEmployeeSalary(empResultSet.getDouble("EmployeeSalary"));
-				emp.setEmployeeManager(empResultSet.getNString("EmployeeManager"));
-				
-				System.out.println(empResultSet.getNString("EmployeeFirstName"));
+				emp.setEmployeeManager(empResultSet.getNString("EmployeeManager"));		
 				return emp;
 			} else {
-				System.out.println("===================================================88888");
 				throw new EmployeeDetailsException("Internal Server Error");
 			}
 
