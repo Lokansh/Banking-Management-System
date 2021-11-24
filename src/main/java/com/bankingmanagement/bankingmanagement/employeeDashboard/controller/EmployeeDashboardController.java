@@ -2,24 +2,26 @@ package com.bankingmanagement.bankingmanagement.employeeDashboard.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.bankingmanagement.bankingmanagement.authentication.exception.UserAuthenticationException;
-import com.bankingmanagement.bankingmanagement.authentication.model.UserLogin;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.exception.CustomerDataException;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.exception.EmployeeDetailsException;
+import com.bankingmanagement.bankingmanagement.employeeDashboard.exception.RequestException;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.model.Customer;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.model.Employee;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.model.GetCustomer;
+import com.bankingmanagement.bankingmanagement.employeeDashboard.model.Request;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.service.EmployeeDetailsService;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.service.GetCustomerDataService;
+import com.bankingmanagement.bankingmanagement.employeeDashboard.service.GetRequests;
 
 @Controller
 public class EmployeeDashboardController {
@@ -29,6 +31,9 @@ public class EmployeeDashboardController {
 
 	@Autowired
 	GetCustomerDataService getCustomerDataService;
+	
+	@Autowired
+	GetRequests getRequests;
 	
 	@GetMapping(path = "/emp-dash/details")
 	public String home(HttpSession session, ModelMap modelMap) throws EmployeeDetailsException {
@@ -73,7 +78,9 @@ public class EmployeeDashboardController {
     }
 	
 	@GetMapping(path = "/emp-dash/requests")
-	public String getRequests() throws EmployeeDetailsException {
+	public String getRequest(HttpSession session) throws EmployeeDetailsException, RequestException {
+		List<Request> req=getRequests.getRequest();
+		session.setAttribute("requests",req);
 		return "requests";
 	}
 }
