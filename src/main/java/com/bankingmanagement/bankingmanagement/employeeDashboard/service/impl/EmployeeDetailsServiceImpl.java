@@ -14,7 +14,7 @@ import com.bankingmanagement.bankingmanagement.employeeDashboard.database.GetEmp
 import com.bankingmanagement.bankingmanagement.employeeDashboard.exception.EmployeeDetailsException;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.model.Employee;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.service.EmployeeDetailsService;
-
+import static com.bankingmanagement.bankingmanagement.employeeDashboard.database.EmployeeDashboardConstants.*;
 @Service
 public class EmployeeDetailsServiceImpl implements EmployeeDetailsService {
 
@@ -38,10 +38,10 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService {
 //			List<String> nameList = new ArrayList<String>();
 			Employee emp=new Employee();
 			if (empResultSet.next()) {
-				emp.setEmployeeFirstName(empResultSet.getNString("EmployeeFirstName"));
-				emp.setEmployeeLastName(empResultSet.getNString("EmployeeLastName"));
-				emp.setEmployeeSalary(empResultSet.getDouble("EmployeeSalary"));
-				emp.setEmployeeManager(empResultSet.getNString("EmployeeManager"));		
+				emp.setEmployeeFirstName(empResultSet.getNString(EMP_FNAME));
+				emp.setEmployeeLastName(empResultSet.getNString(EMP_LNAME));
+				emp.setEmployeeSalary(empResultSet.getDouble(EMP_SALARY));
+				emp.setEmployeeManager(empResultSet.getNString(EMP_MANAGER));		
 				return emp;
 			} else {
 				throw new EmployeeDetailsException("Internal Server Error");

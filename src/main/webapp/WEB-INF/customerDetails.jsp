@@ -95,11 +95,11 @@ Zipcode   :    ${sessionScope.zip }
 </div>
 
 <div>
-Phone   :    CAD ${sessionScope.phone }
+Phone   :    ${sessionScope.phone }
 </div>
 
 <div>
-SIN   :    CAD ${sessionScope.sin }
+SIN   :    ${sessionScope.sin }
 </div>
 
 <div>

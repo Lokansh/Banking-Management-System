@@ -80,7 +80,7 @@ public class EmployeeDashboardController {
 	@GetMapping(path = "/emp-dash/requests")
 	public String getRequest(HttpSession session) throws EmployeeDetailsException, RequestException {
 		List<Request> req=getRequests.getRequest();
-		session.setAttribute("requests",req);
+//		session.setAttribute("requests",req);
 		return "requests";
 	}
 }

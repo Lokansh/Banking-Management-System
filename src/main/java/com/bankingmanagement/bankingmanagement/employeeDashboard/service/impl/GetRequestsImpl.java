@@ -30,17 +30,20 @@ public class GetRequestsImpl implements GetRequests {
 
 	@Override
 	public List<Request> getRequest() throws RequestException {
+		System.out.println("1111");
 		try (final Connection connection = databaseConnectionDAO.getConnection();
+				
 				final Statement statement = connection.createStatement();
 				final ResultSet requestResultSet = statement.executeQuery(requestDao.getRequests())) {
-
+			System.out.println("2222");
 			if (requestResultSet == null) {
-
+				System.out.println("3333");
 				throw new RequestException("Invalid request");
 			}
 //			List<String> nameList = new ArrayList<String>();
 
 			if (requestResultSet.first()) {
+				System.out.println("4444");
 				while (requestResultSet.next()) {
 					Request req = new Request();
 					req.setCustomerId(requestResultSet.getInt("CustomerId"));

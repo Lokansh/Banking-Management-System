@@ -10,8 +10,8 @@ public class GetEmployeeDetailsDaoImpl implements GetEmployeeDetailsDao{
 	@Override
     public String getEmployeeDetailsData(String id) {
         return "SELECT " +
-                EMP_FIRST_NAME + ", " +
-                EMP_LAST_NAME + ", " +
+                EMP_FNAME + ", " +
+                EMP_LNAME + ", " +
                 EMP_MANAGER + ", " +
                 EMP_SALARY +
                 " FROM " +

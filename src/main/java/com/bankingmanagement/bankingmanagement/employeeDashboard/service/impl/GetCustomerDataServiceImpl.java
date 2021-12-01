@@ -16,7 +16,7 @@ import com.bankingmanagement.bankingmanagement.employeeDashboard.exception.Emplo
 import com.bankingmanagement.bankingmanagement.employeeDashboard.model.Customer;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.model.Employee;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.service.GetCustomerDataService;
-
+import static com.bankingmanagement.bankingmanagement.employeeDashboard.database.EmployeeDashboardConstants.*;
 @Service
 public class GetCustomerDataServiceImpl implements GetCustomerDataService {
 	
@@ -41,16 +41,16 @@ public class GetCustomerDataServiceImpl implements GetCustomerDataService {
 			Customer cust=new Customer();
 			if (custResultSet.next()) {
 				cust.setId(id);
-				cust.setFirstName(custResultSet.getNString("CustomerFirstName"));
-				cust.setLastName(custResultSet.getNString("CustomerLastName"));
-				cust.setAddress1(custResultSet.getNString("CustomerAddress1"));
-				cust.setAddress2(custResultSet.getNString("CustomerAddress1"));
-				cust.setCity(custResultSet.getNString("City"));
-				cust.setZipCode(custResultSet.getNString("ZipCode"));
-				cust.setEmail(custResultSet.getNString("CustomerEmail"));
-				cust.setPhone(custResultSet.getNString("PhoneNumber"));
-				cust.setSin(custResultSet.getNString("SIN"));
-				cust.setBalance(custResultSet.getDouble("Balance"));
+				cust.setFirstName(custResultSet.getNString(CUST_FNAME));
+				cust.setLastName(custResultSet.getNString(CUST_LNAME));
+				cust.setAddress1(custResultSet.getNString(CUST_ADD1));
+				cust.setAddress2(custResultSet.getNString(CUST_ADD2));
+				cust.setCity(custResultSet.getNString(CUST_CITY));
+				cust.setZipCode(custResultSet.getNString(CUST_ZIP));
+				cust.setEmail(custResultSet.getNString(CUST_EMAIL));
+				cust.setPhone(custResultSet.getNString(CUST_PHONE));
+				cust.setSin(custResultSet.getNString(CUST_SIN));
+				cust.setBalance(custResultSet.getDouble(CUST_BAL));
 				return cust;
 			} else {
 				throw new CustomerDataException("Internal Server Error");
