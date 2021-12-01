@@ -1,11 +1,14 @@
 package com.bankingmanagement.bankingmanagement.card.database;
 
 public final class CardConstants {
-    // User-Login table.
-    public static final String USERLOGIN_TABLE = "UserLogin";
+    public static final String CARD_REQUEST_TABLE = "CardRequest";
 
-    // User-Login unique id column
-    public static final String LOGIN_ID = "UserLoginID";
+    public static final String CARD_REQUEST_ID = "CardRequestId";
 
-    public static final String LOGIN_PASSWORD = "password";
+    public static final String CARD_TYPE = "CardType";
+
+    public static final String REQUEST_STATUS = "RequestStatus";
+
+    public static final String REQUEST_TYPE = "RequestType";
+
 }

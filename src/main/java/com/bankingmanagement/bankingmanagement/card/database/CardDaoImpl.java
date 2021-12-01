@@ -9,14 +9,7 @@ public class CardDaoImpl implements com.bankingmanagement.bankingmanagement.card
 
     @Override
     public String cardData(String username) {
-        return "SELECT " +
-                LOGIN_ID + ", " +
-                LOGIN_PASSWORD +
-                " FROM " +
-                USERLOGIN_TABLE +
-                " WHERE " +
-                LOGIN_ID + "=\"" + username + "\";";
-
+        return null;
     }
 
 }

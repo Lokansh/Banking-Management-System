@@ -1,6 +1,6 @@
 package com.bankingmanagement.bankingmanagement.card.serviceImplemenatation;
 
-import static com.bankingmanagement.bankingmanagement.card.database.CardConstants.LOGIN_PASSWORD;
+//import static com.bankingmanagement.bankingmanagement.card.database.CardConstants.LOGIN_PASSWORD;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -47,7 +47,7 @@ public class CardServiceImpl implements CardService {
 
         } catch (SQLException | DatabaseConnectionException sqlException) {
             sqlException.printStackTrace();
-            throw new CardException("Internal Error while fetching employee data");
+            throw new CardException("Internal Error while fetching card data");
         }
 
     }
