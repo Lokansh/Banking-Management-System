@@ -18,7 +18,7 @@
         }
         h4{
             font-family: Calibri;
-            font-size: 15pt;
+            font-size: 10pt;
             font-style: normal;
             font-weight: bold;
             color:#6b5b95;
@@ -99,7 +99,7 @@
     </table>
 </form>
 <h4>First Time User</h4>
-<a href="signup">Register</a><br>
+<a href="signup"><h5>Register</h5></a><br>
 
 </body>
 </html>

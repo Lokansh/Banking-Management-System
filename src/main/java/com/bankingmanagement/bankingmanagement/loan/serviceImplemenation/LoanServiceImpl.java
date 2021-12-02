@@ -5,6 +5,7 @@ import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionExcept
 
 import com.bankingmanagement.bankingmanagement.loan.database.LoanApplyDao;
 import com.bankingmanagement.bankingmanagement.loan.exception.LoanException;
+import com.bankingmanagement.bankingmanagement.loan.model.EligibilityInfo;
 import com.bankingmanagement.bankingmanagement.loan.model.Loan;
 import com.bankingmanagement.bankingmanagement.loan.model.LoanInfo;
 import com.bankingmanagement.bankingmanagement.loan.service.LoanService;
@@ -76,19 +77,6 @@ public class LoanServiceImpl implements LoanService {
                         allLoan.getString("SALARY"),allLoan.getString("AGE"),
                         allLoan.getString("LoanAmount"),
                         allLoan.getString("LOANTYPE"),allLoan.getBoolean("LoanStatus"));
-//                Loan l=null;
-//                l.setFirstName(allLoan.getString("CustomerFirstName"));
-//                l.setLastName(allLoan.getString("CustomerLastName"));
-//                l.setSalary(allLoan.getString("SALARY"));
-//                l.setAddress1(allLoan.getString("CustomerAddress1"));
-//                l.setAddress2(allLoan.getString("CustomerAddress2"));
-//                l.setAge(allLoan.getString("AGE"));
-//                l.setCity(allLoan.getString("City"));
-//                l.setContactNumber(allLoan.getString("PhoneNumber"));
-//                l.setEmail(allLoan.getString("CustomerEmail"));
-//                l.setSin(allLoan.getString("SIN"));
-//                l.setZipCode(allLoan.getString("Zipcode"));
-//                l.setLoanType(allLoan.getString("LOANTYPE"));
                 loans.add(l);
             }
             return loans;
@@ -99,6 +87,56 @@ public class LoanServiceImpl implements LoanService {
         }
 
 
+    }
+
+    @Override
+    public boolean deleteLoanRequest(int loanId) throws LoanException {
+        String loanID= String.valueOf(loanId);
+        return false;
+    }
+
+    @Override
+    public boolean checkLoanEligibility(EligibilityInfo info, String userId) throws LoanException {
+        validateUserId(userId);
+        if(validateLoanEligibilityData(info))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateLoanEligibilityData(EligibilityInfo info) throws LoanException  {
+        String sin = info.getSin();
+        String salary =info.getSalary();
+        String age =info.getAge();
+        String amount =info.getLoanAmount();
+        String loanType =info.getLoanType();
+
+        if(sin==null || sin.trim().isEmpty()){
+            throw new LoanException("sin is empty  ");
+        }
+
+        else if(salary==null || sin.trim().isEmpty()|| salary=="0"){
+            throw new LoanException("Salary is empty  ");
+        }
+        else if(age==null || age.trim().isEmpty()||age=="0"){
+            throw new LoanException("Age is empty ");
+        }
+        else if (Integer.parseInt(age)<18 || Integer.parseInt(age)>60)
+        {
+            throw new LoanException("Our bank doesn't offer loan to your age");
+        }
+        else if(amount==null || amount.trim().isEmpty()|| amount=="0"){
+            throw new LoanException("Amount is empty  ");
+        }
+        else if(Long.parseLong(amount)>1000000000 || Long.parseLong(amount)<1000 )
+        {
+            throw new LoanException("Sorry we dont offer loan for this amount");
+        }
+        else if(loanType==null || loanType.trim().isEmpty()||loanType=="loanType"){
+            throw new LoanException("Please select loanType  ");
+        }
+        return true;
     }
 
     private void validateUserId(String userId) throws LoanException {
@@ -138,8 +176,6 @@ public class LoanServiceImpl implements LoanService {
             throw new LoanException("Email is empty or Invalid ");
         }
 
-
-
         String city = loan.getCity();
 
         if(city==null || city.trim().isEmpty() || !Pattern.matches("[A-Za-z ]+", city)){
@@ -163,17 +199,21 @@ public class LoanServiceImpl implements LoanService {
         if(sin==null || sin.trim().isEmpty()){
             throw new LoanException("sin is empty  ");
         }
+        String age =loan.getAge();
+        if(age==null || age.trim().isEmpty()||age=="0"){
+            throw new LoanException("Age is empty ");
+        }
         String salary =loan.getSalary();
         if(salary==null || sin.trim().isEmpty()|| salary=="0"){
             throw new LoanException("Salary is empty  ");
         }
+        String amount =loan.getLoanAmount();
+        if(amount==null || amount.trim().isEmpty()|| amount=="0"){
+            throw new LoanException("Amount is empty  ");
+        }
         String loanType =loan.getLoanType();
         if(loanType==null || loanType.trim().isEmpty()||loanType=="loanType"){
             throw new LoanException("Please select loanType  ");
-        }
-        String age =loan.getAge();
-        if(age==null || age.trim().isEmpty()||age=="0"){
-            throw new LoanException("Age is empty ");
         }
     }
 }

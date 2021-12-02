@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Home page</title>
+    <title> User login</title>
     <style>
         h3{
             font-family: Calibri;
@@ -16,15 +15,20 @@
             text-align: center;
             text-decoration: underline
         }
+        h2{
+            font-family: Calibri;
+            color:#6b5b95;
+            text-align: center;
+            text-decoration: underline
+        }
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;}
-        .loanviewTable{
+
+        .applyLoanTable{
             margin-left: auto;
             margin-right: auto;
         }
-        td{
-            text-align:center;
-        }
+
         .errorMsg{
             border: 1px solid;
             margin: 10px 0px;
@@ -47,51 +51,35 @@
         .hide {
             display: none;
         }
+        .container{ text-align: center;}
     </style>
 </head>
-
 <body>
-<div>Welcome, ${sessionScope.username }
-    <a href="user">Home</a>
-    <a href="${pageContext.request.contextPath }/logout">Logout</a>
-</div>
-<h3>Applied Loan Status</h3>
 <div class="${successMsg==null ? "hide" : "successMsg"}">
     ${successMsg}
 </div>
-<div class="${errorMsg==null ? "hide" : "errorMsg"}">
-    ${errorMsg}
+<div class="container">Welcome, ${sessionScope.username }
+    <a href="user">Home</a>
+    <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
-<table class="loanviewTable">
-    <tr>
-        <th>Loan Id</th>
-        <th>  Name</th>
-        <th>  Age</th>
-        <th>  Salary</th>
-        <th>Loan Type</th>
-        <th>Loan Status</th>
-    </tr>
-    <c:forEach items="${loans}" var="loan">
-        <tr>
-            <td>${loan.loanId} </td>
-            <td>${loan.firstName}e</td>
-            <td>${loan.age}</td>
-            <td>${loan.salary}</td>
-            <td>${loan.loanType}</td>
-            <td>${loan.loanStatus?"APPROVED":"PENDING"}</td>
-            <td><c:choose>
-                <c:when test="${loan.loanStatus}">
-                    <br />
-                </c:when>
-                <c:otherwise>
-                    <a href="/deleteLoanApplication?id=${loan.loanId}">Delete Request</a>
-                    <br />
-                </c:otherwise>
-            </c:choose></td>
-        </tr> <br>
-    </c:forEach>
+<h3> Credit Card Services</h3>
+<%
 
-</table>
+    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
 
+    if(session.getAttribute("username")==null)
+    {
+        response.sendRedirect("/login");
+    }
+
+%>
+
+<a href="ccServices">Check my CC Bills</a>
+<br>
+<a href="ccServices">Check my Credit Score</a>
+<br>
+<a href="ccServices">Redeem Reward Points</a>
+<br>
+<a href="ccServices">Apply for Credit Limit Increase</a>
 </body>
 </html>

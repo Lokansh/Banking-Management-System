@@ -1,11 +1,60 @@
 <html>
 <head>
 <title>Nova Bank</title>
+ <style>
+  h3{
+   font-family: Calibri;
+   font-size: 30pt;
+   font-style: normal;
+   font-weight: bold;
+   color:#6b5b95;
+   text-align: center;
+   text-decoration: underline
+  }
+  h2{
+   font-family: Calibri;
+   color:#6b5b95;
+   text-align: center;
+   text-decoration: underline
+  }
+  body {font-family: Arial, Helvetica, sans-serif;}
+  * {box-sizing: border-box;}
+
+  .applyLoanTable{
+   margin-left: auto;
+   margin-right: auto;
+  }
+
+  .errorMsg{
+   border: 1px solid;
+   margin: 10px 0px;
+   padding: 15px 10px 15px 50px;
+   background-repeat: no-repeat;
+   background-position: 10px center;
+   color: #D63301;
+   background-color: #FFCCBA;
+   background-image: url('https://i.imgur.com/GnyDvKN.png');
+  }
+  .successMsg{
+   border: 1px solid;
+   margin: 10px 0px;
+   padding: 15px 10px 15px 50px;
+   background-repeat: no-repeat;
+   background-position: 10px center;
+   color: #08d601;
+   background-color: #d3ffba;
+  }
+  .hide {
+   display: none;
+  }
+  .container{
+   text-align: center;
+  }
+ </style>
 </head>
 <body>
-<div>Welcome, ${sessionScope.username }
-
-
+<div class="container">Welcome, ${sessionScope.username }
+ <a href="user">Home</a>
  <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
 

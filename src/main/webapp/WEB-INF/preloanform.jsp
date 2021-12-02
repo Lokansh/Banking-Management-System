@@ -53,13 +53,12 @@
         .hide {
             display: none;
         }
-        .container{ text-align: center;}
     </style>
 
 </head>
 <body>
 
-<div class="container">Welcome, ${sessionScope.username }
+<div>Welcome, ${sessionScope.username }
     <a href="user">Home</a>
     <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
@@ -69,74 +68,19 @@
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
-<h2>Loan Application</h2>
+<h2>Check Loan Eligiilty</h2>
 <form:errors path="loan.*"/>
-<form:form  method="post" action="${pageContext.request.contextPath }/loanApplication">
+<form:form  method="post" action="${pageContext.request.contextPath }/loanEligibility">
 
     <table border="0" class="applyLoanTable" >
 
-
-        <tr>
-            <td>First Name</td>
-            <td>
-                <input type="text" name="firstName">
-            </td>
-        </tr>
-
-        <tr>
-            <td>Last Name</td>
-            <td>
-                <input type="text" name="lastName">
-            </td>
-        </tr>
-
-        <tr>
-            <td>Address Line 1</td>
-            <td>
-                <input type="text" name="address1">
-            </td>
-        </tr>
-
-        <tr>
-            <td>Address Line 2</td>
-            <td>
-                <input type="text" name="address2">
-            </td>
-        </tr>
-
-        <tr>
-            <td>City</td>
-            <td>
-                <input type="text" name="city">
-            </td>
-        </tr>
-
-        <tr>
-            <td>ZipCode</td>
-            <td>
-                <input type="text" name="zipCode">
-            </td>
-        </tr>
-
-        <tr>
-            <td>Contact Number</td>
-            <td>
-                <input type="text" name="contactNumber">
-            </td>
-        </tr>
-
-        <tr>
-            <td>Email Address</td>
-            <td>
-                <input type="text" name="email">
-            </td>
-        </tr>
 
         <tr>
             <td>SIN number</td>
             <td>
                 <input type="number" name="sin">
             </td>
+            <td>
         </tr>
 
         <tr>
@@ -151,7 +95,7 @@
         </tr>
         <tr>
             <td>Amount Required</td>
-            <td><input type="text" name="loanamount"></td>
+            <td><input type="text" name="loanAmount"></td>
         </tr>
         <tr>
             <td>Loan Type</td>
