@@ -1,4 +1,4 @@
-package com.bankingmanagement.bankingmanagement.payment.exception;
+package com.bankingmanagement.bankingmanagement.ccservice.exception;
 
 public class CreditCardException extends Exception{
     private final String errorMessage;

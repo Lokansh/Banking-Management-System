@@ -6,6 +6,4 @@ public interface LoanApplyDao {
       String insertLoanReqTableQuery(Loan loan, String userId);
 
     String fetchLoanReqTableQuery(String userId);
-//    String insertLoanReqDataQuery(Loan loan);
-//    String getLoanAppliedLoanQuery();
 }

@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" isELIgnored="false"%>
+         pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Applied loans</title>
+    <title>User Credit Card</title>
     <style>
         h3{
             font-family: Calibri;
@@ -50,50 +50,39 @@
         .container{text-align: center;}
     </style>
 </head>
-
 <body>
-<div>Welcome, ${sessionScope.username }
-    <a href="user">Home</a>
+
+<div class="container">Welcome, ${sessionScope.username }
+    <a href="ccServices">Home</a>
     <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
-<h3>Applied Loan Status</h3>
+<h3> My Credit Card Details</h3>
 <div class="${successMsg==null ? "hide" : "successMsg"}">
     ${successMsg}
 </div>
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
-
 <table class="loanviewTable">
     <tr>
-        <th>Loan Id</th>
-        <th>  Name</th>
-        <th>  Age</th>
-        <th>  Salary</th>
-        <th>Loan Type</th>
-        <th>Loan Status</th>
+
+        <th>  Card Number</th>
+        <th>  Card Type</th>
+        <th>  Card Limit</th>
+        <th>  Card State</th>
+
     </tr>
-    <c:forEach items="${loans}" var="loan">
-        <tr>
-            <td>${loan.loanId} </td>
-            <td>${loan.firstName}e</td>
-            <td>${loan.age}</td>
-            <td>${loan.salary}</td>
-            <td>${loan.loanType}</td>
-            <td>${loan.loanStatus?"APPROVED":"PENDING"}</td>
-<%--            <td><c:choose>--%>
-<%--                <c:when test="${loan.loanStatus}">--%>
-<%--                    <br />--%>
-<%--                </c:when>--%>
-<%--                <c:otherwise>--%>
-<%--                    <a href="/deleteLoanApplication?id=${loan.loanId}">Delete Request</a>--%>
-<%--                    <br />--%>
-<%--                </c:otherwise>--%>
-<%--            </c:choose></td>--%>
-        </tr> <br>
+    <c:forEach items="${ccdetails}" var="ccdetail">
+    <tr>
+        <td>${ccdetail.cardNumber} </td>
+        <td>${ccdetail.cardType}</td>
+        <td>${ccdetail.cardLimit}</td>
+        <td>${ccdetail.cardStatus?"Active":"InActive"}</td>
+
+    </tr> <br>
     </c:forEach>
 
-</table>
+
 
 </body>
 </html>

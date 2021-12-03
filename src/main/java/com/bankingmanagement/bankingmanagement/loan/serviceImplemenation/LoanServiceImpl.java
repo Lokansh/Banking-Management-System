@@ -81,7 +81,6 @@ public class LoanServiceImpl implements LoanService {
             }
             return loans;
         } catch (SQLException | DatabaseConnectionException sqlException) {
-            // TODO handle database incosientancy while insering data
             sqlException.printStackTrace();
             throw new LoanException("Internal Error while loan,");
         }
@@ -92,6 +91,7 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public boolean deleteLoanRequest(int loanId) throws LoanException {
         String loanID= String.valueOf(loanId);
+
         return false;
     }
 
@@ -194,7 +194,6 @@ public class LoanServiceImpl implements LoanService {
             throw new LoanException("ContactNumber is empty  ");
         }
 
-        //TODO : update sin to string regex: ^(\d{3}-\d{3}-\d{3})|(\d{9})$
         String sin = loan.getSin();
         if(sin==null || sin.trim().isEmpty()){
             throw new LoanException("sin is empty  ");

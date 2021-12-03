@@ -73,7 +73,8 @@
     }
 
 %>
-
+<a href="ccList">Get My Credit Card Details</a>
+<br>
 <a href="ccServices">Check my CC Bills</a>
 <br>
 <a href="ccServices">Check my Credit Score</a>
