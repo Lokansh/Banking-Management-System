@@ -1,32 +1,44 @@
 package com.bankingmanagement.bankingmanagement.employeeDashboard.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Request {
-	Integer customerId; 
-	String requestData; 
-	String Status; 
-	Integer RequestId;
+	Integer customerId;
+	String requestData;
+	String status;
+	Integer requestId;
+
 	public Integer getCustomerId() {
 		return customerId;
 	}
+
 	public void setCustomerId(int i) {
 		this.customerId = i;
 	}
+
 	public String getRequestData() {
 		return requestData;
 	}
+
 	public void setRequestData(String requestData) {
 		this.requestData = requestData;
 	}
+
 	public String getStatus() {
-		return Status;
+		return status;
 	}
-	public void setStatus(String status) {
-		Status = status;
+
+	public void setStatus(String reqStatus) {
+		status = reqStatus;
 	}
+
 	public Integer getRequestId() {
-		return RequestId;
+		return requestId;
 	}
-	public void setRequestId(Integer requestId) {
-		RequestId = requestId;
+
+	public void setRequestId(Integer id) {
+		requestId = id;
 	}
+
 }

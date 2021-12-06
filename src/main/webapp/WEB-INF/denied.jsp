@@ -64,21 +64,9 @@ body {
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">${errorMsg}</div>
 
-<div>Requests</div>
-
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<table>
-	<c:forEach items="${requests}" var="request">
-		<tr>
-			<td><c:out value="${request.getRequestId()}" /></td>
-			<td><c:out value="${request.getCustomerId()}" /></td>
-			<td><c:out value="${request.getRequestData()}" /></td>
-			<td><c:out value="${request.getStatus()}" /></td>
-			<td><a href="/emp-dash/requests/approve/${request.getRequestId()}"><button>Approve</button></a><button>Deny</button></td>
-		</tr>
-	</c:forEach>
-</table>
-
+<h3>Request Denied</h3>
+<div>
+<a href="/emp-dash/requests"><button>Back</button></a>
+</div>
 </body>
 </html>

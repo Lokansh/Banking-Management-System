@@ -8,4 +8,5 @@ public class RequestDaoImpl implements RequestDao {
 	public String  getRequests() {
 		return "SELECT * FROM CSCI5308_20_PRODUCTION.CustomerRequest where Status='Pending';";
 	};
+	
 }

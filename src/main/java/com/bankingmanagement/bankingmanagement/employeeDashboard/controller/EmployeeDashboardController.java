@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bankingmanagement.bankingmanagement.employeeDashboard.exception.CustomerDataException;
@@ -78,9 +79,15 @@ public class EmployeeDashboardController {
     }
 	
 	@GetMapping(path = "/emp-dash/requests")
-	public String getRequest(HttpSession session) throws EmployeeDetailsException, RequestException {
+	public String getRequest(HttpSession session,  ModelMap modelMap) throws EmployeeDetailsException, RequestException {
 		List<Request> req=getRequests.getRequest();
-//		session.setAttribute("requests",req);
+		modelMap.clear();
+		modelMap.put("requests", req);
 		return "requests";
+	}
+	@GetMapping(path = "/emp-dash/requests/approve/{id}")
+	public String approveRequest(@PathVariable String id, HttpSession session) throws EmployeeDetailsException, RequestException {
+		getRequests.approveRequest(Integer.parseInt(id));
+		return "approved";
 	}
 }

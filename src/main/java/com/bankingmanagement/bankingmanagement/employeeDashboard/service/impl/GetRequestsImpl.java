@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionDao;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionException;
+import com.bankingmanagement.bankingmanagement.employeeDashboard.database.ManageRequestsDao;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.database.RequestDao;
-import com.bankingmanagement.bankingmanagement.employeeDashboard.exception.CustomerDataException;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.exception.RequestException;
-import com.bankingmanagement.bankingmanagement.employeeDashboard.model.Customer;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.model.Request;
 import com.bankingmanagement.bankingmanagement.employeeDashboard.service.GetRequests;
 
@@ -27,6 +26,9 @@ public class GetRequestsImpl implements GetRequests {
 	@Autowired
 	private RequestDao requestDao;
 	List<Request> requests = new ArrayList<Request>();
+	
+	@Autowired
+	private ManageRequestsDao manageRequestsDao;
 
 	@Override
 	public List<Request> getRequest() throws RequestException {
@@ -35,14 +37,12 @@ public class GetRequestsImpl implements GetRequests {
 				
 				final Statement statement = connection.createStatement();
 				final ResultSet requestResultSet = statement.executeQuery(requestDao.getRequests())) {
+//			requestResult
 			System.out.println("2222");
 			if (requestResultSet == null) {
 				System.out.println("3333");
 				throw new RequestException("Invalid request");
-			}
-//			List<String> nameList = new ArrayList<String>();
-
-			if (requestResultSet.first()) {
+			}else{
 				System.out.println("4444");
 				while (requestResultSet.next()) {
 					Request req = new Request();
@@ -53,9 +53,7 @@ public class GetRequestsImpl implements GetRequests {
 					requests.add(req);
 				}
 
-			} else {
-				throw new RequestException("Internal Server Error");
-			}
+			} 
 
 		} catch (SQLException | DatabaseConnectionException sqlException) {
 			sqlException.printStackTrace();
@@ -64,4 +62,22 @@ public class GetRequestsImpl implements GetRequests {
 
 		return requests;
 	}
+	@Override
+	public void approveRequest(int requestId) throws RequestException {
+		try (final Connection connection = databaseConnectionDAO.getConnection();
+				
+				final Statement statement = connection.createStatement();
+				) {
+			final int requestResultSet = statement.executeUpdate(manageRequestsDao.approveRequest(requestId));
+			if (requestResultSet == 0) {
+				throw new RequestException("Internal Server Error");
+			}
+
+		} catch (SQLException | DatabaseConnectionException sqlException) {
+			sqlException.printStackTrace();
+			throw new RequestException("Internal Error while fetching customer data");
+		}
+
+	}
+	
 }
