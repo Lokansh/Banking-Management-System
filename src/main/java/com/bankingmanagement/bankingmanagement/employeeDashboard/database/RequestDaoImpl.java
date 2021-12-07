@@ -8,5 +8,15 @@ public class RequestDaoImpl implements RequestDao {
 	public String  getRequests() {
 		return "SELECT * FROM CSCI5308_20_PRODUCTION.CustomerRequest where Status='Pending';";
 	};
+
+	@Override
+	public String  approvedRequestHistory() {
+		return "SELECT * FROM CSCI5308_20_PRODUCTION.CustomerRequest where Status='APPROVED';";
+	};
+	
+	@Override
+	public String  deniedRequestHistory() {
+		return "SELECT * FROM CSCI5308_20_PRODUCTION.CustomerRequest where Status='DENIED';";
+	};
 	
 }

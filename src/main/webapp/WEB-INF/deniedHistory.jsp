@@ -72,7 +72,7 @@ body {
 </h5>
 
 
-<div>Requests</div>
+<div>Denied Requests</div>
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -83,12 +83,10 @@ body {
 			<td><c:out value="${request.getCustomerId()}" /></td>
 			<td><c:out value="${request.getRequestData()}" /></td>
 			<td><c:out value="${request.getStatus()}" /></td>
-			<td><a
-				href="/emp-dash/requests/approve/${request.getRequestId()}"><button>Approve</button></a><a
-				href="/emp-dash/requests/deny/${request.getRequestId()}"><button>Deny</button></a></td>
 		</tr>
 	</c:forEach>
 </table>
-
+<a href="/emp-dash/requests"><button>Back</button></a>
+<div></div>
 </body>
 </html>

@@ -90,4 +90,23 @@ public class EmployeeDashboardController {
 		getRequests.approveRequest(Integer.parseInt(id));
 		return "approved";
 	}
+	@GetMapping(path = "/emp-dash/requests/deny/{id}")
+	public String denyRequest(@PathVariable String id, HttpSession session) throws EmployeeDetailsException, RequestException {
+		getRequests.denyRequest(Integer.parseInt(id));
+		return "approved";
+	}
+	@GetMapping(path = "/emp-dash/requests/approved")
+	public String approvedRequest(HttpSession session,  ModelMap modelMap) throws EmployeeDetailsException, RequestException {
+		List<Request> req=getRequests.approvedHistory();
+		modelMap.clear();
+		modelMap.put("requests", req);
+		return "approvedHistory";
+	}
+	@GetMapping(path = "/emp-dash/requests/denied")
+	public String deniedRequest(HttpSession session,  ModelMap modelMap) throws EmployeeDetailsException, RequestException {
+		List<Request> req=getRequests.deniedHistory();
+		modelMap.clear();
+		modelMap.put("requests", req);
+		return "deniedHistory";
+	}
 }
