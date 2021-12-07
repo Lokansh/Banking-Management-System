@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+.DS_Store
+.gitignore
+local.properties
+src/main/webapp/WEB-INF/signup.jsp
