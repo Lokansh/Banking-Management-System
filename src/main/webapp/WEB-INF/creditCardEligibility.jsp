@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Apply Card</title>
+    <title>Card Eligibility</title>
     <style>
         h3{
             font-family: Calibri;
@@ -35,7 +35,17 @@
             color: #08d601;
             background-color: #d3ffba;
         }
-        .errorMsg{
+        .errorMsg1{
+            border: 1px solid;
+            margin: 10px 0px;
+            padding: 15px 10px 15px 50px;
+            background-repeat: no-repeat;
+            background-position: 10px center;
+            color: #D63301;
+            background-color: #FFA500;
+            background-image: url('https://i.imgur.com/GnyDvKN.png');
+        }
+        .errorMsg2{
             border: 1px solid;
             margin: 10px 0px;
             padding: 15px 10px 15px 50px;
@@ -45,13 +55,10 @@
             background-color: #FFCCBA;
             background-image: url('https://i.imgur.com/GnyDvKN.png');
         }
-        .applyCard{
-            margin-left: auto;
-            margin-right: auto;
-        }
         .container{text-align: center;}
     </style>
 </head>
+
 <body>
 
 <h3>Nova Bank</h3>
@@ -68,25 +75,28 @@
     <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
 
-<h2>Apply a new card</h2>
+<h2>Check Credit Card Eligibility</h2>
 
-<div class="${Request==null ? "hide" : "successMsg"}">
-    Your Request have been successfully submitted
+<div class="${RequestSuccess==null ? "hide" : "successMsg"}">
+    You are eligible for a credit card.
 </div>
-<div class="${errorMsg==null ? "hide" : "errorMsg"}">
+<div class="${RequestDeny==null ? "hide" : "errorMsg1"}">
+    Sorry, you are not eligible for a credit card.
+</div>
+<div class="${errorMsg==null ? "hide" : "errorMsg2"}">
     ${errorMsg}
 </div>
 
-<form method="post" action="${pageContext.request.contextPath }/applyCard">
+<form method="post" action="${pageContext.request.contextPath }/cardEligibility">
 
-    <table border="0" class="applyCard" >
+    <table border="0" class="cardEligibility" >
         <tr>
             <td>Username - </td>
             <td><output name="username">${sessionScope.username }</output></td>
         </tr>
         <tr>
-            <td>Card Type - </td>
-            <td><input type="text" name="cardType" placeholder="Eg. Credit Card"></td>
+            <td>SIN - </td>
+            <td><input type="text" name="sin" placeholder="Enter value"></td>
         </tr>
         <tr>
             <td>&nbsp;</td>

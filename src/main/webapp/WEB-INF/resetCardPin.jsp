@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Apply Card</title>
+    <title>Reset PIN</title>
     <style>
         h3{
             font-family: Calibri;
@@ -45,13 +45,10 @@
             background-color: #FFCCBA;
             background-image: url('https://i.imgur.com/GnyDvKN.png');
         }
-        .applyCard{
-            margin-left: auto;
-            margin-right: auto;
-        }
         .container{text-align: center;}
     </style>
 </head>
+
 <body>
 
 <h3>Nova Bank</h3>
@@ -68,29 +65,33 @@
     <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
 
-<h2>Apply a new card</h2>
+<h2>Reset Card PIN</h2>
 
 <div class="${Request==null ? "hide" : "successMsg"}">
-    Your Request have been successfully submitted
+    Your Card PIN has been successfully changed.
 </div>
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
 
-<form method="post" action="${pageContext.request.contextPath }/applyCard">
+<form method="post" action="${pageContext.request.contextPath }/resetPin">
 
-    <table border="0" class="applyCard" >
+    <table border="0" class="resetPin" >
         <tr>
             <td>Username - </td>
             <td><output name="username">${sessionScope.username }</output></td>
         </tr>
         <tr>
-            <td>Card Type - </td>
-            <td><input type="text" name="cardType" placeholder="Eg. Credit Card"></td>
+            <td>Card Number - </td>
+            <td><input type="text" name="cardNumber" placeholder="Card Number"></td>
+        </tr>
+        <tr>
+            <td>New PIN - </td>
+            <td><input type="text" name="cardPin" placeholder="XXXX"></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><input type="submit" value="Submit"></td>
+            <td><input type="submit" value="Apply"></td>
         </tr>
     </table>
 </form>

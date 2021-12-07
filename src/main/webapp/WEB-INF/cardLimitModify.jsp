@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Apply Card</title>
+    <title>Limit Modify</title>
     <style>
         h3{
             font-family: Calibri;
@@ -20,11 +20,18 @@
             color:#6b5b95;
             text-align: center;
         }
-
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;}
         .hide {
             display: none;
+        }
+        .incrLimit{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .modifyLimit{
+            margin-left: auto;
+            margin-right: auto;
         }
         .successMsg{
             border: 1px solid;
@@ -45,13 +52,10 @@
             background-color: #FFCCBA;
             background-image: url('https://i.imgur.com/GnyDvKN.png');
         }
-        .applyCard{
-            margin-left: auto;
-            margin-right: auto;
-        }
         .container{text-align: center;}
     </style>
 </head>
+
 <body>
 
 <h3>Nova Bank</h3>
@@ -68,25 +72,46 @@
     <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
 
-<h2>Apply a new card</h2>
+<h2>Card Limit Modify</h2>
 
 <div class="${Request==null ? "hide" : "successMsg"}">
-    Your Request have been successfully submitted
+    Your request have been successfully processed and limit has been changed to ${Request}.
 </div>
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
 
-<form method="post" action="${pageContext.request.contextPath }/applyCard">
+<table class="modifyLimit">
+    <tr>
+        <td>
+            <a href="checkLimit">Check Card Limit</a>
+        </td>
+    </tr>
+    <tr>
+        <div class="${CreditCardLimit==null ? "hide" : "successMsg"}">
+            Your Card Limit is ${CreditCardLimit}
+        </div>
+    </tr>
+    <tr>
+        <td>
+            <a href="changeLimit">Modify Limit</a>
+        </td>
+    </tr>
+</table>
 
-    <table border="0" class="applyCard" >
+<form method="post" action="${pageContext.request.contextPath }/changeLimit" >
+    <table class="${ChangeLimit==null ? "hide" : "incrLimit"}">
         <tr>
             <td>Username - </td>
             <td><output name="username">${sessionScope.username }</output></td>
         </tr>
         <tr>
-            <td>Card Type - </td>
-            <td><input type="text" name="cardType" placeholder="Eg. Credit Card"></td>
+            <td>Card Number - </td>
+            <td><input type="text" name="cardNumber" placeholder="Enter Value"></td>
+        </tr>
+        <tr>
+            <td>New Limit - </td>
+            <td><input type="text" name="newLimit" placeholder="Enter Value"></td>
         </tr>
         <tr>
             <td>&nbsp;</td>

@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Apply Card</title>
+    <title>Block Card</title>
     <style>
         h3{
             font-family: Calibri;
@@ -45,13 +45,14 @@
             background-color: #FFCCBA;
             background-image: url('https://i.imgur.com/GnyDvKN.png');
         }
-        .applyCard{
+        .blockCard{
             margin-left: auto;
             margin-right: auto;
         }
         .container{text-align: center;}
     </style>
 </head>
+
 <body>
 
 <h3>Nova Bank</h3>
@@ -68,21 +69,25 @@
     <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
 
-<h2>Apply a new card</h2>
+<h2>Block a card</h2>
 
 <div class="${Request==null ? "hide" : "successMsg"}">
-    Your Request have been successfully submitted
+    Your request have been successfully processed and card has been blocked.
 </div>
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
 
-<form method="post" action="${pageContext.request.contextPath }/applyCard">
+<form method="post" action="${pageContext.request.contextPath }/blockCard">
 
-    <table border="0" class="applyCard" >
+    <table border="0" class="blockCard" >
         <tr>
             <td>Username - </td>
             <td><output name="username">${sessionScope.username }</output></td>
+        </tr>
+        <tr>
+            <td>Card Number - </td>
+            <td><input type="text" name="cardNumber" placeholder="Card Number"></td>
         </tr>
         <tr>
             <td>Card Type - </td>

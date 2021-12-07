@@ -15,6 +15,15 @@
             text-align: center;
             text-decoration: underline
         }
+        h2{
+            font-family: Calibri;
+            color:#6b5b95;
+            text-align: center;
+        }
+        .cardHome{
+            margin-left: auto;
+            margin-right: auto;
+        }
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;}
     </style>
@@ -22,16 +31,48 @@
 <body>
 
 <h3>Nova Bank</h3>
+<%
+    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+    if(session.getAttribute("username")==null)
+    {
+        response.sendRedirect("/user");
+    }
+%>
 
-<a href="${pageContext.request.contextPath }/logout">Apply for a Card</a>
-<br><br>
-<a href="${pageContext.request.contextPath }/logout">Block Card</a>
-<br><br>
-<a href="${pageContext.request.contextPath }/logout">Set/Reset Pin</a>
-<br><br>
-<a href="${pageContext.request.contextPath }/logout">Reset Pin</a>
-<br><br>
-<a href="${pageContext.request.contextPath }/logout">Modify Limit</a>
+<h2>Card Limit Modify</h2>
+
+<table class="cardHome">
+    <tr>
+        <td>
+            <a href="${pageContext.request.contextPath }/applyCard">Apply for a Card</a>
+            <br><br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="${pageContext.request.contextPath }/blockCard">Block Card</a>
+            <br><br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="${pageContext.request.contextPath }/resetPin">Set/Reset Pin</a>
+            <br><br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="${pageContext.request.contextPath }/cardEligibility">Check Credit Card Eligibility</a>
+            <br><br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="${pageContext.request.contextPath }/modifyLimit">Modify Limit</a>
+            <br><br>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>
