@@ -9,16 +9,16 @@ import static com.bankingmanagement.bankingmanagement.card.database.CardConstant
 public class NewCardRequestDaoImpl implements NewCardRequestDao{
     @Override
     public String submitNewCardRequestQuery(String customerId, String cardType) {
-        String requestType = "New Card";
+        String requestType = NEW + " " + cardType;
         return "INSERT INTO " + CARD_REQUEST_TABLE + "(" +
                 CUSTOMER_ID + ", " +
-                CARD_TYPE  + ", " +
-                REQUEST_TYPE  +
+                REQUEST_TYPE  + ", " +
+                REQUEST_STATUS  +
                 ") " +
                 "VALUES (" +
                 "\"" + customerId + "\", " +
-                "\"" + cardType  + "\", " +
-                "\"" + requestType  + "\"" +
+                "\"" + requestType  + "\", " +
+                "\"" + PENDING  + "\"" +
                 ");";
     }
 }

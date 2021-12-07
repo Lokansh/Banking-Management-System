@@ -1,6 +1,6 @@
-package com.bankingmanagement.bankingmanagement.card.model;
+package com.bankingmanagement.bankingmanagement.chequebook.model;
 
-public class CardRequest {
+public class ChequeRequest {
 
     private String customerId;;
     private String requestStatus;
@@ -29,5 +29,4 @@ public class CardRequest {
     public void setRequestType(String requestType) {
         this.requestType = requestType;
     }
-
 }

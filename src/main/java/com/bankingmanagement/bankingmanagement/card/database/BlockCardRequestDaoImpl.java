@@ -11,16 +11,16 @@ import static com.bankingmanagement.bankingmanagement.card.database.CardConstant
 public class BlockCardRequestDaoImpl implements BlockCardRequestDao{
     @Override
     public String submitBlockCardRequestQuery(String customerId,String cardType) {
-        String requestType = "Block Card";
+        String requestType = BLOCK + " " + cardType;
         return "INSERT INTO " + CARD_REQUEST_TABLE + "(" +
                 CUSTOMER_ID + ", " +
-                CARD_TYPE  + ", " +
-                REQUEST_TYPE  +
+                REQUEST_TYPE  + ", " +
+                REQUEST_STATUS  +
                 ") " +
                 "VALUES (" +
                 "\"" + customerId + "\", " +
-                "\"" + cardType  + "\", " +
-                "\"" + requestType  + "\"" +
+                "\"" + requestType  + "\", " +
+                "\"" + AUTO_APPROVED  + "\"" +
                 ");";
     }
 

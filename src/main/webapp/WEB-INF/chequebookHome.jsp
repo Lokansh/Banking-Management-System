@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Cards</title>
+    <title>Cheque Book</title>
     <style>
         h3{
             font-family: Calibri;
@@ -20,7 +20,7 @@
             color:#6b5b95;
             text-align: center;
         }
-        .cardHome{
+        .chequebookHome{
             margin-left: auto;
             margin-right: auto;
         }
@@ -39,36 +39,12 @@
     }
 %>
 
-<h2>Cards Home</h2>
+<h2>Cheque Book Home</h2>
 
-<table class="cardHome">
+<table class="chequebookHome">
     <tr>
         <td>
-            <a href="${pageContext.request.contextPath }/applyCard">Apply for a Card</a>
-            <br><br>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="${pageContext.request.contextPath }/blockCard">Block Card</a>
-            <br><br>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="${pageContext.request.contextPath }/resetPin">Set/Reset Pin</a>
-            <br><br>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="${pageContext.request.contextPath }/cardEligibility">Check Credit Card Eligibility</a>
-            <br><br>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="${pageContext.request.contextPath }/modifyLimit">Modify Limit</a>
+            <a href="${pageContext.request.contextPath }/applyChequebook">Apply for a Cheque Book</a>
             <br><br>
         </td>
     </tr>

@@ -1,8 +1,8 @@
-package com.bankingmanagement.bankingmanagement.card.serviceImplemenatation;
+package com.bankingmanagement.bankingmanagement.chequebook.serviceImplementation;
 
-import com.bankingmanagement.bankingmanagement.card.database.NewCardRequestDao;
-import com.bankingmanagement.bankingmanagement.card.exception.CardException;
-import com.bankingmanagement.bankingmanagement.card.service.NewCardService;
+import com.bankingmanagement.bankingmanagement.chequebook.database.NewChequeBookRequestDao;
+import com.bankingmanagement.bankingmanagement.chequebook.exception.ChequeBookException;
+import com.bankingmanagement.bankingmanagement.chequebook.service.NewChequeBookService;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionDao;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,24 +13,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Service
-public class NewCardServiceImpl implements NewCardService {
+public class NewChequeBookServiceImpl implements NewChequeBookService {
     @Autowired
     private DatabaseConnectionDao databaseConnectionDAO;
 
     @Autowired
-    private NewCardRequestDao newCardRequestDao;
+    private NewChequeBookRequestDao newChequeBookRequestDao;
 
     @Override
-    public boolean submitNewCardRequest(String customerId, String cardType) throws CardException {
+    public boolean submitNewChequeRequest(String customerId) throws ChequeBookException{
         if(customerId==null || customerId.trim().isEmpty()) {
-            throw new CardException("Please Login Again!");
-        }
-        if(cardType==null || cardType.isEmpty()) {
-            throw new CardException("Please enter correct value for cardType");
+            throw new ChequeBookException("Please Login Again!");
         }
         try (final Connection connection = databaseConnectionDAO.getConnection();
              final Statement statement = connection.createStatement()) {
-            String submitReqQuery = newCardRequestDao.submitNewCardRequestQuery(customerId,cardType);
+            String submitReqQuery = newChequeBookRequestDao.submitNewChequeRequestQuery(customerId);
             final int dataInserted = statement.executeUpdate(submitReqQuery, Statement.RETURN_GENERATED_KEYS);
 
             if(dataInserted>0){
@@ -42,7 +39,7 @@ public class NewCardServiceImpl implements NewCardService {
         }
         catch (SQLException | DatabaseConnectionException sqlException) {
             sqlException.printStackTrace();
-            throw new CardException("Internal Error while new card request.");
+            throw new ChequeBookException("Internal Error while new chequebook request");
         }
     }
 }
