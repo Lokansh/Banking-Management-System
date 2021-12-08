@@ -1,12 +1,9 @@
 package com.bankingmanagement.bankingmanagement.loan.controller;
 
-import com.bankingmanagement.bankingmanagement.authentication.exception.UserAuthenticationException;
-import com.bankingmanagement.bankingmanagement.authentication.model.UserLogin;
 import com.bankingmanagement.bankingmanagement.loan.exception.LoanException;
 import com.bankingmanagement.bankingmanagement.loan.model.EligibilityInfo;
 import com.bankingmanagement.bankingmanagement.loan.model.Loan;
 import com.bankingmanagement.bankingmanagement.loan.service.LoanService;
-import com.bankingmanagement.bankingmanagement.signup.model.SecurityAnswer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,10 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-
-import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class LoanController {
@@ -34,7 +27,7 @@ public class LoanController {
     }
 
     @RequestMapping(value = "/loanApplication", method= RequestMethod.POST)
-    public String submitApplication(@ModelAttribute("loan") Loan loan, BindingResult bindingResult, HttpSession session, ModelMap modelMap)
+    public String submitApplication(@ModelAttribute("loan") Loan loan, HttpSession session, ModelMap modelMap)
     {
         try {
                 String userId= (String) session.getAttribute("username");

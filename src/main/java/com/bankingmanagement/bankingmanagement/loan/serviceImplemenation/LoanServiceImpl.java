@@ -2,7 +2,6 @@ package com.bankingmanagement.bankingmanagement.loan.serviceImplemenation;
 
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionDao;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionException;
-
 import com.bankingmanagement.bankingmanagement.loan.database.LoanApplyDao;
 import com.bankingmanagement.bankingmanagement.loan.exception.LoanException;
 import com.bankingmanagement.bankingmanagement.loan.model.EligibilityInfo;
@@ -11,7 +10,6 @@ import com.bankingmanagement.bankingmanagement.loan.model.LoanInfo;
 import com.bankingmanagement.bankingmanagement.loan.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,14 +20,13 @@ import java.util.regex.Pattern;
 
 @Service
 public class LoanServiceImpl implements LoanService {
-    private static List<LoanInfo> loans = new ArrayList<LoanInfo>();
+    private static final List<LoanInfo> loans = new ArrayList<>();
     // Database connection instance.
     @Autowired
     private DatabaseConnectionDao databaseConnectionDAO;
 
     @Autowired
     private LoanApplyDao loanapplydao;
-
 
     @Override
     public String applyLoan(Loan loan,String userId) throws LoanException {
@@ -85,13 +82,10 @@ public class LoanServiceImpl implements LoanService {
             throw new LoanException("Internal Error while loan,");
         }
 
-
     }
 
     @Override
-    public boolean deleteLoanRequest(int loanId) throws LoanException {
-        String loanID= String.valueOf(loanId);
-
+    public boolean deleteLoanRequest(int loanId) {
         return false;
     }
 
@@ -100,9 +94,7 @@ public class LoanServiceImpl implements LoanService {
         validateUserId(userId);
         if(validateLoanEligibilityData(info))
         {
-            double interest=calculateInterestRates(info);
-                return interest;
-
+            return calculateInterestRates(info);
         }
         return 0;
     }
@@ -112,7 +104,7 @@ public class LoanServiceImpl implements LoanService {
         double amount =Double.parseDouble(info.getLoanAmount());
         String loanType =info.getLoanType();
         double salary =Double.parseDouble(info.getSalary());
-        double interest=getLoanInterestByType(loanType);;
+        double interest=getLoanInterestByType(loanType);
 
         if(age>55)
         {
@@ -121,7 +113,7 @@ public class LoanServiceImpl implements LoanService {
                 interest=interest/3;
             }
         }
-        else if( age>18 && age<=55)
+        else if( age>18 )
         {
             if(interest>13)
             {
@@ -191,24 +183,24 @@ public class LoanServiceImpl implements LoanService {
             throw new LoanException("sin is empty  ");
         }
 
-        else if(salary==null || sin.trim().isEmpty()|| salary=="0"){
+        else if(salary==null || salary.trim().isEmpty()|| salary.equalsIgnoreCase("0")){
             throw new LoanException("Salary is empty  ");
         }
-        else if(age==null || age.trim().isEmpty()||age=="0"){
+        else if(age==null || age.trim().isEmpty()||age.equalsIgnoreCase("0")){
             throw new LoanException("Age is empty ");
         }
         else if (Integer.parseInt(age)<18 || Integer.parseInt(age)>60)
         {
             throw new LoanException("Our bank doesn't offer loan to your age");
         }
-        else if(amount==null || amount.trim().isEmpty()|| amount=="0"){
+        else if(amount==null || amount.trim().isEmpty()|| amount.equalsIgnoreCase("0")){
             throw new LoanException("Amount is empty  ");
         }
         else if(Long.parseLong(amount)>1000000000 || Long.parseLong(amount)<1000 )
         {
             throw new LoanException("Sorry we dont offer loan for this amount");
         }
-        else if(loanType==null || loanType.trim().isEmpty()||loanType=="loanType"){
+        else if(loanType==null || loanType.trim().isEmpty()||loanType.equalsIgnoreCase("loanType")){
             throw new LoanException("Please select loanType  ");
         }
         return true;
@@ -259,7 +251,7 @@ public class LoanServiceImpl implements LoanService {
 
         String zipCode = loan.getZipCode();
 
-        if(false&&(zipCode==null || zipCode.trim().isEmpty() || !Pattern.matches("^\\d{5}(?:[-\\s]\\d{4})?$", zipCode))){
+        if(zipCode==null || zipCode.trim().isEmpty() || !Pattern.matches("^\\d{5}(?:[-\\s]\\d{4})?$", zipCode)){
             throw new LoanException("Zipcode is empty or Invalid ");
         }
 
@@ -274,19 +266,19 @@ public class LoanServiceImpl implements LoanService {
             throw new LoanException("sin is empty  ");
         }
         String age =loan.getAge();
-        if(age==null || age.trim().isEmpty()||age=="0"){
+        if(age==null || age.trim().isEmpty()||age.equalsIgnoreCase("0")){
             throw new LoanException("Age is empty ");
         }
         String salary =loan.getSalary();
-        if(salary==null || sin.trim().isEmpty()|| salary=="0"){
+        if(salary==null || sin.trim().isEmpty()|| salary.equalsIgnoreCase("0")){
             throw new LoanException("Salary is empty  ");
         }
         String amount =loan.getLoanAmount();
-        if(amount==null || amount.trim().isEmpty()|| amount=="0"){
+        if(amount==null || amount.trim().isEmpty()|| amount.equalsIgnoreCase("0")){
             throw new LoanException("Amount is empty  ");
         }
         String loanType =loan.getLoanType();
-        if(loanType==null || loanType.trim().isEmpty()||loanType=="loanType"){
+        if(loanType==null || loanType.trim().isEmpty()||loanType.equalsIgnoreCase("loanType")){
             throw new LoanException("Please select loanType  ");
         }
     }

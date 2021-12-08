@@ -12,8 +12,6 @@ import static com.bankingmanagement.bankingmanagement.loan.database.LoanConstant
 
 @Component
 public class LoanApplyDaoImpl implements LoanApplyDao {
-
-
     @Override
     public String insertLoanReqTableQuery(Loan loan, String UserId) {
         return "INSERT INTO " + LOAN_TABLE + "(" +
@@ -54,9 +52,5 @@ public class LoanApplyDaoImpl implements LoanApplyDao {
     public String fetchLoanReqTableQuery(String userId) {
         return " SELECT * FROM " + LOAN_TABLE +" WHERE CustomerID = "+ "\"" + userId + "\"; ";
     }
-
-
-
-
 
 }

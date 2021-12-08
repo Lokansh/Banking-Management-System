@@ -1,7 +1,6 @@
 package com.bankingmanagement.bankingmanagement.ccservice.database;
 
 import org.springframework.stereotype.Component;
-
 import static com.bankingmanagement.bankingmanagement.ccservice.database.CreditCardConstants.*;
 import static com.bankingmanagement.bankingmanagement.ccservice.database.CreditCardConstants.CUSTOMER_ID;
 import static com.bankingmanagement.bankingmanagement.signup.database.CustomerConstants.*;
@@ -28,7 +27,6 @@ public class CCDaoImpl implements CCDao{
                 "\"" + userId + "\", " +
                 "\"" + salary  + "\""+
                 ");";
-
     }
 
     @Override

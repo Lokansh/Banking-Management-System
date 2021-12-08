@@ -4,7 +4,6 @@ import com.bankingmanagement.bankingmanagement.ccservice.exception.CreditCardExc
 import com.bankingmanagement.bankingmanagement.ccservice.model.CreditCardInfo;
 import com.bankingmanagement.bankingmanagement.ccservice.model.CreditScoreInfo;
 import com.bankingmanagement.bankingmanagement.ccservice.service.CreditCardService;
-import com.bankingmanagement.bankingmanagement.loan.exception.LoanException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -74,7 +73,6 @@ public class CreditCardServiceController {
       return "creditScore";
    }
 
-
    @RequestMapping(value = "/increaseCreditLimit", method= RequestMethod.GET)
    public String increaseLimit(HttpSession session, ModelMap modelMap) {
       String userId = (String) session.getAttribute("username");
@@ -92,6 +90,7 @@ public class CreditCardServiceController {
          return "ccServiceHome";
       }
    }
+
    @RequestMapping(value = "/checkCCLimit", method= RequestMethod.GET)
    public String checkCCLimit(HttpSession session, ModelMap modelMap) {
       String userId = (String) session.getAttribute("username");
@@ -142,6 +141,7 @@ public class CreditCardServiceController {
       }
       return "creditLimit";
    }
+
    @RequestMapping(value = "/fetchCCLimitRequest", method= RequestMethod.GET)
    public String ccLimitReq( HttpSession session, ModelMap modelMap) {
       modelMap.remove("ApplyLimitIncr");

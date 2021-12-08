@@ -30,6 +30,5 @@ public final class LoanConstants {
 
     public static final String CUSTOMER_LOANTYPE="LOANTYPE";
 
-
     public static final String CUSTOMER_LOANAMOUNT = "LoanAmount";
 }

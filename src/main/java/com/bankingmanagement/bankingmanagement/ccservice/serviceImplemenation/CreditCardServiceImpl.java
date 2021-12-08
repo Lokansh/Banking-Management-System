@@ -24,8 +24,8 @@ public class CreditCardServiceImpl implements CreditCardService {
     @Autowired
     private CCDao ccDao;
 
-    private static List<CreditCardInfo> ccList = new ArrayList<CreditCardInfo>();
-    private static CreditScoreInfo creditscore;
+    private static final List<CreditCardInfo> ccList = new ArrayList<>();
+    private static CreditScoreInfo creditScore;
 
     @Override
     public List<CreditCardInfo> getCCList(String userId) throws CreditCardException {
@@ -68,10 +68,10 @@ public class CreditCardServiceImpl implements CreditCardService {
             String fetchCreditScoreQuery = ccDao.fetchCreditScoreQuery(sin);
             final ResultSet score = statement.executeQuery(fetchCreditScoreQuery);
             while (score.next()) {
-                 creditscore= new CreditScoreInfo(score.getString("customerID"),score.getString("sin")
+                creditScore= new CreditScoreInfo(score.getString("customerID"),score.getString("sin")
                         ,score.getString("Credit_Score"),score.getString("Last_Update"));
             }
-            return creditscore;
+            return creditScore;
         }
         catch (SQLException | DatabaseConnectionException sqlException) {
             sqlException.printStackTrace();
@@ -126,7 +126,7 @@ public class CreditCardServiceImpl implements CreditCardService {
         if(userId==null || userId.trim().isEmpty()) {
             throw new CreditCardException("Please Login Again!! ");
         }
-        if(salary==null || salary.trim().isEmpty()||salary=="0") {
+        if(salary==null || salary.trim().isEmpty()||salary.equalsIgnoreCase("0")) {
             throw new CreditCardException("Please enter valid salary ");
         }
         try (final Connection connection = databaseConnectionDAO.getConnection();
@@ -158,11 +158,6 @@ public class CreditCardServiceImpl implements CreditCardService {
             throw new CreditCardException("Please Login Again!! ");
         }
         List<CreditCardInfo> list=getCCList(userId);
-        if(list.isEmpty())
-        {
-            return false;
-        }
-
-        return true;
+        return !list.isEmpty();
     }
 }
