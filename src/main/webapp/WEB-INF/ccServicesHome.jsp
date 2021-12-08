@@ -58,6 +58,9 @@
 <div class="${successMsg==null ? "hide" : "successMsg"}">
     ${successMsg}
 </div>
+<div class="${errorMsg==null ? "hide" : "errorMsg"}">
+    ${errorMsg}
+</div>
 <div class="container">Welcome, ${sessionScope.username }
     <a href="user">Home</a>
     <a href="${pageContext.request.contextPath }/logout">Logout</a>

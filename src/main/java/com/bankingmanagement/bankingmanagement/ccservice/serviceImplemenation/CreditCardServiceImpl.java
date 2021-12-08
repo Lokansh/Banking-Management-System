@@ -118,7 +118,7 @@ public class CreditCardServiceImpl implements CreditCardService {
             sqlException.printStackTrace();
             throw new CreditCardException("Internal Error while loan,");
         }
-        return "";
+        return salary;
     }
 
     @Override
@@ -131,12 +131,16 @@ public class CreditCardServiceImpl implements CreditCardService {
         }
         try (final Connection connection = databaseConnectionDAO.getConnection();
              final Statement statement = connection.createStatement()) {
-            String submitReqQuery = ccDao.submitCCIncReqQuery(userId,salary);
-            final int RowInserted = statement.executeUpdate(submitReqQuery, Statement.RETURN_GENERATED_KEYS);
-
-            if(RowInserted>0)
+            if(checkCustCC(userId))
             {
-                return true;
+                String submitReqQuery = ccDao.submitCCIncReqQuery(userId,salary);
+                final int RowInserted = statement.executeUpdate(submitReqQuery, Statement.RETURN_GENERATED_KEYS);
+                if(RowInserted>0) {
+                    return true;
+                }
+            }
+            else {
+                throw new CreditCardException("No Credit Card linked with this User,");
             }
         }
         catch (SQLException | DatabaseConnectionException sqlException) {
@@ -144,5 +148,21 @@ public class CreditCardServiceImpl implements CreditCardService {
             throw new CreditCardException("Internal Error while loan,");
         }
         return false;
+    }
+
+    @Override
+    public boolean checkCustCC(String userId) throws CreditCardException
+    {
+        if(userId==null || userId.trim().isEmpty())
+        {
+            throw new CreditCardException("Please Login Again!! ");
+        }
+        List<CreditCardInfo> list=getCCList(userId);
+        if(list.isEmpty())
+        {
+            return false;
+        }
+
+        return true;
     }
 }

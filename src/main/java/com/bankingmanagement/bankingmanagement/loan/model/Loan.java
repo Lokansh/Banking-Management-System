@@ -32,14 +32,6 @@ public class Loan {
             this.loanType = loanType;
         }
 
-//        public String getCustomerID() {
-//            return customerID;
-//        }
-//
-//        public void setCustomerID(String customerID) {
-//            this.customerID = customerID;
-//        }
-
         public String getFirstName() {
             return firstName;
         }

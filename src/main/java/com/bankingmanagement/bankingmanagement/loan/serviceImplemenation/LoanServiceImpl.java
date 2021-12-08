@@ -96,13 +96,88 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public boolean checkLoanEligibility(EligibilityInfo info, String userId) throws LoanException {
+    public double checkEligibilityAndInterest(EligibilityInfo info, String userId) throws LoanException {
         validateUserId(userId);
         if(validateLoanEligibilityData(info))
         {
-            return true;
+            double interest=calculateInterestRates(info);
+                return interest;
+
         }
-        return false;
+        return 0;
+    }
+
+    public double calculateInterestRates(EligibilityInfo info) {
+        int age =Integer.parseInt(info.getAge());
+        double amount =Double.parseDouble(info.getLoanAmount());
+        String loanType =info.getLoanType();
+        double salary =Double.parseDouble(info.getSalary());
+        double interest=getLoanInterestByType(loanType);;
+
+        if(age>55)
+        {
+            if (interest>13)
+            {
+                interest=interest/3;
+            }
+        }
+        else if( age>18 && age<=55)
+        {
+            if(interest>13)
+            {
+                if(amount>100000)
+                {
+                 if(salary>25000)
+                 {
+                     interest=interest-3;
+                 }
+                }
+            }
+        }
+
+        return interest;
+    }
+
+    public double getLoanInterestByType(String loanType) {
+        double interestPercentage=0;
+        if(loanType.equalsIgnoreCase("PersonalLoan"))
+        {
+            interestPercentage=15;
+        }
+        else if(loanType.equalsIgnoreCase("HomeLoan"))
+        {
+            interestPercentage=13;
+        }
+        else if(loanType.equalsIgnoreCase("EducationLoan"))
+        {
+            interestPercentage=14;
+        }
+        else if(loanType.equalsIgnoreCase("GoldLoan"))
+        {
+            interestPercentage=5.5;
+        }
+        else if(loanType.equalsIgnoreCase("VehicleLoan"))
+        {
+            interestPercentage=10.5;
+        }
+        else if(loanType.equalsIgnoreCase("AgriculturalLoan"))
+        {
+            interestPercentage=9.8;
+        }
+        else if(loanType.equalsIgnoreCase("LoanAgainstInsurancePolicies"))
+        {
+            interestPercentage=4.5;
+        }
+        else if(loanType.equalsIgnoreCase("LoanAgainstBankFDs"))
+        {
+            interestPercentage=4.5;
+        }
+        else if(loanType.equalsIgnoreCase("LoanAgainstMutualFundsOrShares"))
+        {
+            interestPercentage=6.0;
+        }
+
+        return interestPercentage;
     }
 
     private boolean validateLoanEligibilityData(EligibilityInfo info) throws LoanException  {

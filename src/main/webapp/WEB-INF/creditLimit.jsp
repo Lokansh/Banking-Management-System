@@ -78,11 +78,11 @@
            <a href="applyCCLimit">Request to increase Credit Card Limit</a>
         </td>
     </tr>
-<%--    <tr>--%>
-<%--        <td>--%>
-<%--            <a href="fetchCCLimitRequest"> Check Credit Limit Increase Requests</a>--%>
-<%--        </td>--%>
-<%--    </tr>--%>
+    <tr>
+        <td>
+            <a href="fetchCCLimitRequest"> Check Credit Limit Increase Requests</a>
+        </td>
+    </tr>
     <tr>
         <div class="${CreditCardLimit==null ? "hide" : "successMsg"}">
                Your Credit Limit is ${CreditCardLimit}

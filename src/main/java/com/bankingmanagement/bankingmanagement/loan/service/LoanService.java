@@ -7,13 +7,13 @@ import com.bankingmanagement.bankingmanagement.loan.model.LoanInfo;
 
 import java.util.List;
 
-public interface LoanService {
+    public interface LoanService {
 
 
      String applyLoan(Loan loan,String userId) throws LoanException;
-
-    List<LoanInfo> getAppliedLoans(String userId) throws LoanException;
-    boolean deleteLoanRequest(int loanId) throws LoanException;
-
-    boolean checkLoanEligibility(EligibilityInfo info, String userId) throws LoanException;
+     List<LoanInfo> getAppliedLoans(String userId) throws LoanException;
+     boolean deleteLoanRequest(int loanId) throws LoanException;
+     double checkEligibilityAndInterest(EligibilityInfo info, String userId) throws LoanException;
+     double calculateInterestRates(EligibilityInfo info);
+     double getLoanInterestByType(String loanType);
 }

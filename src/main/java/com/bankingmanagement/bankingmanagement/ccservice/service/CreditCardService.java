@@ -19,4 +19,6 @@ public interface CreditCardService {
     String getSalary(String userId) throws CreditCardException;
 
     boolean submitRequest(String userId,String salary) throws CreditCardException;
+
+    boolean checkCustCC(String userId) throws CreditCardException;
 }

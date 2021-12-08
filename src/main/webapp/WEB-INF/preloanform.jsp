@@ -63,7 +63,8 @@
     <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
 <div class="${successMsg==null ? "hide" : "successMsg"}">
-    ${successMsg}
+    ${successMsg}<br>
+    You can get loan at ${Interest} % Interest
 </div>
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
@@ -104,6 +105,7 @@
                 <option value="EducationLoan">Education Loan</option>
                 <option value="VehicleLoan">Vehicle Loan</option>
                 <option value="PersonalLoan">Personal Loan</option>
+                <option value="GoldLoan">Gold Loan</option>
                 <option value="HomeLoan">Home Loan</option>
                 <option value="AgriculturalLoan">Agricultural Loan</option>
                 <option value="LoanAgainstInsurancePolicies">Loan Against Insurance Policies</option>

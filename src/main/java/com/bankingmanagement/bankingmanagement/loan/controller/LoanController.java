@@ -28,7 +28,7 @@ public class LoanController {
     LoanService loanService;
 
     @RequestMapping(value = "/loanApplication", method= RequestMethod.GET)
-    public String getloanApplication()
+    public String getLoanApplication()
     {
         return "loanapp";
     }
@@ -50,7 +50,7 @@ public class LoanController {
     }
 
     @RequestMapping("/loantypes")
-    public String getloantypes()
+    public String getLoanTypes()
     {
         return "loantypes";
     }
@@ -75,18 +75,19 @@ public class LoanController {
         return "viewapplications";
     }
     @RequestMapping(value = "/loanEligibility", method= RequestMethod.GET)
-    public String getpreloanform()
+    public String getPreLoanForm()
     {
         return "preloanform";
     }
 
     @RequestMapping(value = "/loanEligibility", method= RequestMethod.POST)
-    public String checkEligibility(@ModelAttribute("info") EligibilityInfo info, BindingResult bindingResult, HttpSession session, ModelMap modelMap)
+    public String checkEligibilityAndInterest(@ModelAttribute("info") EligibilityInfo info, BindingResult bindingResult, HttpSession session, ModelMap modelMap)
     {
         try {
             String userId = (String) session.getAttribute("username");
-            boolean check=loanService.checkLoanEligibility(info, userId);
-            if (check) {
+            double check=loanService.checkEligibilityAndInterest(info, userId);
+            if (check>0) {
+                modelMap.put("Interest", check);
                 modelMap.put("successMsg", "You are eligible to apply loan");
             } else {
                 modelMap.put("errorMsg", "Sorry! you are not eligible to apply loan");
@@ -99,7 +100,7 @@ public class LoanController {
         }
     }
     @RequestMapping(value = "/deleteLoanApplication", method= RequestMethod.GET)
-    public String deleteloanApp(@RequestParam int id, ModelMap modelMap)
+    public String deleteLoanApp(@RequestParam int id, ModelMap modelMap)
     {
         try {
             if(loanService.deleteLoanRequest(id))

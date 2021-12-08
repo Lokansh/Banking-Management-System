@@ -12,12 +12,9 @@ import static com.bankingmanagement.bankingmanagement.loan.database.LoanConstant
 
 @Component
 public class LoanApplyDaoImpl implements LoanApplyDao {
-    public LoanApplyDaoImpl() {
-    }
 
 
     @Override
-    //INSERT INTO LoanRequest(CustomerID, CustomerFirstName, CustomerLastName, CustomerAddress1, CustomerAddress2, City, Zipcode, CustomerEmail, PhoneNumber, SIN, SALARY, AGE, LOANTYPE) VALUES ("3", "Pranav", "Chauhan", "sadasdsdsadasdsdas", "asd", "Delhi", "pranavchauhan1196@gmail.com", "110095", "+919968511144", "22""22""33333333""HomeLoan");
     public String insertLoanReqTableQuery(Loan loan, String UserId) {
         return "INSERT INTO " + LOAN_TABLE + "(" +
                 CUSTOMER_ID + ", " +

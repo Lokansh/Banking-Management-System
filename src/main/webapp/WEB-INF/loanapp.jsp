@@ -151,7 +151,7 @@
         </tr>
         <tr>
             <td>Amount Required</td>
-            <td><input type="text" name="loanamount"></td>
+            <td><input type="text" name="loanAmount"></td>
         </tr>
         <tr>
             <td>Loan Type</td>

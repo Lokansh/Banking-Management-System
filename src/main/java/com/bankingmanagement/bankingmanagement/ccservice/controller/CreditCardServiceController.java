@@ -31,11 +31,12 @@ public class CreditCardServiceController {
       String userId = (String) session.getAttribute("username");
       try {
          List<CreditCardInfo> ccList=creditCardService.getCCList(userId);
-         if(ccList!=null){
-            modelMap.put("ccdetails", ccList);}
+         if(ccList.isEmpty()){
+            modelMap.put("errorMsg", "No Credit Card associated with this account");
+            }
          else
          {
-            modelMap.put("errorMsg", "No Credit Card associated with this account");
+            modelMap.put("ccdetails", ccList);
          }
       }
       catch (CreditCardException e){
@@ -52,7 +53,7 @@ public class CreditCardServiceController {
    }
 
    @RequestMapping(value = "/checkCreditScore", method= RequestMethod.POST)
-   public String getCScore(@RequestParam("sin") String sin,ModelMap modelMap) {
+   public String checkCreditScore(@RequestParam("sin") String sin,ModelMap modelMap) {
       modelMap.remove("RequestTable");
       try
       {
@@ -77,7 +78,19 @@ public class CreditCardServiceController {
    @RequestMapping(value = "/increaseCreditLimit", method= RequestMethod.GET)
    public String increaseLimit(HttpSession session, ModelMap modelMap) {
       String userId = (String) session.getAttribute("username");
-      return "creditLimit";
+      try {
+         if (creditCardService.checkCustCC(userId)) {
+            return "creditLimit";
+         } else {
+            modelMap.put("errorMsg", "Sorry you dont have a credit card");
+            return "ccServicesHome";
+         }
+      }
+      catch (CreditCardException e){
+         e.printStackTrace();
+         modelMap.put("errorMsg", e.getErrorMessage());
+         return "ccServiceHome";
+      }
    }
    @RequestMapping(value = "/checkCCLimit", method= RequestMethod.GET)
    public String checkCCLimit(HttpSession session, ModelMap modelMap) {
@@ -110,7 +123,7 @@ public class CreditCardServiceController {
    }
 
    @RequestMapping(value = "/applyCCLimit", method= RequestMethod.POST)
-   public String CCLimitApp(@RequestParam("salary")String salary, HttpSession session, ModelMap modelMap) {
+   public String ccLimitApp(@RequestParam("salary")String salary, HttpSession session, ModelMap modelMap) {
 
       String userId = (String) session.getAttribute("username");
       try {
@@ -130,7 +143,7 @@ public class CreditCardServiceController {
       return "creditLimit";
    }
    @RequestMapping(value = "/fetchCCLimitRequest", method= RequestMethod.GET)
-   public String CCLimitReq( HttpSession session, ModelMap modelMap) {
+   public String ccLimitReq( HttpSession session, ModelMap modelMap) {
       modelMap.remove("ApplyLimitIncr");
       String userId = (String) session.getAttribute("username");
       try {
