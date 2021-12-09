@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Sign up</title>
+    <title>Loan Application</title>
 
     <style>
         h3{
@@ -17,18 +17,18 @@
             text-align: center;
             text-decoration: underline
         }
+        h2{
+            font-family: Calibri;
+            color:#6b5b95;
+            text-align: center;
+            text-decoration: underline
+        }
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;}
 
-        .signupTable{
+        .applyLoanTable{
             margin-left: auto;
             margin-right: auto;
-        }
-        h4{
-            font-family: Calibri;
-            font-style: normal;
-            font-weight: bold;
-            text-align: center
         }
 
         .errorMsg{
@@ -41,44 +41,41 @@
             background-color: #FFCCBA;
             background-image: url('https://i.imgur.com/GnyDvKN.png');
         }
+        .successMsg{
+             border: 1px solid;
+             margin: 10px 0px;
+             padding: 15px 10px 15px 50px;
+             background-repeat: no-repeat;
+             background-position: 10px center;
+             color: #08d601;
+             background-color: #d3ffba;
+         }
         .hide {
             display: none;
         }
+        .container{ text-align: center;}
     </style>
 
 </head>
-
-<%
-
-    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
-    if(session.getAttribute("username")!=null)
-    {
-        response.sendRedirect("/user");
-    }
-
-%>
-
 <body>
 
-<h3>Welcome to Nova Bank</h3>
-<h4>Register New User</h4>
-
+<div class="container">Welcome, ${sessionScope.username }
+    <a href="user">Home</a>
+    <a href="${pageContext.request.contextPath }/logout">Logout</a>
+</div>
+<div class="${successMsg==null ? "hide" : "successMsg"}">
+    ${successMsg}
+</div>
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
-<a href="home"><h4>Home Page</h4></a><br>
+<h2>Loan Application</h2>
+<form:errors path="loan.*"/>
+<form:form  method="post" action="${pageContext.request.contextPath }/loanApplication">
 
-<form:errors path="user.*"/>
-<form:form  method="post" action="${pageContext.request.contextPath }/signup">
+    <table border="0" class="applyLoanTable" >
 
-    <table border="0" class="signupTable" >
 
-        <tr>
-            <td>User ID</td>
-            <td>
-                <input type="text" name="customerID">
-            </td>
-        </tr>
         <tr>
             <td>First Name</td>
             <td>
@@ -138,36 +135,46 @@
         <tr>
             <td>SIN number</td>
             <td>
-                <input type="text" name="sin">
+                <input type="number" name="sin">
             </td>
         </tr>
 
         <tr>
-            <td>Password</td>
-            <td><input type="password" name="password"></td>
-        </tr>
-
-        <tr>
-            <td>Security Question</td>
+            <td>Age</td>
             <td>
-                <select name="questionID">
-                    <option value="1">In what city were you born?</option>
-                    <option value="2">What is the name of your favorite movie?</option>
-                    <option value="3">What is your mother's maiden name?</option>
-                    <option value="4">What college did you attend?</option>
-                    <option value="5">What was your favorite subject as a child?</option>
-                </select>
+                <input type="text" name="age">
             </td>
         </tr>
-
         <tr>
-            <td>Security Answer</td>
-            <td><input type="text" name="questionAnswer"></td>
+            <td>Salary</td>
+            <td><input type="text" name="salary"></td>
         </tr>
+        <tr>
+            <td>Amount Required</td>
+            <td><input type="text" name="loanAmount"></td>
+        </tr>
+        <tr>
+            <td>Loan Type</td>
+            <td><select name="loanType">
+                <option value="">Loan Type</option>
+                <option value="EducationLoan">Education Loan</option>
+                <option value="VehicleLoan">Vehicle Loan</option>
+                <option value="PersonalLoan">Personal Loan</option>
+                <option value="HomeLoan">Home Loan</option>
+                <option value="AgriculturalLoan">Agricultural Loan</option>
+                <option value="LoanAgainstInsurancePolicies">Loan Against Insurance Policies</option>
+                <option value="LoanAgainstBankFDs">Loan Against Bank FDs</option>
+                <option value="LoanAgainstMutualFundsOrShares">Loan Against Mutual Funds Or Shares</option>
+
+            </select></td>
+
+            <td><a href="loantypes">Know type of loans we offer</a></td>
+        </tr>
+
 
         <tr>
             <td>&nbsp;</td>
-            <td><input type="submit" value="signup"></td>
+            <td><input type="submit" value="submit"></td>
         </tr>
     </table>
 </form:form>

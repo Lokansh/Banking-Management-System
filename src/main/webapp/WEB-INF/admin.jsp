@@ -77,6 +77,10 @@ Welcome, ${sessionScope.username }
 <a href="${pageContext.request.contextPath }/adminlogout">Logout</a>
 <br>
 
+<br>
+<a href="adminLoanView">Loan Applications</a>
+
+
 <div class="${isSalary==null ? "hide" : "salaryMsg"}">
    Employee ${employeeName} is being paid a salary of ${salary} CAD per week.
 </div>
