@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Applied loans</title>
+    <title>Admin| Loan Applications</title>
     <style>
         h3{
             font-family: Calibri;
@@ -52,19 +52,28 @@
 </head>
 
 <body>
-<div>Welcome, ${sessionScope.username }
-    <a href="user">Home</a>
-    <a href="${pageContext.request.contextPath }/logout">Logout</a>
-</div>
+<%
+    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+
+    if(session.getAttribute("username")==null||session.getAttribute("role")!="admin")
+    {
+        response.sendRedirect("/adminlogin");
+    }
+
+%>
+Welcome, ${sessionScope.username }
+<br>
+
+<a href="${pageContext.request.contextPath }/adminlogout">Logout</a>
+
 <div class="${successMsg==null ? "hide" : "successMsg"}">
     ${successMsg}
 </div>
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
-<h3>Applied Loan Status</h3>
-
-<table class="loanviewTable">
+<h3>Applied Loan List</h3>
+<table>
     <tr>
         <th>Loan Id</th>
         <th>  Name</th>
@@ -73,19 +82,36 @@
         <th>Loan Type</th>
         <th>Loan Status</th>
     </tr>
-    <c:forEach items="${loans}" var="loan">
+    <c:forEach items="${pendingLoans}" var="loan">
         <tr>
             <td>${loan.loanId} </td>
             <td>${loan.firstName}</td>
             <td>${loan.age}</td>
             <td>${loan.salary}</td>
             <td>${loan.loanType}</td>
-            <td>${loan.loanStatus?"APPROVED":"PENDING"}</td>
-
+            <td><a href="${pageContext.request.contextPath }/approveLoan?id=${loan.loanId}">Approve</a></td>
+            <td><a href="${pageContext.request.contextPath }/rejectLoan?id=${loan.loanId}">Reject</a></td>
+        </tr> <br>
+    </c:forEach>
+    <c:forEach items="${approvedLoans}" var="loan">
+        <tr>
+            <td>${loan.loanId} </td>
+            <td>${loan.firstName}</td>
+            <td>${loan.age}</td>
+            <td>${loan.salary}</td>
+            <td>${loan.loanType}</td>
+        </tr> <br>
+    </c:forEach>
+    <c:forEach items="${rejectedLoans}" var="loan">
+        <tr>
+            <td>${loan.loanId} </td>
+            <td>${loan.firstName}</td>
+            <td>${loan.age}</td>
+            <td>${loan.salary}</td>
+            <td>${loan.loanType}</td>
         </tr> <br>
     </c:forEach>
 
 </table>
-
 </body>
 </html>

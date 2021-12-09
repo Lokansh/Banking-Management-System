@@ -4,6 +4,7 @@ public final class LoanConstants {
 
     public static final String LOAN_TABLE = "LoanRequest";
 
+    public static final String LOAN_ID = "idLoanRequest";
     public static final String CUSTOMER_ID = "CustomerID";
 
     public static final String CUSTOMER_FIRST_NAME = "CustomerFirstName";
@@ -28,7 +29,8 @@ public final class LoanConstants {
 
     public static final String CUSTOMER_AGE="AGE";
 
-    public static final String CUSTOMER_LOANTYPE="LOANTYPE";
+    public static final String LOANTYPE="LOANTYPE";
 
-    public static final String CUSTOMER_LOANAMOUNT = "LoanAmount";
+    public static final String LOANAMOUNT = "LoanAmount";
+    public static final String LOANSTATUS = "LoanStatus";
 }

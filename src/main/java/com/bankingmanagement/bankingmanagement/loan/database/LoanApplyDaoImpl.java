@@ -1,12 +1,10 @@
 package com.bankingmanagement.bankingmanagement.loan.database;
 
-import com.bankingmanagement.bankingmanagement.loan.exception.LoanException;
 import com.bankingmanagement.bankingmanagement.loan.model.Loan;
-import com.bankingmanagement.bankingmanagement.loan.exception.LoanException;
 import org.springframework.stereotype.Component;
 
-import java.util.regex.Pattern;
-
+import static com.bankingmanagement.bankingmanagement.authentication.database.LoginConstants.*;
+import static com.bankingmanagement.bankingmanagement.authentication.database.LoginConstants.LOGIN_ID;
 import static com.bankingmanagement.bankingmanagement.loan.database.LoanConstants.*;
 
 
@@ -27,8 +25,8 @@ public class LoanApplyDaoImpl implements LoanApplyDao {
                 CUSTOMER_SIN + ", " +
                 CUSTOMER_SALARY + ", " +
                 CUSTOMER_AGE + ", " +
-                CUSTOMER_LOANAMOUNT + ", " +
-                CUSTOMER_LOANTYPE  +
+                LOANAMOUNT + ", " +
+                LOANTYPE  +
                 ") " +
                 "VALUES (" +
                 "\"" + UserId+ "\", " +
@@ -53,4 +51,34 @@ public class LoanApplyDaoImpl implements LoanApplyDao {
         return " SELECT * FROM " + LOAN_TABLE +" WHERE CustomerID = "+ "\"" + userId + "\"; ";
     }
 
+    @Override
+    public String fetchAllPendingLoanQuery() {
+        return " SELECT * FROM " + LOAN_TABLE +" WHERE LoanStatus = "+ 0 +"; ";
+    }
+    @Override
+    public String fetchAllApprovedLoanQuery() {
+        return " SELECT * FROM " + LOAN_TABLE +" WHERE LoanStatus = "+ 1 +"; ";
+    }
+    @Override
+    public String fetchAllRejectedLoanQuery() {
+        return " SELECT * FROM " + LOAN_TABLE +" WHERE LoanStatus = "+ 2 +"; ";
+    }
+    @Override
+    public String approveLoanQuery(int loanId) {
+        return "UPDATE " +
+                LOAN_TABLE
+                + " SET "+
+                LOANSTATUS+" ="+ 1 +
+                " WHERE " +
+                LOAN_ID + "=" + loanId + ";";
+    }
+    @Override
+    public String rejectLoanQuery(int loanId) {
+        return "UPDATE " +
+                LOAN_TABLE
+                + " SET "+
+                LOANSTATUS+" ="+ 2 +
+                " WHERE " +
+                LOAN_ID + "=" + loanId + ";";
+    }
 }

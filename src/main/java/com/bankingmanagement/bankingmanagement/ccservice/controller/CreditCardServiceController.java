@@ -43,7 +43,7 @@ public class CreditCardServiceController {
          modelMap.put("errorMsg", e.getErrorMessage());
 
       }
-      return "ccList";
+      return "ccListView";
    }
    @RequestMapping(value = "/checkCreditScore", method= RequestMethod.GET)
    public String getCreditScore()

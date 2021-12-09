@@ -16,4 +16,9 @@ import java.util.List;
      double checkEligibilityAndInterest(EligibilityInfo info, String userId) throws LoanException;
      double calculateInterestRates(EligibilityInfo info);
      double getLoanInterestByType(String loanType);
+ boolean approveLoan(int id) throws LoanException;
+ boolean rejectLoan(int id) throws LoanException;
+ List<LoanInfo>  getAllPendingLoans() throws LoanException;
+ List<LoanInfo> getAllApprovedLoans()throws LoanException;
+ List<LoanInfo> getAllRejectedLoans()throws LoanException;
 }

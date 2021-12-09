@@ -18,7 +18,7 @@
         }
         h4{
             font-family: Calibri;
-            font-size: 10pt;
+            font-size: 15pt;
             font-style: normal;
             font-weight: bold;
             color:#6b5b95;
@@ -64,15 +64,22 @@
 <%
 
     response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
-    if(session.getAttribute("username")!=null)
+    if(session.getAttribute("username")!=null && session.getAttribute("role")=="user")
     {
         response.sendRedirect("/user");
+    }
+    else if(session.getAttribute("username")!=null && session.getAttribute("role")=="admin"){
+        response.sendRedirect("/admin");
+    }
+    else if(session.getAttribute("username")!=null && session.getAttribute("role")=="employee"){
+        response.sendRedirect("/employeeDashboard");
     }
 
 %>
 
 
 <h3>Welcome to Nova Bank</h3>
+<h4>User Login Page</h4>
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
@@ -99,7 +106,7 @@
     </table>
 </form>
 <h4>First Time User</h4>
-<a href="signup"><h5>Register</h5></a><br>
+<a href="signup">Register</a><br>
 
 </body>
 </html>

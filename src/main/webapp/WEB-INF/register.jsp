@@ -137,7 +137,7 @@
         <tr>
             <td>SIN number</td>
             <td>
-                <input type="number" name="sin">
+                <input type="text" name="sin">
             </td>
         </tr>
 

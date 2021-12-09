@@ -64,7 +64,6 @@
 <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
 <div><a href="loanApplication">Apply for Loan</a></div>
-
 <div><a href="loanEligibility">Check Loan Eligibility</a></div>
 <div><a href="viewallApplication">View my Loan Applications</a></div>
 <div><a href="ccServices">Credit Card Services</a></div>

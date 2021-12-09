@@ -8,6 +8,7 @@ import com.bankingmanagement.bankingmanagement.loan.model.EligibilityInfo;
 import com.bankingmanagement.bankingmanagement.loan.model.Loan;
 import com.bankingmanagement.bankingmanagement.loan.model.LoanInfo;
 import com.bankingmanagement.bankingmanagement.loan.service.LoanService;
+import com.bankingmanagement.bankingmanagement.signup.exception.NewPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.Connection;
@@ -20,7 +21,7 @@ import java.util.regex.Pattern;
 
 @Service
 public class LoanServiceImpl implements LoanService {
-    private static final List<LoanInfo> loans = new ArrayList<>();
+
     // Database connection instance.
     @Autowired
     private DatabaseConnectionDao databaseConnectionDAO;
@@ -53,7 +54,7 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public List<LoanInfo> getAppliedLoans(String userId) throws LoanException {
 
-        loans.clear();
+         final List<LoanInfo> loans = new ArrayList<>();
         if(userId==null || userId.trim().isEmpty()) {
             throw new LoanException("Please Login Again to fetch details");
         }
@@ -172,6 +173,120 @@ public class LoanServiceImpl implements LoanService {
         return interestPercentage;
     }
 
+    @Override
+    public List<LoanInfo> getAllPendingLoans() throws LoanException {
+         List<LoanInfo> pendingLoans = new ArrayList<>();
+        try (final Connection connection = databaseConnectionDAO.getConnection();
+             final Statement statement = connection.createStatement()) {
+            String fetchAllPendingLoanQuery = loanapplydao.fetchAllPendingLoanQuery();
+            final ResultSet allLoan = statement.executeQuery(fetchAllPendingLoanQuery);
+            if (allLoan == null) {
+                return null;
+            }
+            while (allLoan.next()) {
+                LoanInfo l=new LoanInfo(allLoan.getInt("idLoanRequest"),allLoan.getString("CustomerID"),
+                        allLoan.getString("CustomerFirstName"),
+                        allLoan.getString("CustomerLastName"),allLoan.getString("CustomerAddress1"),
+                        allLoan.getString("CustomerAddress2"),allLoan.getString("City"),
+                        allLoan.getString("Zipcode"),allLoan.getString("CustomerEmail"),
+                        allLoan.getString("PhoneNumber"),allLoan.getString("SIN"),
+                        allLoan.getString("SALARY"),allLoan.getString("AGE"),
+                        allLoan.getString("LoanAmount"),
+                        allLoan.getString("LOANTYPE"),allLoan.getBoolean("LoanStatus"));
+                pendingLoans.add(l);
+            }
+            return pendingLoans;
+        } catch (SQLException | DatabaseConnectionException sqlException) {
+            sqlException.printStackTrace();
+            throw new LoanException("Internal Error while loan,");
+        }
+    }
+    @Override
+    public List<LoanInfo> getAllApprovedLoans() throws LoanException {
+        List<LoanInfo> approvedLoans = new ArrayList<>();
+        try (final Connection connection = databaseConnectionDAO.getConnection();
+             final Statement statement = connection.createStatement()) {
+            String fetchAllApprovedLoanQuery = loanapplydao.fetchAllApprovedLoanQuery();
+            final ResultSet allLoan = statement.executeQuery(fetchAllApprovedLoanQuery);
+            if (allLoan == null) {
+                return null;
+            }
+            while (allLoan.next()) {
+                LoanInfo l=new LoanInfo(allLoan.getInt("idLoanRequest"),allLoan.getString("CustomerID"),
+                        allLoan.getString("CustomerFirstName"),
+                        allLoan.getString("CustomerLastName"),allLoan.getString("CustomerAddress1"),
+                        allLoan.getString("CustomerAddress2"),allLoan.getString("City"),
+                        allLoan.getString("Zipcode"),allLoan.getString("CustomerEmail"),
+                        allLoan.getString("PhoneNumber"),allLoan.getString("SIN"),
+                        allLoan.getString("SALARY"),allLoan.getString("AGE"),
+                        allLoan.getString("LoanAmount"),
+                        allLoan.getString("LOANTYPE"),allLoan.getBoolean("LoanStatus"));
+                approvedLoans.add(l);
+            }
+            return approvedLoans;
+        } catch (SQLException | DatabaseConnectionException sqlException) {
+            sqlException.printStackTrace();
+            throw new LoanException("Internal Error while loan,");
+        }
+    }
+    @Override
+    public List<LoanInfo> getAllRejectedLoans() throws LoanException {
+        List<LoanInfo> rejectedLoans = new ArrayList<>();
+        try (final Connection connection = databaseConnectionDAO.getConnection();
+             final Statement statement = connection.createStatement()) {
+            String fetchAllRejectedLoanQuery = loanapplydao.fetchAllRejectedLoanQuery();
+            final ResultSet allLoan = statement.executeQuery(fetchAllRejectedLoanQuery);
+            if (allLoan == null) {
+                return null;
+            }
+            while (allLoan.next()) {
+                LoanInfo l=new LoanInfo(allLoan.getInt("idLoanRequest"),allLoan.getString("CustomerID"),
+                        allLoan.getString("CustomerFirstName"),
+                        allLoan.getString("CustomerLastName"),allLoan.getString("CustomerAddress1"),
+                        allLoan.getString("CustomerAddress2"),allLoan.getString("City"),
+                        allLoan.getString("Zipcode"),allLoan.getString("CustomerEmail"),
+                        allLoan.getString("PhoneNumber"),allLoan.getString("SIN"),
+                        allLoan.getString("SALARY"),allLoan.getString("AGE"),
+                        allLoan.getString("LoanAmount"),
+                        allLoan.getString("LOANTYPE"),allLoan.getBoolean("LoanStatus"));
+                rejectedLoans.add(l);
+            }
+            return rejectedLoans;
+        } catch (SQLException | DatabaseConnectionException sqlException) {
+            sqlException.printStackTrace();
+            throw new LoanException("Internal Error while loan,");
+        }
+    }
+    @Override
+    public boolean approveLoan(int id) throws LoanException {
+        try (final Connection connection = databaseConnectionDAO.getConnection();
+             final Statement statement = connection.createStatement()) {
+            final int totalRowsUpdated = statement.executeUpdate(loanapplydao.approveLoanQuery(id));
+            if (totalRowsUpdated>0){
+                return true;
+            }
+            throw new LoanException("Internal Error while loan,");
+        }
+        catch (SQLException | DatabaseConnectionException sqlException) {
+            sqlException.printStackTrace();
+            throw new LoanException("Internal Error while loan,");
+        }
+    }
+    @Override
+    public boolean rejectLoan(int id) throws LoanException {
+        try (final Connection connection = databaseConnectionDAO.getConnection();
+             final Statement statement = connection.createStatement()) {
+            final int totalRowsUpdated = statement.executeUpdate(loanapplydao.rejectLoanQuery(id));
+            if (totalRowsUpdated>0){
+                return true;
+            }
+            throw new LoanException("Internal Error while loan,");
+        }
+        catch (SQLException | DatabaseConnectionException sqlException) {
+            sqlException.printStackTrace();
+            throw new LoanException("Internal Error while loan,");
+        }
+    }
     private boolean validateLoanEligibilityData(EligibilityInfo info) throws LoanException  {
         String sin = info.getSin();
         String salary =info.getSalary();
