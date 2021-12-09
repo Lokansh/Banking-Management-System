@@ -32,7 +32,7 @@ public class EmployeeLoginController {
 
 
 	@RequestMapping(path = "/employeelogin", method = POST)
-	public String loginAdmin(@ModelAttribute UserLogin userLogin, HttpSession session, ModelMap modelMap)
+	public String loginEmployee(@ModelAttribute UserLogin userLogin, HttpSession session, ModelMap modelMap)
 	{
 		try {
 			userLogin.setRole(EMPLOYEE_ROLE);

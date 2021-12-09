@@ -7,7 +7,6 @@ import com.bankingmanagement.bankingmanagement.signup.service.ForgetPasswordServ
 import com.bankingmanagement.bankingmanagement.signup.service.NewPasswordService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,9 +56,8 @@ public class UserForgetPasswordController {
     }
 
     @RequestMapping(path = "/forget", method = POST)
-    public String changePassword(@ModelAttribute("securityAnswer") SecurityAnswer securityAnswer, BindingResult bindingResult, HttpSession session, ModelMap modelMap)
+    public String changePassword(@ModelAttribute("securityAnswer") SecurityAnswer securityAnswer, HttpSession session, ModelMap modelMap)
     {
-        if(!bindingResult.hasErrors()){
             try {
                 String username= forgetPasswordService.handleForgetPassword(securityAnswer);
                 session.setAttribute("new_password",true);
@@ -70,8 +68,6 @@ public class UserForgetPasswordController {
                 e.printStackTrace();
                 return "forget";
             }
-    }
-        return "forget";
     }
 
 }

@@ -46,6 +46,7 @@ public class UserLoginController {
 
             session.setAttribute("username",userLogin.getUserLoginID());
             session.setAttribute("role",USER_ROLE);
+            System.out.println("here");
             return "redirect:/user";
 
         } catch (UserAuthenticationException | InvalidRoleException e) {

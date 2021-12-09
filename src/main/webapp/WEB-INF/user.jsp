@@ -53,12 +53,12 @@
 <h3> Nova Bank</h3>
 <%
 
-
     
 
     response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
 
     if(session.getAttribute("username")==null||session.getAttribute("role")!="user")
+
 
     {
         response.sendRedirect("/login");
@@ -66,20 +66,26 @@
 
 %>
 
+
 <div class="${successMsg==null ? "hide" : "successMsg"}">
     ${successMsg}
 </div>
-<div>Welcome, ${sessionScope.username }
 
+
+
+Welcome, ${sessionScope.username }
+<br>
 
 <a href="${pageContext.request.contextPath }/logout">Logout</a>
-</div>
-<div><a href="loanApplication">Apply for Loan</a></div>
-<div><a href="loanEligibility">Check Loan Eligibility</a></div>
-<div><a href="viewallApplication">View my Loan Applications</a></div>
-<div><a href="ccServices">Credit Card Services</a></div>
 
-
+<a href="cust-dash/home"><h4>Profile Page</h4></a><br>
+<a href="depositHome"><h4>Deposit Page</h4></a><br>
+<a href="chequebookHome"><h4>Cheque Book Home</h4></a><br>
+<a href="cardHome"><h4>Manage Cards</h4></a><br>
+<a href="loanApplication"><h4>Apply for Loan</h4></a><br>
+<a href="loanEligibility"><h4>Check Loan Eligibility</h4></a><br>
+<a href="viewallApplication"><h4>View my Loan Applications</h4></a><br>
+<a href="ccServices"><h4>Credit Card Services</h4></a><br>
 
 </body>
 </html>

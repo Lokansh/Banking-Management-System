@@ -9,11 +9,13 @@ import com.bankingmanagement.bankingmanagement.signup.model.UserInfo;
 import com.bankingmanagement.bankingmanagement.signup.service.RegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+
+
+import static com.bankingmanagement.bankingmanagement.authentication.database.LoginConstants.USER_ROLE;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -34,21 +36,21 @@ public class UserRegistrationController {
 
 
     @RequestMapping(path = "/signup", method = POST)
-    public String register_user(@ModelAttribute("user") User user, BindingResult bindingResult, HttpSession session, ModelMap modelMap)
+
+    public String registerUser(@ModelAttribute("user") User user, HttpSession session, ModelMap modelMap)
+
     {
-        if(!bindingResult.hasErrors()){
             try {
                 UserInfo userInfo = getUserInfo(user);
                 String username = registrationService.registerUser(userInfo);
                 session.setAttribute("username",username);
+                session.setAttribute("role",USER_ROLE);
                 return "redirect:user";
             } catch (UserRegistrationException e) {
                 e.printStackTrace();
                 modelMap.put("errorMsg", e.getErrorMessage());
                 return "register";
             }
-        }
-        return "register";
     }
 
     private UserInfo getUserInfo(User user) {
