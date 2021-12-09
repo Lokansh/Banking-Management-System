@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class GetEmployeeDetailsDaoImplTest {
-
+	@Test
+	public void getEmployeeDetailsDaoImplClassExists() throws ClassNotFoundException {
+		  //checking whether the class exists or not
+	      assertNotNull(Class.forName("com.bankingmanagement.bankingmanagement.employeeDashboard.database.GetEmployeeDetailsDaoImpl"));
+	}
 	@Test
 	void employeeQueryTest() {
 		

@@ -54,7 +54,13 @@ body {
 }
 </style>
 </head>
-
+<%
+    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+    if(session.getAttribute("username")==null)
+    {
+        response.sendRedirect("/user");
+    }
+%>
 <h3>
 	Welcome to Nova Bank
 </h3>

@@ -1,8 +1,5 @@
 package com.bankingmanagement.bankingmanagement.database;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class DatabaseConnection implements DatabaseConnectionDao {

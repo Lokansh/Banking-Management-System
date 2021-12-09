@@ -11,12 +11,12 @@ public class User {
     private String zipCode;
     private String contactNumber;
     private String email;
-    private int sin;
+    private String sin;
     private int questionID;
     private String questionAnswer;
     private String password;
 
-    public User(String customerID, String firstName, String lastName, String address1, String address2, String city, String zipCode, String contactNumber, String email, int sin, int questionID, String questionAnswer, String password) {
+    public User(String customerID, String firstName, String lastName, String address1, String address2, String city, String zipCode, String contactNumber, String email, String sin, int questionID, String questionAnswer, String password) {
         this.customerID = customerID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -105,11 +105,11 @@ public class User {
         this.email = email;
     }
 
-    public int getSin() {
+    public String getSin() {
         return sin;
     }
 
-    public void setSin(int sin) {
+    public void setSin(String sin) {
         this.sin = sin;
     }
 

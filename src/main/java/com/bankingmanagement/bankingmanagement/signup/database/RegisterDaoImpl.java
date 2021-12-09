@@ -26,7 +26,7 @@ public class RegisterDaoImpl implements RegisterDao {
                 CUSTOMER_PHONE_NUMBER + ", " +
                 CUSTOMER_SIN + ") " +
                 "VALUES (" +
-                "\"" + user.getCustomerID() + "\", " +
+                "\"" + user.getCustomerId() + "\", " +
                 "\"" + user.getFirstName() + "\", " +
                 "\"" + user.getLastName() + "\", " +
                 "\"" + user.getAddress1() + "\", " +
@@ -37,16 +37,20 @@ public class RegisterDaoImpl implements RegisterDao {
                 "\"" + user.getContactNumber() + "\", " +
                 "\"" + user.getSin() + "\"" +
                 ");";
-    };
+    }
 
 
-    @Override
+	@Override
     public String insertLoginTableQuery(String username, String password) {
-        return "INSERT INTO " + USERLOGIN_TABLE + "(" +
+        return "INSERT INTO " + USER_LOGIN_TABLE + "(" +
                 LOGIN_ID + ", " +
+                LOGIN_FAILED_ATTEMPT + ", " +
+                LOGIN_ROLE_TYPE + ", " +
                 LOGIN_PASSWORD +") " +
                 "VALUES (" +
                 "\"" + username + "\", " +
+                "\"" + 0 + "\", " +
+                "\"" + 0 + "\", " +
                 "\"" + password + "\" " +
                 ");";
     }
@@ -64,8 +68,4 @@ public class RegisterDaoImpl implements RegisterDao {
                 ");";
     }
 
-    @Override
-    public String getSecurityQuestionsQuery() {
-        return null;
-    }
 }

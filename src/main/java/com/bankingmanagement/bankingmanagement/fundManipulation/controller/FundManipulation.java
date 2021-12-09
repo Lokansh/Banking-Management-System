@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bankingmanagement.bankingmanagement.fundManipulation.exception.CustomerDataException;
+import com.bankingmanagement.bankingmanagement.fundManipulation.exception.FundTransferException;
 import com.bankingmanagement.bankingmanagement.fundManipulation.exception.StatementException;
 import com.bankingmanagement.bankingmanagement.fundManipulation.model.Customer;
 import com.bankingmanagement.bankingmanagement.fundManipulation.model.Statement;
 import com.bankingmanagement.bankingmanagement.fundManipulation.service.CustomerDetailsService;
+import com.bankingmanagement.bankingmanagement.fundManipulation.service.FundTransferService;
 import com.bankingmanagement.bankingmanagement.fundManipulation.service.GetStatementService;
 
 @Controller
@@ -24,7 +26,10 @@ public class FundManipulation {
 	CustomerDetailsService customerDetailService;
 	@Autowired
 	GetStatementService getStatementService;
+	@Autowired
+	FundTransferService fundTransferService;
 
+	
 	@GetMapping(path = "/cust-dash/home")
 	public String custHome() {
 		return "customerHome";
@@ -32,7 +37,7 @@ public class FundManipulation {
 
 	@GetMapping(path = "/cust-dash/balance")
 	public String custBalance(HttpSession session, ModelMap modelMap) throws CustomerDataException {
-		String id = "abhas";
+		String id = (String) session.getAttribute("username");
 		Customer c1 = customerDetailService.getDetails(id);
 		session.setAttribute("custSearchId", id);
 		session.setAttribute("account", c1.getAccount());
@@ -41,12 +46,12 @@ public class FundManipulation {
 		} else {
 			session.setAttribute("balance", 0);
 		}
-		return "customerBalance";
+		return "custBalance";
 	}
 
 	@GetMapping(path = "/cust-dash/details")
 	public String custDetails(HttpSession session, ModelMap modelMap) throws CustomerDataException {
-		String id = "abhas";
+		String id = (String) session.getAttribute("username");
 		Customer c1 = customerDetailService.getDetails(id);
 		session.setAttribute("custSearchId", id);
 		session.setAttribute("cFName", c1.getFirstName());
@@ -76,7 +81,7 @@ public class FundManipulation {
 	@GetMapping(path = "/cust-dash/statement")
 	public String custStatement(HttpSession session, ModelMap modelMap)
 			throws CustomerDataException, StatementException {
-		String id = "abhas";
+		String id = (String) session.getAttribute("username");
 		List<Statement> statements = getStatementService.getStatement(id);
 		modelMap.clear();
 		modelMap.put("statements", statements);
@@ -85,9 +90,15 @@ public class FundManipulation {
 
 	@PostMapping(path = "/cust-dash/transfer")
 	public String transfer(HttpSession session, ModelMap modelMap, @RequestParam("recipient-id") String recipient,
-			@RequestParam("amount") Float amount, @RequestParam("methodType") String methodType) throws CustomerDataException, StatementException {
-		String id = "abhas";
-		return "statement";
+			@RequestParam("amount") int amount, @RequestParam("methodType") String methodType) throws CustomerDataException, StatementException {
+		String id = (String) session.getAttribute("username");
+		try {
+			fundTransferService.transferFund(id, recipient, amount, methodType);
+		}catch (FundTransferException e) {
+			modelMap.put("errorMsg",e.getErrorMessage());
+		}
+		
+		return "transfer";
 	}
 
 }

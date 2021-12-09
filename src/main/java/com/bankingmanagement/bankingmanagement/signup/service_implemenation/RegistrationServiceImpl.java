@@ -1,47 +1,44 @@
-package com.bankingmanagement.bankingmanagement.signup.serviceImplemenation;
+package com.bankingmanagement.bankingmanagement.signup.service_implemenation;
 
 import com.bankingmanagement.bankingmanagement.authentication.model.UserLogin;
+import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionDao;
+import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionException;
+import com.bankingmanagement.bankingmanagement.signup.database.RegisterDao;
 import com.bankingmanagement.bankingmanagement.signup.exception.UserRegistrationException;
 import com.bankingmanagement.bankingmanagement.signup.model.Customer;
 import com.bankingmanagement.bankingmanagement.signup.model.SecurityAnswer;
 import com.bankingmanagement.bankingmanagement.signup.model.UserInfo;
 import com.bankingmanagement.bankingmanagement.signup.service.RegistrationService;
-import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionDao;
-import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bankingmanagement.bankingmanagement.util.HashAlgorithm;
 import org.springframework.stereotype.Service;
-import com.bankingmanagement.bankingmanagement.signup.database.RegisterDao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.regex.Pattern;
 
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
 
     // Database connection instance.
-    @Autowired
-    private DatabaseConnectionDao databaseConnectionDAO;
+    private final DatabaseConnectionDao databaseConnectionDAO;
+    private final RegisterDao registerDao;
 
-    @Autowired
-    private RegisterDao registerDao;
+    public RegistrationServiceImpl(DatabaseConnectionDao databaseConnectionDAO, RegisterDao registerDao) {
+        this.databaseConnectionDAO = databaseConnectionDAO;
+        this.registerDao = registerDao;
+    }
 
     @Override
     public String registerUser(UserInfo userInfo) throws UserRegistrationException {
         Customer customer = userInfo.getCustomer();
         validateUser(customer);
-        String username = customer.getCustomerID();
+        String username = customer.getCustomerId();
         UserLogin userLogin = userInfo.getUserLogin();
         String rawPassword = userLogin.getPassword();
 
         //validating username and password
-        validatUserLogin(username,rawPassword);
+        validateUserLogin(username,rawPassword);
 
         SecurityAnswer securityAnswer = userInfo.getSecurityAnswer();
         int questionID = securityAnswer.getQuestionID();
@@ -49,7 +46,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         //validating security ques and answer
         validateSecurityAnswer(questionID,secAnswer);
 
-        String password = getSHA256Hash(userLogin.getPassword());
+        String password = HashAlgorithm.getSHA256Hash(userLogin.getPassword());
 
         try (final Connection connection = databaseConnectionDAO.getConnection();
              final Statement statement = connection.createStatement()) {
@@ -62,16 +59,15 @@ public class RegistrationServiceImpl implements RegistrationService {
                         final int userQARowsInserted = statement.executeUpdate(securityQuestionQuery);
                         if (userQARowsInserted > 0) {
                             final String loginInfoQuery = registerDao.insertLoginTableQuery(username,password);
-                            final int customerfinalRowInserted = statement.executeUpdate(loginInfoQuery, Statement.RETURN_GENERATED_KEYS);
+                            final int customerFinalRowInserted = statement.executeUpdate(loginInfoQuery, Statement.RETURN_GENERATED_KEYS);
 
-                            if (customerfinalRowInserted!=0){
+                            if (customerFinalRowInserted!=0){
                                 return username;
                             }
                             throw new UserRegistrationException("Error While registration");
                     }
                 }
                 } catch (SQLException | DatabaseConnectionException sqlException) {
-            //      TODO handle database incosientancy while insering data
                     sqlException.printStackTrace();
                     throw new UserRegistrationException("Internal Error while Registration, try with new username");
         }
@@ -89,6 +85,15 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     private void validateUser(Customer customer) throws UserRegistrationException {
+        String userid = customer.getCustomerId();
+
+        final boolean isUserValid = (userid != null) &&
+                (!userid.trim().isEmpty()) && Pattern.matches("^[a-zA-Z0-9._-]{3,}$", userid);
+
+        if(!isUserValid){
+            throw new UserRegistrationException("Invalid format of User ID");
+        }
+
         String firstName = customer.getFirstName();
 
         if(firstName==null || firstName.trim().isEmpty() || !Pattern.matches("[A-Za-z ]+", firstName)){
@@ -119,7 +124,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new UserRegistrationException("Email is empty or Invalid ");
         }
 
-        String userName = customer.getCustomerID();
+        String userName = customer.getCustomerId();
 
         if(userName==null || userName.trim().isEmpty() || !Pattern.matches("^[a-zA-Z0-9._-]{3,}$", userName)){
             throw new UserRegistrationException("username is empty or Invalid ");
@@ -133,7 +138,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         String zipCode = customer.getZipCode();
 
-        if(false&&(zipCode==null || zipCode.trim().isEmpty() || !Pattern.matches("^\\d{5}(?:[-\\s]\\d{4})?$", zipCode))){
+        if(zipCode==null || zipCode.trim().isEmpty() || !Pattern.matches("^\\d{5}(?:[- ]?\\d{4})?$", zipCode)){
             throw new UserRegistrationException("Zipcode is empty or Invalid ");
         }
 
@@ -143,12 +148,15 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new UserRegistrationException("ContactNumber is empty  ");
         }
 
-        //TODO : update sin to string regex: ^(\d{3}-\d{3}-\d{3})|(\d{9})$
-        int sin = customer.getSin();
+        String sin = customer.getSin();
+
+        if(sin==null || sin.trim().isEmpty() || !Pattern.matches("^(\\d{3}-\\d{3}-\\d{3})|(\\d{9})$", sin)){
+            throw new UserRegistrationException("sin is empty or Invalid ");
+        }
 
     }
 
-    private void validatUserLogin(String userid, String password) throws UserRegistrationException {
+    private void validateUserLogin(String userid, String password) throws UserRegistrationException {
         final boolean isUserValid = (userid != null) &&
                 (!userid.trim().isEmpty()) && Pattern.matches("^[a-zA-Z0-9._-]{3,}$", userid);
 
@@ -162,22 +170,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         if (!isUserPasswordValid) {
             throw new UserRegistrationException("Invalid format of password");
-        }
-    }
-
-    // ToDO : Add commmon util method to avoid code duplication
-    public String getSHA256Hash(final String str) {
-        if (str == null) {
-            return null;
-        }
-        try {
-            final MessageDigest messageDigest =
-                    MessageDigest.getInstance("SHA-256");
-            return String.format("%064x",
-                    new BigInteger(1,
-                            messageDigest.digest(str.getBytes(StandardCharsets.UTF_8))));
-        } catch (final NoSuchAlgorithmException e) {
-            return null;
         }
     }
 

@@ -2,36 +2,36 @@ package com.bankingmanagement.bankingmanagement.signup.model;
 
 
 public class Customer {
-    private String CustomerID;
+    private String customerId;
     private String firstName;
     private String lastName;
     private String address1;
     private String address2;
-    private String City;
+    private String city;
     private String zipCode;
     private String contactNumber;
     private String email;
-    private int sin;
+    private String sin;
 
-    public Customer(String customerID, String firstName, String lastName, String address1, String address2, String city, String zipCode, String contactNumber, String email, int sin) {
-        CustomerID = customerID;
+    public Customer(String customerId, String firstName, String lastName, String address1, String address2, String city, String zipCode, String contactNumber, String email, String sin) {
+        this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address1 = address1;
         this.address2 = address2;
-        City = city;
+        this.city = city;
         this.zipCode = zipCode;
         this.contactNumber = contactNumber;
         this.email = email;
         this.sin = sin;
     }
 
-    public String getCustomerID() {
-        return CustomerID;
+    public String getCustomerId() {
+        return this.customerId;
     }
 
-    public void setCustomerID(String customerID) {
-        CustomerID = customerID;
+    public void setCustomerId(String customerID) {
+        customerId = customerID;
     }
 
     public String getFirstName() {
@@ -67,11 +67,11 @@ public class Customer {
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String city) {
-        City = city;
+        this.city = city;
     }
 
     public String getZipCode() {
@@ -98,11 +98,11 @@ public class Customer {
         this.email = email;
     }
 
-    public int getSin() {
+    public String getSin() {
         return sin;
     }
 
-    public void setSin(int sin) {
+    public void setSin(String sin) {
         this.sin = sin;
     }
 }
