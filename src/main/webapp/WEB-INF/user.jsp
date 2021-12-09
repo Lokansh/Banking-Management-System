@@ -37,8 +37,7 @@ Welcome, ${sessionScope.username }
 
 <a href="${pageContext.request.contextPath }/logout">Logout</a>
 
-<a href="customerDetails"><h4>Profile Page</h4></a><br>
-<a href="fundManipulation"><h4>Fund Manipulation</h4></a><br>
+<a href="cust-dash/home"><h4>Profile Page</h4></a><br>
 <a href="chequeBookHome"><h4>Cheque Book Home</h4></a><br>
 <a href="loanapp"><h4>Loan Application</h4></a><br>
 <a href="cardHome"><h4>Manage Cards</h4></a><br>
