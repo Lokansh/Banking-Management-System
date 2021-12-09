@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
+
 import static com.bankingmanagement.bankingmanagement.authentication.database.LoginConstants.USER_ROLE;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
@@ -34,7 +36,9 @@ public class UserRegistrationController {
 
 
     @RequestMapping(path = "/signup", method = POST)
+
     public String registerUser(@ModelAttribute("user") User user, HttpSession session, ModelMap modelMap)
+
     {
             try {
                 UserInfo userInfo = getUserInfo(user);

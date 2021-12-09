@@ -1,11 +1,9 @@
+package com.bankingmanagement.bankingmanagement.loan.exception;
 
-
-package com.bankingmanagement.bankingmanagement.card.exception;
-
-public class CardException extends Throwable {
+public class LoanException extends Exception{
     private final String errorMessage;
 
-    public CardException(String errorMessage) {
+    public LoanException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
@@ -15,7 +13,7 @@ public class CardException extends Throwable {
 
     @Override
     public String toString() {
-        return "CardException{" +
+        return "LoanException{" +
                 "errorMessage='" + errorMessage + '\'' +
                 '}';
     }

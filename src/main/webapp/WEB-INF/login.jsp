@@ -92,12 +92,17 @@
     <table border="0" class="loginTable" >
         <tr>
             <td>Username</td>
-            <td><input type="text" name="userLoginID"></td>
+
+
+            <td><input type="text" name="UserLoginID"></td>
+
+
         </tr>
         <tr>
             <td>Password</td>
             <td><input type="password" name="password"></td><br>
             <td><a href="forget">Forget Password?</a></td>
+
         </tr>
 
         <tr>
