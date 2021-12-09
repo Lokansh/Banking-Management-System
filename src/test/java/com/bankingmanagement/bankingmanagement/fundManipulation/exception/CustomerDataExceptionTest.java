@@ -6,9 +6,6 @@ import org.junit.jupiter.api.Test;
 
 class CustomerDataExceptionTest {
 
-	@Test
-	void testGetErrorMessage() {
-		fail("Not yet implemented");
-	}
+	
 
 }
