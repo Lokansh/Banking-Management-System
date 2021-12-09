@@ -1,7 +1,7 @@
 package com.bankingmanagement.bankingmanagement.chequebook.database;
 
 public class ChequeBookConstants {
-    public static final String CHEQUE_REQUEST_TABLE = "CustomerRequest";
+    public static final String CHEQUE_REQUEST_TABLE = "Customer_Request";
 
     public static final String CHEQUE_REQUEST_ID = "CardRequestId";
     public static final String CUSTOMER_ID = "CustomerId";

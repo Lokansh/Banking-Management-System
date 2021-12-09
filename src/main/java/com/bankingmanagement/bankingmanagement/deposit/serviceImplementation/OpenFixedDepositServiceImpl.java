@@ -53,10 +53,8 @@ public class OpenFixedDepositServiceImpl implements OpenFixedDepositService {
         try (final Connection connection = databaseConnectionDAO.getConnection();
              final Statement statement = connection.createStatement()) {
             String openFDQuery = openFixedDepositDao.openFixedDepositQuery(deposit);
-            System.out.println("openFDQuery " + openFDQuery);
             String updateCAQuery = openFixedDepositDao.deductBalanceFromCustomerAccount(deposit, customerAccount);
             final int dataInserted = statement.executeUpdate(openFDQuery, Statement.RETURN_GENERATED_KEYS);
-            System.out.println("updateCAQuery " + updateCAQuery);
             final int dataUpdated = statement.executeUpdate(updateCAQuery, Statement.RETURN_GENERATED_KEYS);
             if(dataInserted > 0 && dataUpdated > 0){
                 return true;

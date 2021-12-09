@@ -78,41 +78,70 @@ class CardControllerTest {
 
     @Test
     void blockCard() {
-    }
+        String expected = "blockCard";
+        NewCardService newCardService= Mockito.mock(NewCardService.class);
+        BlockCardService blockCardService = Mockito.mock(BlockCardService.class);
+        ResetPinService resetPinService = Mockito.mock(ResetPinService.class);
+        CardEligibilityService cardEligibilityService = Mockito.mock(CardEligibilityService.class);
+        ModifyLimitService modifyLimitService = Mockito.mock(ModifyLimitService.class);
 
-    @Test
-    void testCardRequest() {
+        CardController cardController = new CardController(newCardService,blockCardService,resetPinService,
+                cardEligibilityService,modifyLimitService);
+
+        String actual = cardController.blockCard();
+
+        assertEquals(expected,actual);
     }
 
     @Test
     void resetPin() {
-    }
+        String expected = "resetCardPin";
+        NewCardService newCardService= Mockito.mock(NewCardService.class);
+        BlockCardService blockCardService = Mockito.mock(BlockCardService.class);
+        ResetPinService resetPinService = Mockito.mock(ResetPinService.class);
+        CardEligibilityService cardEligibilityService = Mockito.mock(CardEligibilityService.class);
+        ModifyLimitService modifyLimitService = Mockito.mock(ModifyLimitService.class);
 
-    @Test
-    void pinChangeRequest() {
+        CardController cardController = new CardController(newCardService,blockCardService,resetPinService,
+                cardEligibilityService,modifyLimitService);
+
+        String actual = cardController.resetPin();
+
+        assertEquals(expected,actual);
     }
 
     @Test
     void cardEligibility() {
-    }
+        String expected = "creditCardEligibility";
+        NewCardService newCardService= Mockito.mock(NewCardService.class);
+        BlockCardService blockCardService = Mockito.mock(BlockCardService.class);
+        ResetPinService resetPinService = Mockito.mock(ResetPinService.class);
+        CardEligibilityService cardEligibilityService = Mockito.mock(CardEligibilityService.class);
+        ModifyLimitService modifyLimitService = Mockito.mock(ModifyLimitService.class);
 
-    @Test
-    void cardEligibilityCheck() {
+        CardController cardController = new CardController(newCardService,blockCardService,resetPinService,
+                cardEligibilityService,modifyLimitService);
+
+        String actual = cardController.cardEligibility();
+
+        assertEquals(expected,actual);
     }
 
     @Test
     void modifyLimit() {
+        String expected = "cardLimitModify";
+        NewCardService newCardService= Mockito.mock(NewCardService.class);
+        BlockCardService blockCardService = Mockito.mock(BlockCardService.class);
+        ResetPinService resetPinService = Mockito.mock(ResetPinService.class);
+        CardEligibilityService cardEligibilityService = Mockito.mock(CardEligibilityService.class);
+        ModifyLimitService modifyLimitService = Mockito.mock(ModifyLimitService.class);
+
+        CardController cardController = new CardController(newCardService,blockCardService,resetPinService,
+                cardEligibilityService,modifyLimitService);
+
+        String actual = cardController.modifyLimit();
+
+        assertEquals(expected,actual);
     }
 
-    @Test
-    void checkLimit() {
-    }
-
-    @Test
-    void testModifyLimit() {
-    }
-
-    @Test
-    void modifyLimitRequest() {
-    }
 }
