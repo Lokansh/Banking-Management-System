@@ -8,7 +8,7 @@ class NewChequeBookRequestDaoImplTest {
 
     @Test
     void submitNewChequeRequestQuery() {
-        String expectedQuery = "INSERT INTO CustomerRequest(CustomerId, Request, Status) VALUES (\"user\", \"New ChequeBook\", \"Pending\");";
+        String expectedQuery = "INSERT INTO Customer_Request(CustomerId, Request, Status) VALUES (\"user\", \"New ChequeBook\", \"Pending\");";
         NewChequeBookRequestDaoImpl newChequeBookRequestDao = new NewChequeBookRequestDaoImpl();
         String username = "user";
 
