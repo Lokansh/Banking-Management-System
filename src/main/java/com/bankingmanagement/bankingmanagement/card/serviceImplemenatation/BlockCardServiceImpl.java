@@ -2,7 +2,6 @@ package com.bankingmanagement.bankingmanagement.card.serviceImplemenatation;
 
 import com.bankingmanagement.bankingmanagement.card.database.BlockCardRequestDao;
 import com.bankingmanagement.bankingmanagement.card.exception.CardException;
-import com.bankingmanagement.bankingmanagement.card.model.Card;
 import com.bankingmanagement.bankingmanagement.card.service.BlockCardService;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionDao;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionException;
@@ -10,13 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.bankingmanagement.bankingmanagement.card.database.CardConstants.*;
 
 @Service
 public class BlockCardServiceImpl implements BlockCardService {

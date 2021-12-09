@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,15 +18,16 @@ public class ChequeBookController {
     @Autowired
     NewChequeBookService newChequeBookService;
 
+    //Chequebook Home
     @RequestMapping(path= "/chequebookHome", method = GET)
-    public String cardHome()
+    public String chequeHome()
     {
         return "chequebookHome";
     }
 
     // Apply for a new chequebook block - Start
     @RequestMapping(path= "/applyChequebook", method = GET)
-    public String applyCard()
+    public String applyCheque()
     {
         return "applyChequebook";
     }

@@ -1,12 +1,10 @@
 package com.bankingmanagement.bankingmanagement.card.controller;
 
-
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import com.bankingmanagement.bankingmanagement.card.exception.CardException;
 import com.bankingmanagement.bankingmanagement.card.model.CreditScore;
 import com.bankingmanagement.bankingmanagement.card.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,25 +12,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 public class CardController {
-    @Autowired
-    NewCardService newCardService;
+    private final NewCardService newCardService;
 
-    @Autowired
-    BlockCardService blockCardService;
+    private final BlockCardService blockCardService;
 
-    @Autowired
-    ResetPinService resetPinService;
+    private final ResetPinService resetPinService;
 
-    @Autowired
-    CardEligibilityService cardEligibilityService;
+    private final CardEligibilityService cardEligibilityService;
 
-    @Autowired
-    ModifyLimitService modifyLimitService;
+    private final ModifyLimitService modifyLimitService;
 
+    public CardController(NewCardService newCardService, BlockCardService blockCardService, ResetPinService resetPinService, CardEligibilityService cardEligibilityService, ModifyLimitService modifyLimitService) {
+        this.newCardService = newCardService;
+        this.blockCardService = blockCardService;
+        this.resetPinService = resetPinService;
+        this.cardEligibilityService = cardEligibilityService;
+        this.modifyLimitService = modifyLimitService;
+    }
+
+    //Home page
     @RequestMapping(path= "/cardHome", method = GET)
     public String cardHome()
     {
@@ -58,6 +59,7 @@ public class CardController {
             }
             else{
                 modelMap.put("errorMsg", "Can't submit your new card request");
+                System.out.println("here");
             }
         } catch (CardException e) {
             modelMap.put("errorMsg", e.getErrorMessage());
@@ -155,7 +157,7 @@ public class CardController {
     }
     // credit card eligibility check block - end
 
-    // credit card eligibility check block - start
+    // modify card limit block - start
     @RequestMapping(path= "/modifyLimit", method = GET)
     public String modifyLimit()
     {
@@ -189,7 +191,8 @@ public class CardController {
     }
 
     @RequestMapping(value = "/changeLimit", method= RequestMethod.POST)
-    public String modifyLimitRequest(@RequestParam("cardNumber")String cardNumber, @RequestParam("newLimit")String newLimit, HttpSession session, ModelMap modelMap) {
+    public String modifyLimitRequest(@RequestParam("cardNumber")String cardNumber, @RequestParam("newLimit")String newLimit,
+                                     HttpSession session, ModelMap modelMap) {
 
         String userId = (String) session.getAttribute("username");
         try {
@@ -206,5 +209,5 @@ public class CardController {
         }
         return "cardLimitModify";
     }
-    // credit card eligibility check block - end
+    // modify card limit block - end
 }

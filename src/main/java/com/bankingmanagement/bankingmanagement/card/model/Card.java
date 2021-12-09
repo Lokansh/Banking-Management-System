@@ -9,9 +9,8 @@ public class Card {
     private String cardLimit;
     private Integer cardPin;
 
-    public Card (){
+    public Card (){}
 
-    }
     public Card(String customerIDInput, String cardNumberInput, String cardTypeInput,
                 String cardStatusInput, String cardLimitInput, Integer cardPinInput){
         this.customerID = customerIDInput;

@@ -1,6 +1,5 @@
 package com.bankingmanagement.bankingmanagement.card.serviceImplemenatation;
 
-import com.bankingmanagement.bankingmanagement.card.database.BlockCardRequestDao;
 import com.bankingmanagement.bankingmanagement.card.database.CardEligibilityCheckDao;
 import com.bankingmanagement.bankingmanagement.card.exception.CardException;
 import com.bankingmanagement.bankingmanagement.card.model.CreditScore;
@@ -38,7 +37,7 @@ public class CardEligibilityServiceImpl implements CardEligibilityService {
             String fetchCreditScoreQuery = cardEligibilityCheckDao.checkEligibilityQuery(customerId, sin);
             final ResultSet score = statement.executeQuery(fetchCreditScoreQuery);
             while (score.next()) {
-                creditScore= new CreditScore(score.getString("customerID"),score.getString("sin")
+                creditScore = new CreditScore(score.getString("customerID"),score.getString("sin")
                         ,score.getString("Credit_Score"),score.getString("Last_Update"));
             }
             return creditScore;

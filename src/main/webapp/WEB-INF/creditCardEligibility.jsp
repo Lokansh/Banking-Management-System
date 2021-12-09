@@ -55,6 +55,10 @@
             background-color: #FFCCBA;
             background-image: url('https://i.imgur.com/GnyDvKN.png');
         }
+        .cardEligibility{
+            margin-left: auto;
+            margin-right: auto;
+        }
         .container{text-align: center;}
     </style>
 </head>

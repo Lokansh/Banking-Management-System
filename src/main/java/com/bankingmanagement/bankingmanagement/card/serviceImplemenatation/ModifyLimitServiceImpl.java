@@ -1,9 +1,7 @@
 package com.bankingmanagement.bankingmanagement.card.serviceImplemenatation;
 
 import com.bankingmanagement.bankingmanagement.card.database.ModifyLimitDao;
-import com.bankingmanagement.bankingmanagement.card.database.ResetPinDao;
 import com.bankingmanagement.bankingmanagement.card.exception.CardException;
-import com.bankingmanagement.bankingmanagement.card.model.Card;
 import com.bankingmanagement.bankingmanagement.card.service.ModifyLimitService;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionDao;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionException;
@@ -76,6 +74,4 @@ public class ModifyLimitServiceImpl implements ModifyLimitService {
             throw new CardException("Internal Error while Modify limit");
         }
     }
-
-
 }

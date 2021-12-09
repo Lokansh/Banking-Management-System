@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Reset PIN</title>
+    <title>Open Fixed Deposit</title>
     <style>
         h3{
             font-family: Calibri;
@@ -20,11 +20,18 @@
             color:#6b5b95;
             text-align: center;
         }
-
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;}
         .hide {
             display: none;
+        }
+        .incrLimit{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .openFD{
+            margin-left: auto;
+            margin-right: auto;
         }
         .successMsg{
             border: 1px solid;
@@ -45,10 +52,6 @@
             background-color: #FFCCBA;
             background-image: url('https://i.imgur.com/GnyDvKN.png');
         }
-        .resetPin{
-            margin-left: auto;
-            margin-right: auto;
-        }
         .container{text-align: center;}
     </style>
 </head>
@@ -65,37 +68,48 @@
 %>
 
 <div class="container">Welcome, ${sessionScope.username }
-    <a href="cardHome">Home</a>
+    <a href="depositHome">Home</a>
     <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
 
-<h2>Reset Card PIN</h2>
+<h2>Open Deposit</h2>
 
 <div class="${Request==null ? "hide" : "successMsg"}">
-    Your Card PIN has been successfully changed.
+    Deposit has been opened.
 </div>
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
 
-<form method="post" action="${pageContext.request.contextPath }/resetPin">
-
-    <table border="0" class="resetPin" >
+<form method="post" action="${pageContext.request.contextPath }/openFD" >
+    <table class="openFD">
         <tr>
-            <td>Username - </td>
+            <td>Customer Name - </td>
             <td><output name="username">${sessionScope.username }</output></td>
         </tr>
         <tr>
-            <td>Card Number - </td>
-            <td><input type="text" name="cardNumber" placeholder="Card Number"></td>
+            <td>Account Number - </td>
+            <td><output name="account">${AccountNumber}</output></td>
         </tr>
         <tr>
-            <td>New PIN - </td>
-            <td><input type="text" name="cardPin" placeholder="XXXX"></td>
+            <td>Balance - </td>
+            <td><output name="balance">${Balance}</output></td>
+        </tr>
+        <tr>
+            <td>Deposit Amount - </td>
+            <td><input type="text" name="amount" placeholder="Enter Value"></td>
+        </tr>
+        <tr>
+            <td>Deposit Period (In Months) - </td>
+            <td><input type="text" name="tenure" placeholder="Enter Value"></td>
+        </tr>
+        <tr>
+            <td>Interest Rate - </td>
+            <td><output name="interest">${FixedDepositInterest}</output></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><input type="submit" value="Apply"></td>
+            <td><input type="submit" value="Submit"></td>
         </tr>
     </table>
 </form>

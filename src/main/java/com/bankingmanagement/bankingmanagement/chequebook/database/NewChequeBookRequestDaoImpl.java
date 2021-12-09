@@ -1,6 +1,5 @@
 package com.bankingmanagement.bankingmanagement.chequebook.database;
 
-import com.bankingmanagement.bankingmanagement.card.database.NewCardRequestDao;
 import org.springframework.stereotype.Component;
 
 import static com.bankingmanagement.bankingmanagement.chequebook.database.ChequeBookConstants.*;

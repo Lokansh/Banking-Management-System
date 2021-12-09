@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Reset PIN</title>
+    <title>Liquidate Fixed Deposit</title>
     <style>
         h3{
             font-family: Calibri;
@@ -20,11 +20,23 @@
             color:#6b5b95;
             text-align: center;
         }
-
+        h4{
+            font-family: Calibri;
+            color:#6b5b95;
+            text-align: center;
+        }
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;}
         .hide {
             display: none;
+        }
+        .incrLimit{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .closeFD{
+            margin-left: auto;
+            margin-right: auto;
         }
         .successMsg{
             border: 1px solid;
@@ -45,10 +57,6 @@
             background-color: #FFCCBA;
             background-image: url('https://i.imgur.com/GnyDvKN.png');
         }
-        .resetPin{
-            margin-left: auto;
-            margin-right: auto;
-        }
         .container{text-align: center;}
     </style>
 </head>
@@ -65,39 +73,53 @@
 %>
 
 <div class="container">Welcome, ${sessionScope.username }
-    <a href="cardHome">Home</a>
+    <a href="depositHome">Home</a>
     <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
 
-<h2>Reset Card PIN</h2>
+<h2>Liquidate Deposit</h2>
 
 <div class="${Request==null ? "hide" : "successMsg"}">
-    Your Card PIN has been successfully changed.
+    Selected deposit has been liquidated.
 </div>
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
 
-<form method="post" action="${pageContext.request.contextPath }/resetPin">
-
-    <table border="0" class="resetPin" >
+<form method="post" action="${pageContext.request.contextPath }/closeFD" >
+    <table class="closeFD">
         <tr>
-            <td>Username - </td>
+            <td>Customer Name - </td>
             <td><output name="username">${sessionScope.username }</output></td>
         </tr>
         <tr>
-            <td>Card Number - </td>
-            <td><input type="text" name="cardNumber" placeholder="Card Number"></td>
+            <td>Account Number - </td>
+            <td><output name="account">${AccountNumber}</output></td>
         </tr>
         <tr>
-            <td>New PIN - </td>
-            <td><input type="text" name="cardPin" placeholder="XXXX"></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td><input type="submit" value="Apply"></td>
+            <td>Balance - </td>
+            <td><output name="balance">${Balance}</output></td>
         </tr>
     </table>
+
+<h4>All Deposits</h4>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<table class="closeFD">
+    <c:forEach items="${depositList}" var="deposit">
+        <tr>
+            <td><c:out value="${deposit.getDepositId()}" /></td>
+            <td><c:out value="${deposit.getCustomerId()}" /></td>
+            <td><c:out value="${deposit.getAmount()}" /></td>
+            <td><c:out value="${deposit.getDepositType()}" /></td>
+            <td><c:out value="${deposit.getTenure()}" /></td>
+            <td><c:out value="${deposit.getInterest()}" /></td>
+            <td><c:out value="${deposit.getOpenDate()}" /></td>
+            <td><c:out value="${deposit.getMaturityDate()}" /></td>
+            <td><button type="submit" name="selected" value="${deposit.getDepositId()}">Liquidate</button></td>
+        </tr>
+    </c:forEach>
+</table>
 </form>
 
 </body>

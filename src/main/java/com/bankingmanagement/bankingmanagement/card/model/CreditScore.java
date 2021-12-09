@@ -6,9 +6,7 @@ public class CreditScore {
     private String creditScore;
     private String lastUpdate;
 
-    public CreditScore() {
-
-    }
+    public CreditScore() {}
 
     public CreditScore(String customerID, String sin, String creditScore, String lastUpdate) {
         this.customerID = customerID;

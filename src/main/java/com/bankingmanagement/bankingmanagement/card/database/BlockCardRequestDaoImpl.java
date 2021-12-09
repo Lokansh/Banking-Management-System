@@ -1,9 +1,7 @@
 package com.bankingmanagement.bankingmanagement.card.database;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
-import static com.bankingmanagement.bankingmanagement.authentication.database.LoginConstants.LOGIN_ID;
 import static com.bankingmanagement.bankingmanagement.card.database.CardConstants.*;
 import static com.bankingmanagement.bankingmanagement.card.database.CardConstants.REQUEST_TYPE;
 
@@ -30,5 +28,5 @@ public class BlockCardRequestDaoImpl implements BlockCardRequestDao{
                 " SET " + CARD_STATUS + " = 'Blocked' WHERE " +
                 CARD_NUMBER + "=\"" + cardNumber + "\"" + " AND " +
                 CUSTOMER_ID + "=\"" + customerId + "\";";
-    };
+    }
 }
