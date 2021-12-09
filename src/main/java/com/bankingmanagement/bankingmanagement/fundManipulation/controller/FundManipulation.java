@@ -1,5 +1,7 @@
 package com.bankingmanagement.bankingmanagement.fundManipulation.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +10,18 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.bankingmanagement.bankingmanagement.fundManipulation.exception.CustomerDataException;
+import com.bankingmanagement.bankingmanagement.fundManipulation.exception.StatementException;
 import com.bankingmanagement.bankingmanagement.fundManipulation.model.Customer;
+import com.bankingmanagement.bankingmanagement.fundManipulation.model.Statement;
 import com.bankingmanagement.bankingmanagement.fundManipulation.service.CustomerDetailsService;
+import com.bankingmanagement.bankingmanagement.fundManipulation.service.GetStatementService;
 
 @Controller
 public class FundManipulation {
 	@Autowired
 	CustomerDetailsService customerDetailService;
-
+	@Autowired
+	GetStatementService getStatementService;
 	@GetMapping(path = "/cust-dash/home")
 	public String custHome() {
 		return "customerHome";
@@ -75,5 +81,15 @@ public class FundManipulation {
 
 		return "rtgs";
 	}
+	
+	@GetMapping(path = "/cust-dash/statement")
+	public String custStatement(HttpSession session, ModelMap modelMap) throws CustomerDataException, StatementException {
+		String id = "abhas";
+		List<Statement> statements=getStatementService.getStatement(id);
+		modelMap.clear();
+		modelMap.put("statements", statements);
+		return "statement";
+	}
+	
 
 }

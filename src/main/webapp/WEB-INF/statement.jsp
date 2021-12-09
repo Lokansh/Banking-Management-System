@@ -56,47 +56,36 @@ body {
 </head>
 
 <h4>
-	<span class="pr"><a href="/emp-dash/details">Employee
-			Dashboard</a></span> <span class="pr"><a href="/emp-dash/cust-details">Customer
-			Details</a></span> <span class="selected"> Requests</span>
+	Statement
 </h4>
 
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">${errorMsg}</div>
 
 
-<h5>
-	<span class="pr"><a href="/emp-dash/requests/approved">Approved
-			Requests</a></span> <span class="pr"><a href="/emp-dash/requests/denied">Denied
-			Requests</a></span><span class="pr"><a href="/emp-dash/requests/auto-approved">Auto Approved
-			Requests</a></span>
-</h5>
-
-
-<div>Requests</div>
-
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <table>
 <tr>
 			<td>Request ID</td>
-			<td>CustomerId</td>
-			<td>Request</td>
-			<td>Status</td>
-			<td>Action</td>
+			<td>Amount</td>
+			<td>Type</td>
+			<td>Sender/Receiver</td>
+			<td>Mode</td>
+			<td>Time Stamp</td>
 		</tr>
-	<c:forEach items="${requests}" var="request">
+	<c:forEach items="${statements}" var="stm">
 		<tr>
-			<td><c:out value="${request.getRequestId()}" /></td>
-			<td><c:out value="${request.getCustomerId()}" /></td>
-			<td><c:out value="${request.getRequestData()}" /></td>
-			<td><c:out value="${request.getStatus()}" /></td>
-			<td><a
-				href="/emp-dash/requests/approve/${request.getRequestId()}"><button>Approve</button></a><a
-				href="/emp-dash/requests/deny/${request.getRequestId()}"><button>Deny</button></a></td>
+		<td><c:out value="${stm.getId()}" /></td>
+			<td><c:out value="${stm.getAmount()}" /></td>
+			<td><c:out value="${stm.getType()}" /></td>
+			<td><c:out value="${stm.getFromToAccount()}" /></td>
+			<td><c:out value="${stm.getMode()}" /></td>
+			<td><c:out value="${stm.getTimeStamp()}" /></td>
 		</tr>
 	</c:forEach>
 </table>
-
+<a href="/cust-dash/home"><button>Back</button></a>
+<div></div>
 </body>
 </html>

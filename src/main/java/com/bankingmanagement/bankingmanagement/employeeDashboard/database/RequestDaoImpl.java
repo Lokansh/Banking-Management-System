@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RequestDaoImpl implements RequestDao {
-@Override
-	public String  getRequests() {
+	@Override
+	public String getRequests() {
 		return "SELECT * FROM CSCI5308_20_PRODUCTION.Customer_Request where Status='Pending';";
 	};
 
