@@ -1,4 +1,4 @@
-package com.bankingmanagement.bankingmanagement.authentication.service_implemenation;
+package com.bankingmanagement.bankingmanagement.authentication.service_implementation;
 
 import com.bankingmanagement.bankingmanagement.authentication.exception.InvalidRoleException;
 import com.bankingmanagement.bankingmanagement.authentication.exception.UserAuthenticationException;

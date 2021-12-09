@@ -67,6 +67,7 @@
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
+<a href="home"><h4>Home Page</h4></a><br>
 
 <form:errors path="user.*"/>
 <form:form  method="post" action="${pageContext.request.contextPath }/signup">

@@ -62,6 +62,8 @@
 
 <h3>Welcome to Nova Bank</h3>
 <h4>Forget Password</h4>
+<a href="home"><h4>Home Page</h4></a><br>
+
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>

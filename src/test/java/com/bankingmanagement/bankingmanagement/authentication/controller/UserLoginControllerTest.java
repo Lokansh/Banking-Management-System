@@ -3,7 +3,7 @@ package com.bankingmanagement.bankingmanagement.authentication.controller;
 import com.bankingmanagement.bankingmanagement.authentication.exception.InvalidRoleException;
 import com.bankingmanagement.bankingmanagement.authentication.exception.UserAuthenticationException;
 import com.bankingmanagement.bankingmanagement.authentication.model.UserLogin;
-import com.bankingmanagement.bankingmanagement.authentication.service_implemenation.ProxyLoginServiceImpl;
+import com.bankingmanagement.bankingmanagement.authentication.service_implementation.ProxyLoginServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.ui.ModelMap;
