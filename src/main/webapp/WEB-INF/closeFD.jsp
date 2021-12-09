@@ -73,7 +73,7 @@
 %>
 
 <div class="container">Welcome, ${sessionScope.username }
-    <a href="depositHome">Home</a>
+    <a href="user">Home</a>
     <a href="${pageContext.request.contextPath }/logout">Logout</a>
 </div>
 
