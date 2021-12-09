@@ -62,7 +62,35 @@ body {
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">${errorMsg}</div>
 
-<h3></h3>
+<form method="post" action="${pageContext.request.contextPath }/cust-dash/transfer">
+
+    <table>
+       
+        <tr>
+            <td>Recipient ID</td>
+            <td><input type="text" name="recipient-id"></td>
+        </tr>
+        <tr>
+            <td>Amount</td>
+            <td><input type="number" name="amount"></td>
+        </tr>
+         <tr>
+            <td>Method</td>
+            <td>
+<div><input type="radio" name="methodType" value="imps" checked>IMPS</div>
+<div><input type="radio" name="methodType" value="rtgs" >RTGS</div>
+<div><input type="radio" name="methodType" value="neft" >NEFT</div>
+
+
+</td>
+        </tr>
+       
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Submit"></td>
+        </tr>
+    </table>
+</form>
 
 </body>
 </html>

@@ -1,9 +1,10 @@
-package com.bankingmanagement.bankingmanagement.authentication.exception;
+package com.bankingmanagement.bankingmanagement.fundManipulation.exception;
 
-public class UserAuthenticationException extends Exception{
+public class FundTransferException extends Exception{
+	
     private final String errorMessage;
 
-    public UserAuthenticationException(String errorMessage) {
+    public FundTransferException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
@@ -13,8 +14,9 @@ public class UserAuthenticationException extends Exception{
 
     @Override
     public String toString() {
-        return "userAuthenticationException{" +
+        return "FundTransferException{" +
                 "errorMessage='" + errorMessage + '\'' +
                 '}';
     }
+
 }

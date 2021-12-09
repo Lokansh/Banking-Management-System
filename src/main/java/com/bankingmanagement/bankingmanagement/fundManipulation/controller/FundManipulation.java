@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bankingmanagement.bankingmanagement.fundManipulation.exception.CustomerDataException;
 import com.bankingmanagement.bankingmanagement.fundManipulation.exception.StatementException;
@@ -22,6 +24,7 @@ public class FundManipulation {
 	CustomerDetailsService customerDetailService;
 	@Autowired
 	GetStatementService getStatementService;
+
 	@GetMapping(path = "/cust-dash/home")
 	public String custHome() {
 		return "customerHome";
@@ -64,32 +67,27 @@ public class FundManipulation {
 		return "custDetails";
 	}
 
-	@GetMapping(path = "/cust-dash/imps")
-	public String custImps(HttpSession session, ModelMap modelMap) throws CustomerDataException {
+	@GetMapping(path = "/cust-dash/transfer-home")
+	public String transferHome(HttpSession session, ModelMap modelMap) throws CustomerDataException {
 
-		return "imps";
+		return "fund-transfer-home";
 	}
-	
-	@GetMapping(path = "/cust-dash/neft")
-	public String custNeft(HttpSession session, ModelMap modelMap) throws CustomerDataException {
 
-		return "neft";
-	}
-	
-	@GetMapping(path = "/cust-dash/rtgs")
-	public String custRtgs(HttpSession session, ModelMap modelMap) throws CustomerDataException {
-
-		return "rtgs";
-	}
-	
 	@GetMapping(path = "/cust-dash/statement")
-	public String custStatement(HttpSession session, ModelMap modelMap) throws CustomerDataException, StatementException {
+	public String custStatement(HttpSession session, ModelMap modelMap)
+			throws CustomerDataException, StatementException {
 		String id = "abhas";
-		List<Statement> statements=getStatementService.getStatement(id);
+		List<Statement> statements = getStatementService.getStatement(id);
 		modelMap.clear();
 		modelMap.put("statements", statements);
 		return "statement";
 	}
-	
+
+	@PostMapping(path = "/cust-dash/transfer")
+	public String transfer(HttpSession session, ModelMap modelMap, @RequestParam("recipient-id") String recipient,
+			@RequestParam("amount") Float amount, @RequestParam("methodType") String methodType) throws CustomerDataException, StatementException {
+		String id = "abhas";
+		return "statement";
+	}
 
 }
