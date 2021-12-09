@@ -1,0 +1,55 @@
+image: maven:latest
+
+variables:
+  GIT_STRATEGY: clone
+
+before_script:
+  - echo "Pipeline Started"
+  - chmod 777 ./mvnw
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  tags:
+    - ugrad
+  script:
+    - echo "Build Stage Started"
+    - ./mvnw clean install -DskipTests
+  artifacts:
+    paths:
+      - "**/target/*.jar"
+
+test:
+  stage: test
+  tags:
+    - ugrad
+  script:
+    - echo "Test Stage Started"
+    - ./mvnw test
+  artifacts:
+    paths:
+      - "**/target/surefire-reports/TEST-*.xml"
+    reports:
+      junit:
+        - "**/target/surefire-reports/TEST-*.xml"
+
+deploy:
+  tags:
+    - dalfcs_gitlab_docker_ci
+  stage: deploy
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+  only:
+   - develop
+   - main
+
+after_script:
+  - echo "Pipeline Ended"
