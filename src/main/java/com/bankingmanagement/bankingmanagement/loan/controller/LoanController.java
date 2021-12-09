@@ -102,6 +102,7 @@ public class LoanController {
     public String adminLoanView() {
         return "adminloanview";
     }
+
     @RequestMapping(value = "/fetchAllLoanApplication", method = RequestMethod.GET)
     public String fetchAllLoanRequests(@RequestParam String reqtype,ModelMap modelMap) {
         try {
@@ -122,6 +123,27 @@ public class LoanController {
         }
         return "viewloanrequest";
     }
+    @RequestMapping(value = "/fetchAllCCApplication", method = RequestMethod.GET)
+    public String fetchAllCCRequests(@RequestParam String reqtype,ModelMap modelMap) {
+        try {
+            if(reqtype.equalsIgnoreCase("pending"))
+            {
+                modelMap.put("pendingLoans", loanService.getAllPendingLoans());
+            }
+            else if(reqtype.equalsIgnoreCase("approved"))
+            {
+                modelMap.put("approvedLoans",loanService.getAllApprovedLoans());
+            }
+            else
+            {
+                modelMap.put("rejectedLoans",loanService.getAllRejectedLoans());
+            }
+        } catch (LoanException e) {
+            e.printStackTrace();
+        }
+        return "viewccrequest";
+    }
+
     @RequestMapping(value = "/approveLoan", method = RequestMethod.GET)
     public String approveLoan(@RequestParam int id)
     {
@@ -142,4 +164,6 @@ public class LoanController {
         }
         return "admin";
     }
+
+
 }

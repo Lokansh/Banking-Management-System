@@ -29,21 +29,15 @@ public class ProxyLoginServiceImpl implements LoginService {
 			throw new UserAuthenticationException("User Already Logged in Another Device");
 		}
 		loginService.validateUser(userLogin);
-		this.addUser(username);
+		users.add(username);
 		return true;
 	}
 
-	public void addUser(String user){
-		users.add(user);
-	}
 
-	public void removeUser(String user){
-		users.remove(user);
-	}
 
 	public void logout(String username) throws UserAuthenticationException {
 		loginService.logout(username);
-		this.removeUser(username);
+		users.remove(username);
 	}
 
 }

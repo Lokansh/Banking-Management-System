@@ -38,5 +38,6 @@ Welcome, ${sessionScope.username }
 <br>
 <br>
 <a href="adminLoanView">Loan Applications</a>
+
 </body>
 </html>

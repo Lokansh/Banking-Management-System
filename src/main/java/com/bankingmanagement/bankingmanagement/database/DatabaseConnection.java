@@ -1,7 +1,6 @@
 package com.bankingmanagement.bankingmanagement.database;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 
 import java.io.FileInputStream;

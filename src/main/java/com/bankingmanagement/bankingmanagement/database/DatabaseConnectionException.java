@@ -11,9 +11,6 @@ public class DatabaseConnectionException extends Exception {
     }
 
 
-    public String geterrMsg() {
-        return errMsg;
-    }
 
 
     @Override
@@ -24,8 +21,5 @@ public class DatabaseConnectionException extends Exception {
                 '}';
     }
 
-    public Throwable getError() {
-        return error;
-    }
 
 }

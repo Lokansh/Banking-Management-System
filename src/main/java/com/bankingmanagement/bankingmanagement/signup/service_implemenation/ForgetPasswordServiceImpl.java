@@ -65,7 +65,7 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService {
         }
         String secAnswer = securityAnswer.getQuestionAnswer();
         if(secAnswer==null || secAnswer.trim().isEmpty() ){
-            throw new UserForgetPasswordException("Security Answer is empty.");
+            throw new UserForgetPasswordException("Security Answer is empty ");
         }
     }
 
