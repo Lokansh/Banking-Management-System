@@ -10,7 +10,7 @@ class NewChequeBookRequestDaoImplTest {
     void submitNewChequeRequestQuery() {
         String expectedQuery = "INSERT INTO CustomerRequest(CustomerId, Request, Status) VALUES (\"lokansh\", \"New ChequeBook\", \"Pending\");";
         NewChequeBookRequestDaoImpl newChequeBookRequestDao = new NewChequeBookRequestDaoImpl();
-        String username = "lokansh";
+        String username = "user";
 
         String actualQuery = newChequeBookRequestDao.submitNewChequeRequestQuery(username);
         assertEquals(expectedQuery,actualQuery);
