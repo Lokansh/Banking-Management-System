@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title> User login</title>
+    <title> Admin| Loan View</title>
     <style>
         h3{
             font-family: Calibri;
@@ -37,6 +37,10 @@ Welcome, ${sessionScope.username }
 <a href="${pageContext.request.contextPath }/adminlogout">Logout</a>
 <br>
 <br>
-<a href="adminLoanView">Loan Applications</a>
+<a href="fetchAllLoanApplication?reqtype=pending">View All Pending Loan Applications</a>
+<br>
+<a href="fetchAllLoanApplication?reqtype=rejected">View All Rejected Loan Applications</a>
+<br>
+<a href="fetchAllLoanApplication?reqtype=approved">View All Approved Loan Applications</a>
 </body>
 </html>
