@@ -64,14 +64,6 @@ body {
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">${errorMsg}</div>
 
-
-<h5>
-	<span class="pr"><a href="/emp-dash/requests/approved">Approved
-			Requests</a></span> <span class="pr"><a href="/emp-dash/requests/denied">Denied
-			Requests</a></span>
-</h5>
-
-
 <div>Approved Requests</div>
 
 

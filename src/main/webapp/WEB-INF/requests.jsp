@@ -68,6 +68,7 @@ body {
 <h5>
 	<span class="pr"><a href="/emp-dash/requests/approved">Approved
 			Requests</a></span> <span class="pr"><a href="/emp-dash/requests/denied">Denied
+			Requests</a></span><span class="pr"><a href="/emp-dash/requests/auto-approved">Auto Approved
 			Requests</a></span>
 </h5>
 

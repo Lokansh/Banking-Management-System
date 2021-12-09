@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Employee Dashboard</title>
+<title>Customer Dashboard</title>
 
 <style>
 h4 {
@@ -56,32 +56,13 @@ body {
 </head>
 
 <h4>
-	<span class="pr"><a href="/emp-dash/details">Employee
-			Dashboard</a></span> <span class="pr"><a href="/emp-dash/cust-details">Customer
-			Details</a></span> <span class="selected"> Requests</span>
+	RTGS
 </h4>
 
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">${errorMsg}</div>
 
+<h3></h3>
 
-
-
-<div>Denied Requests</div>
-
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<table>
-	<c:forEach items="${requests}" var="request">
-		<tr>
-			<td><c:out value="${request.getRequestId()}" /></td>
-			<td><c:out value="${request.getCustomerId()}" /></td>
-			<td><c:out value="${request.getRequestData()}" /></td>
-			<td><c:out value="${request.getStatus()}" /></td>
-		</tr>
-	</c:forEach>
-</table>
-<a href="/emp-dash/requests"><button>Back</button></a>
-<div></div>
 </body>
 </html>

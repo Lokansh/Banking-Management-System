@@ -65,9 +65,7 @@ body {
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">${errorMsg}</div>
 
 
-
-
-<div>Denied Requests</div>
+<div>Auto Approved Requests</div>
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

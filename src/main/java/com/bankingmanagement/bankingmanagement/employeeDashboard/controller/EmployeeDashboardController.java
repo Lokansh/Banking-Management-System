@@ -93,7 +93,7 @@ public class EmployeeDashboardController {
 	@GetMapping(path = "/emp-dash/requests/deny/{id}")
 	public String denyRequest(@PathVariable String id, HttpSession session) throws EmployeeDetailsException, RequestException {
 		getRequests.denyRequest(Integer.parseInt(id));
-		return "approved";
+		return "denied";
 	}
 	@GetMapping(path = "/emp-dash/requests/approved")
 	public String approvedRequest(HttpSession session,  ModelMap modelMap) throws EmployeeDetailsException, RequestException {
@@ -105,6 +105,13 @@ public class EmployeeDashboardController {
 	@GetMapping(path = "/emp-dash/requests/denied")
 	public String deniedRequest(HttpSession session,  ModelMap modelMap) throws EmployeeDetailsException, RequestException {
 		List<Request> req=getRequests.deniedHistory();
+		modelMap.clear();
+		modelMap.put("requests", req);
+		return "deniedHistory";
+	}
+	@GetMapping(path = "/emp-dash/requests/auto-approved")
+	public String autoApprovedRequest(HttpSession session,  ModelMap modelMap) throws EmployeeDetailsException, RequestException {
+		List<Request> req=getRequests.autoApprovedHistory();
 		modelMap.clear();
 		modelMap.put("requests", req);
 		return "deniedHistory";
