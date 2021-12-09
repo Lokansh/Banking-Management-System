@@ -10,10 +10,13 @@ class EmployeeDashboardControllerTest {
 
 	@Test
 	public void getEmployeeDetailsDaoImplClassExists() throws ClassNotFoundException {
-		  //checking whether the class exists or not
-	      assertNotNull(Class.forName("com.bankingmanagement.bankingmanagement.fundManipulation.controller.FundManipulation"));
+		// checking whether the class exists or not
+		assertNotNull(
+				Class.forName("com.bankingmanagement.bankingmanagement.fundManipulation.controller.FundManipulation"));
 	}
-	EmployeeDashboardController testObject=new EmployeeDashboardController();
+
+	EmployeeDashboardController testObject = new EmployeeDashboardController();
+
 	@Test
 	void testCustHome() throws EmployeeDetailsException {
 		assertEquals("findCustomer", testObject.custDetails());
