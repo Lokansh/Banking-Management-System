@@ -1,4 +1,4 @@
-package com.bankingmanagement.bankingmanagement.authentication.service_implemenation;
+package com.bankingmanagement.bankingmanagement.authentication.service_implementation;
 
 import com.bankingmanagement.bankingmanagement.authentication.database.LoginDao;
 import com.bankingmanagement.bankingmanagement.authentication.exception.InvalidRoleException;

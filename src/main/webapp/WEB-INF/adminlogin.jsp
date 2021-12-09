@@ -86,7 +86,7 @@
     ${errorMsg}
 </div>
 
-
+<a href="home"><h4>Home Page</h4></a><br>
 <form method="post" action="${pageContext.request.contextPath }/adminlogin">
 
     <table border="0" class="loginTable" >

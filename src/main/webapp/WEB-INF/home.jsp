@@ -32,7 +32,9 @@
 
 <h3>Welcome to Nova Bank</h3>
 <a href="signup"><h4>Sign Up</h4></a><br>
-<a href="login"><h4>Login</h4></a>
+<a href="login"><h4>Login</h4></a><br>
+<a href="employeelogin"><h4>Employee Login</h4></a><br>
+<a href="adminlogin"><h4>Admin Login</h4></a>
 
 </body>
 </html>

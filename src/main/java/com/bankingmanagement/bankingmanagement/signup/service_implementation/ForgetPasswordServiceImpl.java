@@ -1,4 +1,4 @@
-package com.bankingmanagement.bankingmanagement.signup.service_implemenation;
+package com.bankingmanagement.bankingmanagement.signup.service_implementation;
 
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionDao;
 import com.bankingmanagement.bankingmanagement.database.DatabaseConnectionException;
