@@ -6,4 +6,6 @@ public interface RequestDao {
 	String approvedRequestHistory();
 
 	String deniedRequestHistory();
+	
+	String autoApprovedRequestHistory();
 }

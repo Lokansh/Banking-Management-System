@@ -94,6 +94,27 @@ public class GetRequestsImpl implements GetRequests {
 	}
 
 	@Override
+	public List<Request> autoApprovedHistory() throws RequestException {
+
+		List<Request> requests = new ArrayList<Request>();
+		try (final Connection connection = databaseConnectionDAO.getConnection();
+				final Statement statement = connection.createStatement();
+				final ResultSet requestResultSet = statement.executeQuery(requestDao.autoApprovedRequestHistory())) {
+//			requestResult
+			if (requestResultSet == null) {
+				throw new RequestException("Invalid request");
+			} else {
+				requests = getRequestsStatus(requestResultSet);
+			}
+
+		} catch (SQLException | DatabaseConnectionException sqlException) {
+			sqlException.printStackTrace();
+			throw new RequestException("Internal Error while fetching customer data");
+		}
+		return requests;
+	}
+
+	@Override
 	public void approveRequest(int requestId) throws RequestException {
 		try (final Connection connection = databaseConnectionDAO.getConnection();
 
@@ -131,7 +152,7 @@ public class GetRequestsImpl implements GetRequests {
 		List<Request> requests = new ArrayList<Request>();
 		while (requestResultSet.next()) {
 			Request req = new Request();
-			req.setCustomerId(requestResultSet.getInt("CustomerId"));
+			req.setCustomerId(requestResultSet.getNString("CustomerId"));
 			req.setRequestData(requestResultSet.getNString("Request"));
 			req.setStatus(requestResultSet.getNString("Status"));
 			req.setRequestId(requestResultSet.getInt("RequestId"));

@@ -4,17 +4,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Request {
-	Integer customerId;
+	String customerId;
 	String requestData;
 	String status;
 	Integer requestId;
 
-	public Integer getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(int i) {
-		this.customerId = i;
+	public void setCustomerId(String id) {
+		this.customerId = id;
 	}
 
 	public String getRequestData() {
