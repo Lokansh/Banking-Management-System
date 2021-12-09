@@ -67,6 +67,7 @@ body {
 
 <a href="/cust-dash/balance"><h4>View Balance</h4></a>
 <a href="/cust-dash/details"><h4>View details</h4></a>
+<a href="/cust-dash/statement"><h4>View Statement</h4></a>
 <h3>Transfer Funds</h3>
 <a href="/cust-dash/imps"><h4>IMPS</h4></a>
 <a href="/cust-dash/neft"><h4>NEFT</h4></a>
