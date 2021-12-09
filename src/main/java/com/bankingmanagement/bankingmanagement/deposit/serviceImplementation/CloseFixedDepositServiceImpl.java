@@ -69,10 +69,8 @@ public class CloseFixedDepositServiceImpl implements CloseFixedDepositService {
         try (final Connection connection = databaseConnectionDAO.getConnection();
              final Statement statement = connection.createStatement()) {
             String closeFDQuery = closeFixedDepositDao.closeDeposit(deposit.getDepositId());
-            System.out.println("closeFDQuery " + closeFDQuery);
             String updateCAQuery = closeFixedDepositDao.addBalanceToAccount(deposit, customerAccount);
             final int dataDeleted = statement.executeUpdate(closeFDQuery, Statement.RETURN_GENERATED_KEYS);
-            System.out.println("updateCAQuery " + updateCAQuery);
             final int dataUpdated = statement.executeUpdate(updateCAQuery, Statement.RETURN_GENERATED_KEYS);
 
             if(dataDeleted > 0 && dataUpdated > 0){

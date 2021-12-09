@@ -15,8 +15,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 public class ChequeBookController {
 
-    @Autowired
-    NewChequeBookService newChequeBookService;
+    private final NewChequeBookService newChequeBookService;
+
+    public ChequeBookController(NewChequeBookService newChequeBookService) {
+        this.newChequeBookService = newChequeBookService;
+    }
 
     //Chequebook Home
     @RequestMapping(path= "/chequebookHome", method = GET)

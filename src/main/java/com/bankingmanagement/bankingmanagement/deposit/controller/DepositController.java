@@ -23,16 +23,19 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 public class DepositController {
 
-    @Autowired
-    OpenFixedDepositService openFixedDepositService;
+    private final OpenFixedDepositService openFixedDepositService;
 
-    @Autowired
-    CloseFixedDepositService closeFixedDepositService;
+    private final CloseFixedDepositService closeFixedDepositService;
 
     public static CustomerAccount customerAccount;
     public static CustomerAccount customerAccountClose;
     public static Deposit deposit;
     List<Deposit> depositList;
+
+    public DepositController(OpenFixedDepositService openFixedDepositService, CloseFixedDepositService closeFixedDepositService) {
+        this.openFixedDepositService = openFixedDepositService;
+        this.closeFixedDepositService = closeFixedDepositService;
+    }
 
     //Deposit Home page
     @RequestMapping(path= "/depositHome", method = GET)
@@ -149,7 +152,6 @@ public class DepositController {
         if(localDeposit != null && customerAccountClose != null){
             try{
                 Boolean closeDepositSuccess = closeFixedDepositService.liquidateDeposit(localDeposit,customerAccountClose);
-                System.out.println(closeDepositSuccess + " closeDepositSuccess");
                 if(closeDepositSuccess){
                     customerAccountClose = openFixedDepositService.getAccount(userId);
                     if(customerAccountClose != null) {
