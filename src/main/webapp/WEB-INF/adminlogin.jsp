@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Sign In | NovaBank </title>
+    <title>Admin Sign In | NovaBank </title>
 
     <style>
         h3{
@@ -80,26 +80,23 @@
 
 
 <h3>Welcome to Nova Bank</h3>
-<h4>User Login Page</h4>
+<h4>Admin Login Page</h4>
 
 <div class="${errorMsg==null ? "hide" : "errorMsg"}">
     ${errorMsg}
 </div>
 
-<form method="post" action="${pageContext.request.contextPath }/login">
+
+<form method="post" action="${pageContext.request.contextPath }/adminlogin">
 
     <table border="0" class="loginTable" >
         <tr>
-            <td>Username</td>
-
-            <td><input type="text" name="UserLoginID"></td>
-
+            <td>Admin Username</td>
+            <td><input type="text" name="userLoginID"></td>
         </tr>
         <tr>
             <td>Password</td>
             <td><input type="password" name="password"></td><br>
-            <td><a href="forget">Forget Password?</a></td>
-
         </tr>
 
         <tr>
@@ -108,9 +105,6 @@
         </tr>
     </table>
 </form>
-<h4>First Time User</h4>
-
-<a href="signup">Register</a><br>
 
 </body>
 </html>

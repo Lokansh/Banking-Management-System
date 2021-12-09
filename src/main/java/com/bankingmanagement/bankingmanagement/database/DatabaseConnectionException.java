@@ -10,9 +10,11 @@ public class DatabaseConnectionException extends Exception {
         this.error = error;
     }
 
+
     public String geterrMsg() {
         return errMsg;
     }
+
 
     @Override
     public String toString() {
@@ -25,4 +27,5 @@ public class DatabaseConnectionException extends Exception {
     public Throwable getError() {
         return error;
     }
+
 }
