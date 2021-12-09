@@ -32,13 +32,13 @@ public class EmployeeDashboardController {
 
 	@Autowired
 	GetCustomerDataService getCustomerDataService;
-	
+
 	@Autowired
 	GetRequests getRequests;
-	
+
 	@GetMapping(path = "/emp-dash/details")
 	public String home(HttpSession session, ModelMap modelMap) throws EmployeeDetailsException {
-		Employee empDetails=employeeDetailsService.getEmployeeDetails("111");
+		Employee empDetails = employeeDetailsService.getEmployeeDetails("111");
 		session.setAttribute("fName", empDetails.getEmployeeFirstName());
 		session.setAttribute("lName", empDetails.getEmployeeLastName());
 		session.setAttribute("manager", empDetails.getEmployeeManager());
@@ -51,67 +51,76 @@ public class EmployeeDashboardController {
 	public String custDetails() throws EmployeeDetailsException {
 		return "findCustomer";
 	}
-	
+
 	@RequestMapping(path = "/emp-dash/cust-details/data", method = POST)
-    public String customersDetails(GetCustomer customer, HttpSession session, ModelMap modelMap) throws CustomerDataException
-    {    
-    	session.setAttribute("custSearchId",customer.getCustomerId());
-    	Customer cust=getCustomerDataService.getCustomerDetails(customer.getCustomerId());
-    	
-    	session.setAttribute("cFName",cust.getFirstName());
-    	session.setAttribute("cLName",cust.getLastName());
-    	session.setAttribute("add1",cust.getAddress1());
-    	session.setAttribute("add2",cust.getAddress2());
-    	session.setAttribute("city",cust.getCity());
-    	session.setAttribute("zip",cust.getZipCode());
-    	session.setAttribute("email",cust.getEmail());
-    	session.setAttribute("phone",cust.getPhone());
-    	session.setAttribute("sin",cust.getSin());
-    	if(cust.getBalance() != null) {
-    	session.setAttribute("balance",cust.getBalance());
-    	}
-    	else {
-    		session.setAttribute("balance",0);
-    	}
-    	
-        return "customerDetails";
-        
-    }
-	
+	public String customersDetails(GetCustomer customer, HttpSession session, ModelMap modelMap)
+			throws CustomerDataException {
+		session.setAttribute("custSearchId", customer.getCustomerId());
+		Customer cust = getCustomerDataService.getCustomerDetails(customer.getCustomerId());
+
+		session.setAttribute("cFName", cust.getFirstName());
+		session.setAttribute("cLName", cust.getLastName());
+		session.setAttribute("add1", cust.getAddress1());
+		session.setAttribute("add2", cust.getAddress2());
+		session.setAttribute("city", cust.getCity());
+		session.setAttribute("zip", cust.getZipCode());
+		session.setAttribute("email", cust.getEmail());
+		session.setAttribute("phone", cust.getPhone());
+		session.setAttribute("sin", cust.getSin());
+		if (cust.getBalance() != null) {
+			session.setAttribute("balance", cust.getBalance());
+		} else {
+			session.setAttribute("balance", 0);
+		}
+
+		return "customerDetails";
+
+	}
+
 	@GetMapping(path = "/emp-dash/requests")
-	public String getRequest(HttpSession session,  ModelMap modelMap) throws EmployeeDetailsException, RequestException {
-		List<Request> req=getRequests.getRequest();
+	public String getRequest(HttpSession session, ModelMap modelMap) throws EmployeeDetailsException, RequestException {
+		List<Request> req = getRequests.getRequest();
 		modelMap.clear();
 		modelMap.put("requests", req);
 		return "requests";
 	}
+
 	@GetMapping(path = "/emp-dash/requests/approve/{id}")
-	public String approveRequest(@PathVariable String id, HttpSession session) throws EmployeeDetailsException, RequestException {
+	public String approveRequest(@PathVariable String id, HttpSession session)
+			throws EmployeeDetailsException, RequestException {
 		getRequests.approveRequest(Integer.parseInt(id));
 		return "approved";
 	}
+
 	@GetMapping(path = "/emp-dash/requests/deny/{id}")
-	public String denyRequest(@PathVariable String id, HttpSession session) throws EmployeeDetailsException, RequestException {
+	public String denyRequest(@PathVariable String id, HttpSession session)
+			throws EmployeeDetailsException, RequestException {
 		getRequests.denyRequest(Integer.parseInt(id));
 		return "denied";
 	}
+
 	@GetMapping(path = "/emp-dash/requests/approved")
-	public String approvedRequest(HttpSession session,  ModelMap modelMap) throws EmployeeDetailsException, RequestException {
-		List<Request> req=getRequests.approvedHistory();
+	public String approvedRequest(HttpSession session, ModelMap modelMap)
+			throws EmployeeDetailsException, RequestException {
+		List<Request> req = getRequests.approvedHistory();
 		modelMap.clear();
 		modelMap.put("requests", req);
 		return "approvedHistory";
 	}
+
 	@GetMapping(path = "/emp-dash/requests/denied")
-	public String deniedRequest(HttpSession session,  ModelMap modelMap) throws EmployeeDetailsException, RequestException {
-		List<Request> req=getRequests.deniedHistory();
+	public String deniedRequest(HttpSession session, ModelMap modelMap)
+			throws EmployeeDetailsException, RequestException {
+		List<Request> req = getRequests.deniedHistory();
 		modelMap.clear();
 		modelMap.put("requests", req);
 		return "deniedHistory";
 	}
+
 	@GetMapping(path = "/emp-dash/requests/auto-approved")
-	public String autoApprovedRequest(HttpSession session,  ModelMap modelMap) throws EmployeeDetailsException, RequestException {
-		List<Request> req=getRequests.autoApprovedHistory();
+	public String autoApprovedRequest(HttpSession session, ModelMap modelMap)
+			throws EmployeeDetailsException, RequestException {
+		List<Request> req = getRequests.autoApprovedHistory();
 		modelMap.clear();
 		modelMap.put("requests", req);
 		return "deniedHistory";
